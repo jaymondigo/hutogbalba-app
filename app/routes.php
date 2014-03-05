@@ -10,8 +10,16 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
+Route::get('/', function(){
 
-Route::get('/', function()
-{
-	return View::make('hello');
+	if(Auth::user())
+		return Redirect::to('/home');
+	else
+		return Redirect::to('/user/login');
+});
+
+Route::controller('user', 'UserController');
+
+Route::group(array('before' => 'auth'), function(){    
+	Route::controller('home', 'HomeController');
 });
