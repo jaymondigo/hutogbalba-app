@@ -1,21 +1,6 @@
-## Laravel PHP Framework
+## Dream Builder Solutions
 
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/version.png)](https://packagist.org/packages/laravel/framework) [![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.png)](https://packagist.org/packages/laravel/framework) [![Build Status](https://travis-ci.org/laravel/framework.png)](https://travis-ci.org/laravel/framework) [![License](https://poser.pugx.org/laravel/framework/license.png)](https://packagist.org/packages/laravel/framework) 
-
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, and caching.
-
-Laravel aims to make the development process a pleasing one for the developer without sacrificing application functionality. Happy developers make the best code. To this end, we've attempted to combine the very best of what we have seen in other web frameworks, including frameworks implemented in other languages, such as Ruby on Rails, ASP.NET MVC, and Sinatra.
-
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
-
-## Official Documentation
-
-Documentation for the entire framework can be found on the [Laravel website](http://laravel.com/docs).
-
-### Contributing To Laravel
-
-**All issues and pull requests should be filed on the [laravel/framework](http://github.com/laravel/framework) repository.**
-
-### License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+Shelter is one of the basic needs of human. This is important yet costly when building one. Nowadays, going to different areas of suppliers, canvassing for quality, looking for architects and engineers, minding budget, are only some of the cumbersome things prior to building a house. What you envision sometimes is hard enough to find, that most of the times it would cost you too much in terms of money and effort. This is the major issue that the study has considered, an issue which is until now, remains unresolved and not provided.
+We aim to develop a web-based interface for dreamers which they can maneuver to visualize their dream house and design by themselves-- seeing the structure and cost side by side. In this way, they could consider budget as well as quality.
+This study aims to integrate these functionalities in a single interface. This provides framework of the basic, yet most important parts of a house, where dreamers fill with different available tools and materials. A list of suppliers to choose from is also available, with the real-time price and quality of the materials displayed, therefore helping dreamers have an estimate of the amount to be spent. This also offers contact to suppliers as well as architects and engineers when dreamers are ready to commit to the design they created. 
+This IT Solution therefore makes work, canvassing and dream realization ... easier.
