@@ -8,9 +8,9 @@
                             <img src="img/avatar6.png" class="img-circle" alt="User Image" />
                         </div>
                         <div class="pull-left info">
-                            <p>Hello, Jillberth</p>
+                            <p>Hello, {{Auth::user()->firstname}}</p>
 
-                            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                            <a href="#"><i class="fa fa-circle text-success"></i> {{Auth::user()->online_status}}</a>
                         </div>
                     </div>
                     <!-- search form -->
@@ -26,7 +26,7 @@
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu">
                         <li class="active">
-                            <a href="dreamer-dashboard.php">
+                            <a href="{{URL::to('/')}}">
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                             </a>
                         </li>

@@ -1,9 +1,17 @@
 <?php
 
-use Illuminate\Auth\UserInterface;
-use Illuminate\Auth\Reminders\RemindableInterface;
+use Zizaco\Confide\ConfideUser;
 
-class User extends Eloquent implements UserInterface, RemindableInterface {
+class User extends ConfideUser {
+
+	public static $rules = array(
+		'firstname' => 'required',
+		'lastname' => 'required',
+        'username' => 'required|alpha_dash|unique:users',
+        'email' => 'required|email|unique:users',
+        'password' => 'required|between:4,11|confirmed',
+        'password_confirmation' => 'between:4,11',
+    );
 
 	/**
 	 * The database table used by the model.
@@ -12,6 +20,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 */
 	protected $table = 'users';
 
+	protected $appends = array('fullname');
 	/**
 	 * The attributes excluded from the model's JSON form.
 	 *
@@ -49,4 +58,9 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return $this->email;
 	}
 
+	public function getFullnameAttribute(){
+		return $this->firstname.' '.$this->lastname;
+	}
+
 }
+ 

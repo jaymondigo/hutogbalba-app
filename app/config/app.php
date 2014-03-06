@@ -55,6 +55,7 @@ return array(
 	'locale' => 'en',
 
 	/*
+	| This URL is used by the console to pr
 	|--------------------------------------------------------------------------
 	| Encryption Key
 	|--------------------------------------------------------------------------
@@ -106,6 +107,8 @@ return array(
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
+		'Codesleeve\Stapler\StaplerServiceProvider',
+		'Zizaco\Confide\ConfideServiceProvider',
 
 	),
 
@@ -172,7 +175,7 @@ return array(
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
-
+		'Confide'    	  => 'Zizaco\Confide\ConfideFacade',
 	),
 
 );

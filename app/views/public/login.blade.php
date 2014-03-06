@@ -16,23 +16,37 @@
 @section('body')
 	@section('body_attr') class="bg-black" @stop
 	<div class="form-box" id="login-box">
+            @if ( Session::get('error') )
+                <center>
+                    <div class="alert alert-danger" style="margin-left:0px">{{{ Session::get('error') }}}</div>
+                </center>
+            @endif
+
+            @if ( Session::get('notice') )
+                <center>
+                    <div class="alert alert-warning" style="margin-left:0px">{{{ Session::get('notice') }}}</div>
+                </center>
+            @endif
             <div class="header">Sign In</div>
-            <form action="index.html" method="post">
+            <form method="POST" action="{{{ Confide::checkAction('UserController@do_login') ?: URL::to('/user/login') }}}" accept-charset="UTF-8">
+
                 <div class="body bg-gray">
-                    <div class="form-group">
-                        <input type="email" name="email" class="form-control" placeholder="Email Address"/>
+                    
+                    <div class="form-group"> 
+                        <input class="form-control" tabindex="1" placeholder="{{{ Lang::get('confide::confide.username_e_mail') }}}" type="text" name="email" id="email" value="{{{ Input::old('email') }}}">
                     </div>
                     <div class="form-group">
-                        <input type="password" name="password" class="form-control" placeholder="Password"/>
+                        <input class="form-control" tabindex="2" placeholder="{{{ Lang::get('confide::confide.password') }}}" type="password" name="password" id="password">
                     </div>          
                     <div class="form-group">
-                        <input type="checkbox" name="remember_me"/> Remember me
+                        <input type="hidden" name="remember" value="0">
+                        <input tabindex="4" type="checkbox" name="remember" id="remember" value="1"> Remember me
                     </div>
                 </div>
                 <div class="footer">                                                               
-                    <button type="submit" class="btn bg-olive btn-block">Dream On</button>  
-                    <p><a href="#">I forgot my password</a></p>
-                    <a href="register.php" class="text-center">I wanna be a Dreamer</a>
+                    <button type="submit" tabindex="3" class="btn bg-olive btn-block">Dream On</button>  
+                    <p><a href="{{{ (Confide::checkAction('UserController@forgot_password')) ?: 'forgot' }}}">I forgot my password</a></p>
+                    <a href="{{{(Confide::checkAction('UserController@create')) ? : ''}}}" class="text-center">I wanna be a Dreamer</a>
                 </div>
             </form>
             <!-- <div class="margin text-center">

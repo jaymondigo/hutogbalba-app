@@ -15,31 +15,43 @@
 
 @section('body')
 	@section('body_attr') class="bg-black" @stop
+
 	<div class="form-box" id="login-box">
+            @if ( Session::get('error') )
+                <div class="alert alert-error alert-danger" style="margin-left:0px;">
+                    @if ( is_array(Session::get('error')) )
+                        {{ head(Session::get('error')) }}
+                    @endif
+                </div>
+            @endif
+
+            @if ( Session::get('notice') )
+                <div class="alert" style="margin-left:0px;">{{ Session::get('notice') }}</div>
+            @endif
             <div class="header">Be a Dreamer</div>
-            <form action="../../index.html" method="post">
+            <form method="POST" action="{{{ (Confide::checkAction('UserController@store')) ?: URL::to('user')  }}}" accept-charset="UTF-8">
                 <div class="body bg-gray">
                     <div class="form-group">
                         <input type="text" name="firstname" class="form-control" placeholder="Firstname"/>
                     </div>
                     <div class="form-group">
-                        <input type="text" name="lasatname" class="form-control" placeholder="Lastname"/>
+                        <input type="text" name="lastname" class="form-control" placeholder="Lastname"/>
                     </div>
                     <div class="form-group">
-                        <input type="email" name="email" class="form-control" placeholder="Email Address"/>
+                        <input class="form-control" placeholder="{{{ Lang::get('confide::confide.e_mail') }}}" type="text" name="email" id="email" value="{{{ Input::old('email') }}}">
                     </div>
                     <div class="form-group">
-                        <input type="password" name="password" class="form-control" placeholder="Password"/>
+                         <input class="form-control" placeholder="{{{ Lang::get('confide::confide.password') }}}" type="password" name="password" id="password">
                     </div>
                     <div class="form-group">
-                        <input type="password" name="password2" class="form-control" placeholder="Retype password"/>
+                        <input class="form-control" placeholder="{{{ Lang::get('confide::confide.password_confirmation') }}}" type="password" name="password_confirmation" id="password_confirmation">
                     </div>
                 </div>
                 <div class="footer">                    
 
                     <button type="submit" class="btn bg-olive btn-block">Start Dreaming</button>
 
-                    <a href="login.php" class="text-center">I am already a Dreamer</a>
+                    <a href="{{{ (Confide::checkAction('UserController@login')) ?: 'login' }}}" class="text-center">I am already a Dreamer</a>
                 </div>
             </form>
             <!-- <div class="margin text-center">

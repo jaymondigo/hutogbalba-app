@@ -12,7 +12,11 @@ class CreateTableMaterialImages extends Migration {
 	 */
 	public function up()
 	{
-		//
+		Schema::create('material_images', function($table){
+			$table->increments('id');
+			$table->softDeletes();
+			$table->timeStamps();
+		});
 	}
 
 	/**
@@ -22,7 +26,7 @@ class CreateTableMaterialImages extends Migration {
 	 */
 	public function down()
 	{
-		//
+		Schema::dropIfExists('material_images');
 	}
 
 }

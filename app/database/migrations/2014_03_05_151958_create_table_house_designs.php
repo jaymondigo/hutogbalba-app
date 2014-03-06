@@ -12,7 +12,14 @@ class CreateTableHouseDesigns extends Migration {
 	 */
 	public function up()
 	{
-		//
+		Schema::create('house_designs', function($table){
+			$table->increments('id');
+			$table->string('properties');
+			$table->string('materials');
+			$table->string('estimate');
+			$table->softDeletes();
+			$table->timeStamps();
+		});
 	}
 
 	/**
@@ -22,7 +29,7 @@ class CreateTableHouseDesigns extends Migration {
 	 */
 	public function down()
 	{
-		//
+		Schema::dropIfExists('house_designs');
 	}
 
 }

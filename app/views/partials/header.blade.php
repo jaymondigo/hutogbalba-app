@@ -1,6 +1,6 @@
 <!-- header logo: style can be found in header.less -->
         <header class="header">
-            <a href="index.html" class="logo">
+            <a href="{{URL::to('/')}}" class="logo">
                 <!-- Add the class icon to your logo image or logo icon to add the margining -->
                 Dream Builder
             </a>
@@ -19,15 +19,15 @@
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="glyphicon glyphicon-user"></i>
-                                <span>Jillberth Estillore <i class="caret"></i></span>
+                                <span>{{Auth::user()->fullname}}<i class="caret"></i></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header bg-light-blue">
                                     <img src="img/avatar6.png" class="img-circle" alt="User Image" />
                                     <p>
-                                        Jillberth Estillore - Dreamer
-                                        <small>Member since Feb. 1995</small>
+                                        {{Auth::user()->fullname}} - {{Auth::user()->type}}
+                                        <small>Member since {{date('F Y', strtotime(Auth::user()->created_at))}}</small>
                                     </p>
                                 </li>
                                 <!-- Menu Footer-->
@@ -36,7 +36,7 @@
                                         <a href="#" class="btn btn-default btn-flat">Profile</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                        <a href="{{{ (Confide::checkAction('UserController@logout')) ?: 'signout' }}}" class="btn btn-default btn-flat">Sign out</a>
                                     </div>
                                 </li>
                             </ul>

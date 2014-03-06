@@ -12,8 +12,14 @@ class CreateTableMaterialTypes extends Migration {
 	 */
 	public function up()
 	{
-		//
-	}
+		Schema::create('material_types', function($table){
+			$table->increments('id');
+			$table->string('name');
+			$table->string('description');
+			$table->softDeletes();
+			$table->timeStamps();
+		});
+	}	
 
 	/**
 	 * Reverse the migrations.
@@ -22,7 +28,7 @@ class CreateTableMaterialTypes extends Migration {
 	 */
 	public function down()
 	{
-		//
+		Schema::dropIfExists('material_types');
 	}
 
 }
