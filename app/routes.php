@@ -22,9 +22,9 @@ Route::group(array('before' => 'auth'), function(){
 	Route::controller('home', 'HomeController');
 	Route::controller('dreamer','DreamerController');
 	Route::controller('admin','AdminController');
-	Route::controller('vendor','VendorController');
-
-	Route::resource('product', 'ProductController');
+	
+	Route::resource('product', 'ProductController'); 
+	Route::resource('vendor','VendorController');
 });
 // Confide routes
 Route::get( 'user/register',                 'UserController@create');
