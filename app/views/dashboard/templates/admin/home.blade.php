@@ -1,3 +1,5 @@
+@extends('dashboard.index')
+@section('main_content')
         <div class="wrapper row-offcanvas row-offcanvas-left">
             <!-- Left side column. contains the logo and sidebar -->
             @include('partials.sidebar')
@@ -519,3 +521,4 @@
         </div><!-- ./wrapper -->
 
         <!-- add new calendar event modal -->
+@stop

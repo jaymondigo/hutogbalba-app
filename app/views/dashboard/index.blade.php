@@ -31,7 +31,7 @@
 @section('body')
 	@section('body_attr') class="skin-blue" @stop
 
-    @include('dashboard.templates.'.Auth::user()->type);
+    @yield('main_content')
 @stop
 	 
 @section('footer')

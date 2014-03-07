@@ -24,23 +24,14 @@
                     </form>
                     <!-- /.search form -->
                     <!-- sidebar menu: : style can be found in sidebar.less -->
-                    <ul class="sidebar-menu">
-                        <li class="active">
-                            <a href="{{URL::to('/')}}">
-                                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="dreamer-profile.php">
-                                <i class="fa fa-user"></i> <span>Profile</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="dreamer-sketcher.php">
-                                <i class="fa fa-moon-o"></i> <span>Dreams</span>
-                                <small class="badge pull-right bg-red">3</small>
-                            </a>
-                        </li>
+                    <ul class="sidebar-menu"> 
+                        @foreach (DbsHelper::navs(Auth::user()->type, 'left') as $nav)
+                            <li class="{{isset($nav['active'])&&$nav['active'] ? 'active' :''}}">
+                                <a href="{{$nav['link']}}">
+                                    <i class="{{$nav['icon']}}"></i> <span>{{$nav['label']}}</span>
+                                </a>
+                            </li>
+                        @endforeach 
                     </ul>
                 </section>
                 <!-- /.sidebar -->
