@@ -483,7 +483,7 @@
                 </div>
 
 
-                <div id="contextMenu" class="dropdown clearfix">
+                <div id="contextMenu" style="position: absolute; display: none;" class="dropdown clearfix">
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" style="display:block;position:static;margin-bottom:5px;">
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="#" id="delete-set">Delete</a></li>
                     </ul>
