@@ -109,8 +109,6 @@
 
 	var offsetX = 50, offsetY = 50;
 
-	var rooms = 0, doors = 0, windows = 0;
-
 	var door = {
 		left: {
 			position: 'vertical',
@@ -186,7 +184,7 @@
 		var x = offsetX;
 		var y = offsetY;
 		var set = paper.set();
-		set.index = rooms;
+		set.index = DreamBuilder.rooms;
 		set.property = 'rooms';
 		var room = paper.rect(x, y, obj.width, obj.length);
 		room.attr({
@@ -230,9 +228,9 @@
 			set: set
 		});
 
-		rooms++;
+		DreamBuilder.rooms++;
 
-		var name = obj.name ? obj.name : 'ROOM' + rooms;
+		var name = obj.name ? obj.name : 'ROOM' + DreamBuilder.rooms;
 		//display the room label
 		var label = paper.text(obj.width / 2 + offsetX, obj.length / 2 + offsetY, name);
 
@@ -249,7 +247,7 @@
 			length: obj.length,
 			x: obj.px,
 			y: obj.py,
-			index: rooms - 1,
+			index: DreamBuilder.rooms - 1,
 			property: 'rooms'
 		});
 		//set each node for contextmenu event
@@ -271,6 +269,7 @@
 		DreamBuilder.house.doors.push({
 			where: obj.where,
 			x: obj.x,
+			y: obj.y,
 			width: obj.width,
 			length: obj.length
 		});
@@ -314,7 +313,7 @@
 		var d1 = paper.path('M' + x + ',' + y + 'L' + (x + xx) + ',' + (y + yy));
 		var d2 = paper.path('M' + x + ',' + (y + yy) + 'L' + (x + xx) + ',' + y);
 		var set = paper.set();
-		set.index = doors;
+		set.index = DreamBuilder.doors;
 		set.property = 'doors';
 		set.push(door);
 		set.push(d1);
@@ -331,10 +330,10 @@
 		set[drag]({
 			width: obj.width,
 			x: obj.x,
-			index: doors,
+			index: DreamBuilder.doors,
 			property: 'doors'
 		});
-		doors++;
+		DreamBuilder.doors++;
 	};
 
 	d.prototype.createWindow = function(obj) {
@@ -342,6 +341,7 @@
 		DreamBuilder.house.windows.push({
 			where: obj.where,
 			x: obj.x,
+			y: obj.y,
 			width: obj.width,
 			length: obj.length
 		});
@@ -396,7 +396,7 @@
 		var d1 = paper.path('M' + (xx / 2 + (offsetX - xx + lx)) + ',' + y + 'L' + (xx / 2 + (offsetX - xx + lx)) + ',' + (y + yy));
 		var d2 = paper.path('M' + x + ',' + (yy / 2 + (offsetY - yy + ly)) + 'L' + (x + xx) + ',' + (yy / 2 + (offsetY - yy + ly)));
 		var set = paper.set();
-		set.index = windows;
+		set.index = DreamBuilder.windows;
 		set.property = 'windows';
 		set.push(door);
 		set.push(d1);
@@ -415,11 +415,11 @@
 		set[drag]({
 			width: obj.width,
 			x: obj.x,
-			index: windows,
+			index: DreamBuilder.windows,
 			property: 'windows'
 		});
 
-		windows++;
+		DreamBuilder.windows++;
 
 	};
 
