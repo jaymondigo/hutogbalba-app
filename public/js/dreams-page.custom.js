@@ -1,4 +1,5 @@
 window.baseUrl = $('[base-url]').attr('base-url');
+window.childWindow = '';
 //$alert({type:'warning || danger || success', message: ''});
 window.$alert = function(params) {
 
@@ -25,6 +26,9 @@ $(document).on('click', '#view-3d', function() {
     // var strWindowName = 'Preview 3D - House Design ID #' + houseId;
     var strWindowUrl = baseUrl + '/dreamer/preview3d/' + houseId;
     // window.open(strWindowUrl, "_blank", strWindowFeatures);
-    window.open(strWindowUrl, "_blank", "scrollbars=1,resizable=1");
-
+    if (childWindow == '' || childWindow.closed) {
+        childWindow = window.open(strWindowUrl, "_blank", "scrollbars=1,resizable=1");
+    } else {
+        childWindow.location.reload();
+    }
 });
