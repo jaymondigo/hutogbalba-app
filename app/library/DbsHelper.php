@@ -44,5 +44,65 @@
 			else
 				return array(); 
 		}
+
+		public static function in2cm($in)
+		{
+			return $in * 2.54;
+		}
+
+		public static function cm2in($cm)
+		{
+			return $cm / 2.54;
+		}
+
+		public static function getTiles($width, $length, $dim = 9) {
+			$tiles = 0;
+			$area = $width * $length;
+			switch($dim) {
+				case 4:
+					$tiles = $area / 0.1089;
+					break;
+				case 6:
+					$tiles = $area / 0.25;
+					break;
+				case 9:
+					$tiles = $area / 0.5625;
+					break;
+				case 12:
+					$tiles = $area;
+					break;
+				case 18:
+					$tiles = $area / 2.25;
+					break;
+			}
+			return $tiles;
+		}
+
+		public static function getShingles($width, $length) {
+			return $width * $length / 100;
+		}
+
+		public static function getSandGravel($width, $length, $depth) {
+			$cubeF = $width * $length * $depth;
+			$cubeY = $cubeF / 27; // convert to yards
+			return $cubeY * 1.25; // tons
+		}
+
+		public static function getBricks($width, $length) {
+			return $width * $length / 100 * 3;
+		}
+
+		public static function getPlywoodSheets($width, $length) {
+			return $width * $length / 32;
+		}
+
+		public static function getHollowBlocks($width, $length) {
+			return $width * $length * 2;
+		}
+
+		public static function getMortar($blocks) {
+			return $blocks / 11;
+		}
+
 	}
 ?>
