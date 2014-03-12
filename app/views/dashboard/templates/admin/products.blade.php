@@ -50,7 +50,11 @@
                                     <td>{{$product->productType->name}}</td>
                                     <td>{{$product->price}}</td>
                                     <td><span class="label label-@if($product->availability=='available'){{'success'}} @elseif($product->availability=='Out of stacks'){{'danger'}}@else{{'warning'}} @endif">{{$product->availability}}</span></td>
-                                    <td>{{$product->userVendor->fullname}}</td>
+                                    <td>
+                                        @if(isset($product->vendor_profile->name))
+                                            {{$product->vendor_profile->name}} 
+                                        @endif
+                                    </td>
                                     <td><a href="#view-product-dialog" data-toggle="modal" class="glyphicon glyphicon-eye-open" view-product="{{$product->id}}">
                                     </a>&nbsp;&nbsp;&nbsp;<a href="#edit-product-dialog" edit-product="{{$product->id}}" data-toggle="modal" class="glyphicon glyphicon-pencil">
                                     </a>&nbsp;&nbsp;&nbsp;

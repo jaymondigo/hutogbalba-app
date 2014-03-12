@@ -11,7 +11,7 @@ class User extends ConfideUser {
             'medium' => '300x300',
             'thumb' => '100x100'
           ],
-          'default_url' => '/:attachment/:style/missing.jpg'
+          'default_url' => 'missing.png'
       ]);
 
       parent::__construct($attributes);

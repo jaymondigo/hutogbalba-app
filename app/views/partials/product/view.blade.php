@@ -5,6 +5,9 @@
 <div class="modal-body" > 
 
     <table class="table">
+        <tr> 
+            <td><img src="{{URL::to($product->picture->url('medium'))}}" /></td>
+        </tr>
         <tr>
             <td>Product ID: </td>
             <td>{{$product->productID}}</td>
@@ -27,7 +30,7 @@
         </tr>
         <tr>
             <td>Vendor: </td>
-            <td>{{$product->user_vendor->fullname}}</td>
+            <td>{{$product->vendor_profile->name}}</td>
         </tr>
     </table>
 </div>

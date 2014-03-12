@@ -1,5 +1,5 @@
  
-<form name="addProductForm" action="{{URL::to('product')}}" method="POST">
+<form name="addProductForm" action="{{URL::to('product')}}" method="POST" enctype="multipart/form-data">
  <div class="modal-body">
     <label for="product_id">Product ID</label>
     <input type="text" name="productID" class="form-control" placeholder="CEM1234"><br>
@@ -33,7 +33,9 @@
            <option value="{{$vendor->id}}">{{$vendor->name}}</option>
        @endforeach
     </select>
- 
+    <br/>
+    <label for="picture">Picture</label>
+    <input type="file" name="picture" />
 </div>
  <div class="modal-footer">
     <input type="submit" class="btn btn-flat btn-info cancel" value="Add" />

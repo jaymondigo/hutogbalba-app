@@ -2,7 +2,7 @@
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     <h4 class="modal-title">{{ucfirst($product->name)}} - Edit</h4>
 </div>
-<form name="editProductForm" action="{{URL::to('product')}}" method="POST">
+<form name="editProductForm" action="{{URL::to('product')}}" method="POST" enctype="multipart/form-data">
     <div class="modal-body" >
     <input type="hidden" name="id" value="{{$product->id}}">
     <label for="product_id">Product ID</label>
@@ -34,9 +34,12 @@
     <label for="vendor">Vendor</label>
     <select name="vendor" class="form-control">
        @foreach ($vendors as $vendor)
-           <option value="{{$vendor->id}}" @if($vendor->id == $product->userVendor) selecte="selected" @endif>{{$vendor->name}}</option>
+           <option value="{{$vendor->id}}" @if($vendor->id == $product->vendor) selecte="selected" @endif>{{$vendor->name}}</option>
        @endforeach
     </select>
+    <br/>
+    <label for="picture">Picture</label>
+    <input type="file" name="picture" />
                   
 </div>
 <div class="modal-footer">

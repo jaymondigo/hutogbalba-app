@@ -4,7 +4,7 @@ class ProductController extends BaseController {
 
 
 	public function index(){
-		$obj = Material::with(array('userVendor','productType'))->paginate(15);; 
+		$obj = Material::with(array('vendorProfile','productType'))->paginate(15);; 
 		
 		return View::make('dashboard.templates.'.Auth::user()->type.'.products')->with('products', $obj);
 	}
@@ -28,21 +28,23 @@ class ProductController extends BaseController {
 		 $obj->availability = Input::get('availability');
 		 $obj->price = Input::get('price');
 		 $obj->vendor = Input::get('vendor'); 
+		 $obj->picture = Input::file('picture');
 		 $obj->save();
 		 Session::flash('success', 'Product Successfully added');
 		 return Redirect::back();
 	}
 
-	public function show($id){
-
-		$obj = Material::with(array('userVendor','productType'))->where('id',$id)->first();
-		if(is_object($obj)&&is_object($obj->user_vendor)&&is_object($obj->product_type))
+	public function show($id){ 
+		$obj = Material::with(array('vendorProfile','productType'))->where('id',$id)->first(); 
+		if(is_object($obj))
 			return View::make('partials.product.view')
 					->with('product', $obj);
+		else
+			return array('no Material found');
 	}
 
 	public function edit($id){
-		$obj = Material::with(array('userVendor','productType'))->where('id',$id)->first(); 
+		$obj = Material::with(array('vendorProfile','productType'))->where('id',$id)->first(); 
 		// return $obj;
 		$vendors = VendorProfile::where('is_verified',1)->get();
 		 $elements = Element::with('Types')->get(); 
