@@ -45,8 +45,8 @@
         $('#open-dialog').modal();
         //get available designs
         $.ajax({
-            url: 'sample-designs.json',
-            type: 'POST',
+            url: baseUrl + '/dreamer/my-dreams',
+            type: 'GET',
             dataType: 'json',
             success: function(data) {
                 $designs.empty();
@@ -66,8 +66,16 @@
     });
 
     $('#save').click(function(e) {
+
+        if (typeof DreamBuilder.house.length == 'undefined' || DreamBuilder.house.length <= 0) {
+            $alert({
+                message: 'Nothing to save. Please create a new house design.',
+                type: 'warning'
+            });
+            return false;
+        }
         $.ajax({
-            url: 'save-design.php',
+            url: baseUrl + '/dreamer/save-dream',
             type: 'POST',
             data: {
                 id: DreamBuilder.ID,

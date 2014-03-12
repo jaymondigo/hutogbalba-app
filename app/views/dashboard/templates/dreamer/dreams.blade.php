@@ -59,7 +59,7 @@
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">View <b class="caret"></b></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="javascript:void(0)" id="view-3d" house-id="1">3D</a></li>
+                                            <li><a href="javascript:void(0)" id="view-3d" house-id="">3D</a></li>
                                             <li><a href="estimate.php" target="_blank" tabindex="-1">Estimate</a></li>
                                         </ul>
                                     </li>
@@ -497,6 +497,9 @@
 @stop
 
 @section('other_scripts') 
+    <script type="text/javascript">
+        window.baseUrl = $('[base-url]').attr('base-url');
+    </script>
     <script src="{{URL::to('js/dreambuilder.js')}}" type="text/javascript"></script>
     <script src="{{URL::to('js/2d.dreambuilder.js')}}" type="text/javascript"></script>
     <script src="{{URL::to('js/sketcher.js')}}" type="text/javascript"></script>

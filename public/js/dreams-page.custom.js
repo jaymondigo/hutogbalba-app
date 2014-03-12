@@ -1,7 +1,14 @@
-window.baseUrl = $('[base-url]').attr('base-url');
 window.childWindow = '';
 //$alert({type:'warning || danger || success', message: ''});
 window.$alert = function(params) {
+    if ($('#alert-con').length <= 0) {
+        $('.notification').html('<div id="alert-con" class="alert alert-success alert-dismissable" style="padding-left:10px; margin-left:0px;">' +
+            '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' +
+            '<a href="#" class="alert-link" notification-content>' +
+            'Alert!' +
+            '</a>' +
+            '</div>');
+    }
 
     $('#alert-con').removeClass('alert-success').removeClass('alert-danger').removeClass('alert-warning');
 

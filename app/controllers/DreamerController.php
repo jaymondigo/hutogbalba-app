@@ -21,4 +21,22 @@ class DreamerController extends BaseController {
 					->with('houseDesign', $houseDesign);
 	}
 
+	public function postSaveDream(){
+		$id = Input::get('id');
+		if($id==0)
+			$obj = new HouseDesign();
+		else
+			$obj = HouseDesign::find($id);
+
+		$obj->properties = json_encode(Input::get('house'));
+		$obj->dreamer_id = Auth::user()->id;
+		$obj->save();
+
+		return array('success'=>true, 'ID'=>$obj->id);
+	}
+
+	public function getMyDreams(){
+		// return HouseDesign::where('')
+	}
+
 }
