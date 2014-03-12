@@ -26,7 +26,7 @@ $app = new Illuminate\Foundation\Application;
 
 $env = $app->detectEnvironment(array(
 
-	'local' 		=> array('fox', 'minions'),
+	'local' 		=> array('fox', 'minions', 'JILL-DBS'),
 	'production'	=>array('app.dreambuildersolutions.com'),
 ));
 
