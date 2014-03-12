@@ -14,6 +14,7 @@
     <script type="text/javascript" src="{{URL::to('js/dreambuilder.js')}}"></script>
     <script type="text/javascript" src="{{URL::to('js/3d.dreambuilder.js')}}"></script>
     <script type="text/javascript">
+    baseUrl = "{{URL::to('/')}}";
     DreamBuilder.ID = "{{$houseDesign->id}}";
     </script>
     <script type="text/javascript" src="{{URL::to('js/3d.js')}}"></script>
