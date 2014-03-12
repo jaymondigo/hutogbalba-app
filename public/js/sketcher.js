@@ -14,6 +14,13 @@
         $('#step' + current).modal();
     };
 
+    var clearSketchpad = function() {
+        DreamBuilder.ID = 0;
+        DreamBuilder.house.rooms = [];
+        DreamBuilder.house.windows = [];
+        DreamBuilder.house.doors = [];
+    };
+
     var init = function() {
         $('#sketchpad').empty(); //clear the sketchpad
         //set the new house dimensions
@@ -87,28 +94,29 @@
     });
 
     $('#saveHouse').click(function() {
-        if (DreamBuilder.NAME == '')
-            DreamBuilder.NAME = $('[name="design_name"]').val();
 
+        name = $('[name="design_name"]').val();
+        name = name == '' ? DreamBuilder.NAME : name;
         $.ajax({
             url: baseUrl + '/dreamer/save-dream',
             type: 'POST',
             data: {
                 id: DreamBuilder.ID,
-                name: DreamBuilder.NAME,
+                name: name,
                 house: DreamBuilder.house
             },
             success: function(data) {
                 if (data.success) {
                     $('#save-dialog').modal('hide');
                     DreamBuilder.ID = data.ID;
+                    DreamBuilder.NAME = data.name;
+                    $('[name="design_name"]').val(data.name);
                     $('#view-3d').attr('house-id', data.ID);
                     $alert({
                         type: 'success',
                         message: 'Dream house design successfully save!'
                     });
                 } else {
-                    DreamBuilder.NAME = '';
                     $('.save-notification').show();
                     $('[save-notification-content]').html(data.errors);
                 }
@@ -119,13 +127,68 @@
     $(document).on('click', '[open-design]', function() {
         $id = $(this).attr('open-design');
         $.get(baseUrl + '/dreamer/dream-house/' + $id, function(resp) {
-            DreamBuilder.ID = resp.ID;
+            clearSketchpad();
+            DreamBuilder.ID = resp.id;
             DreamBuilder.NAME = resp.name;
-            DreamBuilder.house = JSON.parse(resp.properties);
+            $('[name="design_name"]').val(resp.name);
             $('#open-dialog').modal('hide');
-
+            $('[house-id]').attr('house-id', resp.id);
             //create 2d
+            var data = JSON.parse(resp.properties);
 
+            DreamBuilder.house.length = data.length;
+            DreamBuilder.house.width = data.width;
+            DreamBuilder.house.height = data.height;
+            DreamBuilder.house.wall = {
+                dimension: data.wall.thickness,
+                element: data.wall.element
+            };
+            DreamBuilder.house.floor = {
+                type: data.floor.type,
+                tile: data.floor.tile,
+                wood: data.floor.wood
+            };
+            DreamBuilder.house.roof = {
+                type: data.roof.type,
+                pitch: data.roof.pitch,
+                element: data.roof.element
+            };
+            DreamBuilder.house.numFloors = data.numFloors;
+            DreamBuilder.house.terrain = data.terrain;
+            DreamBuilder.setLength(DreamBuilder.house.length).setWidth(DreamBuilder.house.width).setHeight(DreamBuilder.house.height);
+            d = new DreamBuilder.TWOD();
+            d.createFloor();
+            if (typeof data.rooms != 'undefined') {
+                $.each(data.rooms, function(i, room) {
+                    d.createRoom({
+                        px: room.x,
+                        py: room.y,
+                        width: room.width,
+                        length: room.length,
+                        name: room.name
+                    });
+                });
+            }
+            if (typeof data.windows != 'undefined') {
+                $.each(data.windows, function(i, win) {
+                    d.createWindow({
+                        where: win.where,
+                        x: win.x,
+                        width: win.width,
+                        length: win.length
+                    });
+                });
+            }
+            if (typeof data.doors != 'undefined') {
+                $.each(data.doors, function(i, door) {
+                    d.createDoor({
+                        where: door.where,
+                        x: door.x,
+                        width: door.width,
+                        length: door.length
+                    });
+                });
+            }
         });
     });
 
@@ -171,10 +234,7 @@
 
     $('#finish').click(function(e) {
         //reset house properties then initialize new
-        DreamBuilder.ID = 0;
-        DreamBuilder.house.rooms = [];
-        DreamBuilder.house.windows = [];
-        DreamBuilder.house.doors = [];
+        clearSketchpad();
         init();
     });
 

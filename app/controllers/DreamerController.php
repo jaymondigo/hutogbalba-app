@@ -33,11 +33,14 @@ class DreamerController extends BaseController {
 		$obj->properties = json_encode(Input::get('house'));
 		$obj->dreamer_id = Auth::user()->id;
 		$obj->name = Input::get('name');
-		$obj->save();
-		
+
+		if(!is_object($obj))
+			$obj->save();
+		else
+			$obj->updateUniques();
 		
 		if(count($obj->validationErrors)<=0)
-			return array('success'=>true, 'ID'=>$obj->id);
+			return array('success'=>true, 'ID'=>$obj->id, 'name'=>$obj->name);
 		else{	
 			$errors = '';
 			foreach(json_decode($obj->validationErrors, true) as $i => $data){
@@ -49,6 +52,22 @@ class DreamerController extends BaseController {
 
 	public function getMyDreams(){
 		return HouseDesign::where('dreamer_id', Auth::user()->id)->get();
+	}
+
+	public function postUploadScreenshot(){
+		$obj = HouseDesign::find(Input::get('id'));
+		if(!is_object($obj))
+			return array('success'=>false, 'message'=>'No house design found');
+
+		$encodedData = str_replace(' ','+',Input::get('url'));
+  		$file = base64_decode($encodedData);
+
+		$objPic = new HousePicture();
+		$objPic->picture = file_get_contents(Input::get('url'));
+		$objPic->house_id = $obj->id;
+		$objPic->save();
+
+		return array('success'=>true, 'message'=>'House design successfully saved');
 	}
 
 }

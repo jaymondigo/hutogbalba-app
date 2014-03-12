@@ -53,7 +53,13 @@
     });
     $('#screenshot').click(function(e) {
         screenshot(function(url) {
-            window.open(url, '_blank ');
+            $.post(baseUrl + '/dreamer/upload-screenshot', {
+                id: DreamBuilder.ID,
+                url: url
+            }, function(resp) {
+                console.log(resp);
+            });
+            //window.open(url, '_blank ');
         });
     });
     $('#toggleRoof').click(function(e) {
