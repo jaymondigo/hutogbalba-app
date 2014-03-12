@@ -11,6 +11,9 @@
             data = JSON.parse(data);
             var divider = (data.length / 250) > (data.width / 250) ? data.length / 250 : data.width / 250;
             DreamBuilder.setLength(data.length / divider).setWidth(data.width / divider).setHeight(data.height / divider);
+            DreamBuilder.wall = data.wall;
+            DreamBuilder.roof = data.roof;
+            DreamBuilder.floor = data.floor;
             var d = new DreamBuilder.THREED();
             d.createFloor(data.floor);
             d.createWalls(data.wall);
