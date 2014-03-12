@@ -5,8 +5,10 @@ class HomeController extends BaseController {
 
 	public function getIndex()
 	{
-		
-		return View::make('dashboard.templates.'.Auth::user()->type.'.home');
+		$obj = HouseDesign::with('pictures')->get();
+
+		return View::make('dashboard.templates.'.Auth::user()->type.'.home')
+					->with('dreams', $obj);
 	}
 	public function getProfile(){
 		$user = Auth::user();

@@ -1,6 +1,7 @@
 window.childWindow = '';
-//$alert({type:'warning || danger || success', message: ''});
-window.$alert = function(params) {
+//$DBSAlert({type:'warning || danger || success', message: ''});
+window.$DBSAlert = function(params) {
+
     if ($('#alert-con').length <= 0) {
         $('.notification').html('<div id="alert-con" class="alert alert-success alert-dismissable" style="padding-left:10px; margin-left:0px;">' +
             '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' +
@@ -17,13 +18,17 @@ window.$alert = function(params) {
     $('[notification-content]').html(params.message);
 
     $('.notification').show();
+
+    setTimeout(function() {
+        $('.notification').fadeOut();
+    }, 3000);
 }
 
 $(document).on('click', '#view-3d', function() {
     houseId = $(this).attr('house-id');
 
     if (houseId == '') {
-        $alert({
+        $DBSAlert({
             type: 'warning',
             message: 'Please save your house design first!'
         });
@@ -39,4 +44,10 @@ $(document).on('click', '#view-3d', function() {
         childWindow.location.reload();
     }
     childWindow.focus();
+});
+
+$(document).on('click', '[view-dream]', function() {
+    $.get(baseUrl + '/dreamer/preview-dream', function() {
+
+    });
 });

@@ -21,6 +21,16 @@
 
                 <!-- Main content -->
                 <section class="content">
+                    @if(Session::has('success'))
+                        <div>
+                        <div class="alert alert-success alert-dismissable" style="padding-left:10px; margin-left:0px;">
+                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                          <a href="#" class="alert-link" notification-content>
+                          {{Session::get('message')}}
+                          </a>
+                        </div>
+                        </div>
+                    @endif
                     <div class="notification" style="display:none;">
                         <div id="alert-con" class="alert alert-success alert-dismissable" style="padding-left:10px; margin-left:0px;">
                          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -42,7 +52,7 @@
                                 <ul class="nav navbar-nav">
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">File <b class="caret"></b></a>
-                                        <ul class="dropdown-menu">
+                                        <ul class="dropdown-menu" file-menu>
                                             <li><a href="#" id="new">New</a></li>
                                             <li><a href="#" id="save">Save</a></li>
                                             <li><a href="#" id="open">Open</a></li>
@@ -491,7 +501,7 @@
                             </div>
                             <div class="modal-body">
                                 <div class="save-notification" style="display:none;">
-                                    <div id="alert-con" class="alert alert-danger" style="padding-left:10px; margin-left:0px;"> 
+                                    <div class="alert alert-danger" style="padding-left:10px; margin-left:0px;"> 
                                       <a href="#" class="alert-link" save-notification-content>
                                       Alert!
                                       </a>
@@ -527,8 +537,9 @@
     <script type="text/javascript">
         window.baseUrl = $('[base-url]').attr('base-url');
     </script>
+    <script src="{{URL::to('js/dreams-page.custom.js')}}" type="text/javascript"></script>
     <script src="{{URL::to('js/dreambuilder.js')}}" type="text/javascript"></script>
     <script src="{{URL::to('js/2d.dreambuilder.js')}}" type="text/javascript"></script>
     <script src="{{URL::to('js/sketcher.js')}}" type="text/javascript"></script>
-    <script src="{{URL::to('js/dreams-page.custom.js')}}" type="text/javascript"></script>
+    
 @stop

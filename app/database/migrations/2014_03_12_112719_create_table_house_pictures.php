@@ -14,7 +14,7 @@ class CreateTableHousePictures extends Migration {
 	{
 		Schema::create('house_pictures', function($table){
 			$table->increments('id');
-			$table->integer('house_id');
+			$table->integer('house_id');  
 			$table->softDeletes();
 			$table->timeStamps();
 		});

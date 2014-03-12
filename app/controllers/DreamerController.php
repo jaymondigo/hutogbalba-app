@@ -7,6 +7,7 @@ class DreamerController extends BaseController {
 	}	 
 
 	public function getDreams(){
+		
 		return View::make('dashboard.templates.dreamer.dreams');
 	}
 
@@ -58,16 +59,28 @@ class DreamerController extends BaseController {
 		$obj = HouseDesign::find(Input::get('id'));
 		if(!is_object($obj))
 			return array('success'=>false, 'message'=>'No house design found');
-
-		$encodedData = str_replace(' ','+',Input::get('url'));
-  		$file = base64_decode($encodedData);
-
+ 
 		$objPic = new HousePicture();
-		$objPic->picture = file_get_contents(Input::get('url'));
+		$objPic->picture = Input::file('picture');
 		$objPic->house_id = $obj->id;
 		$objPic->save();
 
 		return array('success'=>true, 'message'=>'House design successfully saved');
 	}
 
+	public function postDeleteDream(){
+		$id = Input::get('id');
+		HouseDesign::find($id)->delete();
+		HousePicture::where('house_id', $id)->delete();
+
+		Session::flash('success',true);
+		Session::flash('message','House Design deleted successfully'); 
+	}
+
+	public function getPreviewDream($id){
+		$obj = HouseDesign::with('pictures')->where('id', $id)->first();
+
+		return View::make('partials.dream_house.view')
+					->with('dream', $obj);
+	}
 }
