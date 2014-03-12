@@ -18,7 +18,7 @@ class ConfideSetupUsersTable extends Migration {
             $table->string('email');
             $table->string('firstname');
             $table->string('lastname');
-            $table->enum('type', array('dreamer','supplier', 'engineer','architect'));
+            $table->enum('type', array('admin','dreamer','vendor', 'engineer','architect'));
             $table->enum('gender', array('male','female','other'));
             $table->date('birth_date');
             $table->text('bio');

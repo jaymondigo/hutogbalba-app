@@ -9,7 +9,9 @@ class HomeController extends BaseController {
 		return View::make('dashboard.templates.'.Auth::user()->type.'.home');
 	}
 	public function getProfile(){
-		return View::make('dashboard.templates.'.Auth::user()->type.'.profile');
+		$user = Auth::user();
+		return View::make('dashboard.templates.'.Auth::user()->type.'.profile')
+					->with('myAccount', $user);
 	}
 
 }

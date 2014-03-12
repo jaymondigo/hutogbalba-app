@@ -22,6 +22,8 @@
         <link href="{{URL::to('css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}" rel="stylesheet" type="text/css" />
         <!-- Theme style -->
         <link href="{{URL::to('css/AdminLTE.css')}}" rel="stylesheet" type="text/css" />
+        <link href="{{URL::to('css/bootstrap-editable.css')}}" rel="stylesheet" type="text/css" />
+        @yield('other_css')
 @stop
 
 @section('header')
@@ -69,4 +71,6 @@
         
         <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
         <script src="{{URL::to('js/AdminLTE/dashboard.js')}}" type="text/javascript"></script> 
+
+        @yield('other_scripts')
 @stop

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableMaterialImages extends Migration {
+class CreateTableMaterials extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,11 +12,17 @@ class CreateTableMaterialImages extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('material_images', function($table){
+		Schema::create('materials', function($table){
 			$table->increments('id');
+			$table->string('productID');
+			$table->integer('type');
+			$table->string('name');
+			$table->string('price');
+			$table->integer('vendor');
+			$table->enum('availability', array('available', 'Few Stocks Left', 'Out of stacks'));
 			$table->softDeletes();
 			$table->timeStamps();
-		});
+		});	
 	}
 
 	/**
@@ -26,7 +32,7 @@ class CreateTableMaterialImages extends Migration {
 	 */
 	public function down()
 	{
-		Schema::dropIfExists('material_images');
+		//
 	}
 
 }

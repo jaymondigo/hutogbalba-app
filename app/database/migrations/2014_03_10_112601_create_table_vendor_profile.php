@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableMaterials extends Migration {
+class CreateTableVendorProfile extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,18 +12,18 @@ class CreateTableMaterials extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('materials', function($table){
+		Schema::create('vendor_profiles', function($table){
 			$table->increments('id');
-			$table->integer('product_id');
 			$table->integer('vendor_id');
 			$table->string('name');
-			$table->integer('num_stocks');
-			$table->double('price');
-			$table->integer('material_type_id');
-			$table->integer('material_property_id');
-			$table->text('description');
+			$table->boolean('is_verified');
+			$table->string('contact'); 
+			$table->string('email');
+			$table->string('address1');
+			$table->string('address2');
+			$table->string('address3');
 			$table->softDeletes();
-			$table->timeStamps(); 
+			$table->timeStamps();
 		});
 	}
 
@@ -34,7 +34,7 @@ class CreateTableMaterials extends Migration {
 	 */
 	public function down()
 	{
-		Schema::dropIfExists('materials');
+		Schema::dropIfExists('vendor_profiles');
 	}
 
 }

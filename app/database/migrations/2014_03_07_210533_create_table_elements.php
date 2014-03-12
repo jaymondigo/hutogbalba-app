@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableMaterialTypes extends Migration {
+class CreateTableElements extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,14 +12,13 @@ class CreateTableMaterialTypes extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('material_types', function($table){
+		Schema::create('elements', function($table){
 			$table->increments('id');
 			$table->string('name');
-			$table->string('description');
 			$table->softDeletes();
 			$table->timeStamps();
 		});
-	}	
+	}
 
 	/**
 	 * Reverse the migrations.
@@ -28,7 +27,7 @@ class CreateTableMaterialTypes extends Migration {
 	 */
 	public function down()
 	{
-		Schema::dropIfExists('material_types');
+		Schema::drop('elements');
 	}
 
 }

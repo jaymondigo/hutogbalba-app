@@ -4,42 +4,69 @@ class ProductController extends BaseController {
 
 
 	public function index(){
-		$obj = Product::all();
+		$obj = Material::with(array('userVendor','productType'))->paginate(15);; 
 		
-		return View::make('dashboard.templates.'.Auth::user()->type.'.products')		->with('products', $obj);
+		return View::make('dashboard.templates.'.Auth::user()->type.'.products')->with('products', $obj);
 	}
 
-	public function store(){
-		if(Input::has('id')){
-			$obj = Product::find(Input::get('id'));
-			if(Input::has('method') && Input::get('method') == 'delete')
-			{
-				$obj->delete();
-				return 1;
-			}
-		}
-		else
-			$obj = new Product();
+	public function create(){ 
+		 $vendors = VendorProfile::where('is_verified',1)->get();
+		 $elements = Element::with('Types')->get();
+		 
+		 return View::make('partials.product.new')
+		 			->with('vendors', $vendors)
+		 			->with('elements', $elements);
+	}
 
-
-		$obj->product_id	=	Input::get('product_id');
-		$obj->vendor_id 	=	Input::get('vendor_id');
-		$obj->name 			=	Input::get('name');
-		$obj->description 	=	Input::get('description');
-		$obj->price 		=	Input::get('price');
-		$obj->material_type_id =Input::get('material_type_id');
-		$obj->save();
-
-
+	public function store(){ 
+		 $obj = new Material();
+		 if(Input::has('id'))
+		 	$obj = Material::find(Input::get('id'));
+		 $obj->productID = Input::get('productID');
+		 $obj->name = Input::get('name');
+		 $obj->type = Input::get('type');
+		 $obj->availability = Input::get('availability');
+		 $obj->price = Input::get('price');
+		 $obj->vendor = Input::get('vendor'); 
+		 $obj->save();
+		 Session::flash('success', 'Product Successfully added');
+		 return Redirect::back();
 	}
 
 	public function show($id){
-		$obj = Product::find($id);
-		return $obj;
+
+		$obj = Material::with(array('userVendor','productType'))->where('id',$id)->first();
+		if(is_object($obj)&&is_object($obj->user_vendor)&&is_object($obj->product_type))
+			return View::make('partials.product.view')
+					->with('product', $obj);
 	}
 
 	public function edit($id){
-		$obj = Product::find($id);
+		$obj = Material::with(array('userVendor','productType'))->where('id',$id)->first(); 
+		// return $obj;
+		$vendors = VendorProfile::where('is_verified',1)->get();
+		 $elements = Element::with('Types')->get(); 
+		 return View::make('partials.product.edit')
+		 			->with('product',$obj)
+		 			->with('vendors', $vendors)
+		 			->with('elements', $elements);
+	}
+
+	public function getDelete($id=null){
+		if($id && $obj = Material::find($id)){
+			return View::make('partials.product.delete')
+						->with('product', $obj);
+		}
+	}
+	public function postDelete($id=null){
+		if($id || $id= Input::get('id'))
+		{	
+			$obj = Material::find($id);
+			if(is_object($obj))
+				$obj->delete();
+		}
+
+		return Redirect::back();
 	}
  
 }

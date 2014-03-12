@@ -57,7 +57,7 @@ return array(
 			'host'      => 'localhost',
 			'database'  => 'dbs_app',
 			'username'  => 'root',
-			'password'  => '',
+			'password'  => 'root',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

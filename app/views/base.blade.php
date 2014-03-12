@@ -2,10 +2,9 @@
 <html @yield('html_attr')>
     <head> 
 
-        @yield('head')
-
+        @yield('head') 
     </head>
-<body @yield('body_attr')>
+<body base-url="{{URL::to('')}}" @yield('body_attr')>
 
 	@yield('header')
 

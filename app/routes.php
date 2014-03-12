@@ -18,14 +18,6 @@ Route::get('/', function(){
 		return Redirect::to('/user/login');
 });
  
-Route::group(array('before' => 'auth'), function(){    
-	Route::controller('home', 'HomeController');
-	Route::controller('dreamer','DreamerController');
-	Route::controller('admin','AdminController');
-	
-	Route::resource('product', 'ProductController'); 
-	Route::resource('vendor','VendorController');
-});
 // Confide routes
 Route::get( 'user/register',                 'UserController@create');
 Route::post('user',                        'UserController@store');
@@ -37,3 +29,16 @@ Route::post('user/forgot_password',        'UserController@do_forgot_password');
 Route::get( 'user/reset_password/{token}', 'UserController@reset_password');
 Route::post('user/reset_password',         'UserController@do_reset_password');
 Route::get( 'user/logout',                 'UserController@logout');
+
+
+Route::group(array('before' => 'auth'), function(){    
+	Route::controller('home', 'HomeController');
+	Route::controller('dreamer','DreamerController');
+	Route::controller('admin','AdminController');
+	
+	Route::resource('product', 'ProductController'); 
+	Route::controller('product', 'ProductController'); 
+	Route::controller('user', 'UserController'); 
+	Route::resource('vendor','VendorController');
+	Route::controller('vendor', 'VendorController'); 
+});

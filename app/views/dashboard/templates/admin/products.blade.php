@@ -30,7 +30,7 @@
                                 </span>
                             </section>
                         </form>
-                        <a href="#add-product-dialog" data-toggle="modal" class="btn btn-flat btn-primary">Add Product</a>
+                        <a href="#add-product-dialog" data-toggle="modal" class="btn btn-flat btn-primary" id="addProduct">Add Product</a>
                     </div><br /><br />
 
                     <div class="table-responsive">
@@ -43,155 +43,46 @@
                             <th>Vendor</th>
                             <th>Action</th>
                             <tbody>
-                                <tr class="bg-success">
-                                    <td>CEM1234</td>
-                                    <td>Fox Cement</td>
-                                    <td>Cement</td>
-                                    <td>PHP 143.00</td>
-                                    <td><span class="label label-success">Available</span></td>
-                                    <td>Acetillore Hardware</td>
-                                    <td><a href="#view-product-dialog" data-toggle="modal" class="glyphicon glyphicon-eye-open"></a>&nbsp;&nbsp;&nbsp;<a href="#edit-product-dialog" data-toggle="modal" class="glyphicon glyphicon-pencil"></a>&nbsp;&nbsp;&nbsp;<a href="#delete-product-dialog" data-toggle="modal" class="glyphicon glyphicon-trash"></a></td>
+                            @foreach ($products as $product) 
+                                 <tr class="bg-success">
+                                    <td>{{$product->productID}}</td>
+                                    <td>{{$product->name}}</td> 
+                                    <td>{{$product->productType->name}}</td>
+                                    <td>{{$product->price}}</td>
+                                    <td><span class="label label-@if($product->availability=='available'){{'success'}} @elseif($product->availability=='Out of stacks'){{'danger'}}@else{{'warning'}} @endif">{{$product->availability}}</span></td>
+                                    <td>{{$product->userVendor->fullname}}</td>
+                                    <td><a href="#view-product-dialog" data-toggle="modal" class="glyphicon glyphicon-eye-open" view-product="{{$product->id}}">
+                                    </a>&nbsp;&nbsp;&nbsp;<a href="#edit-product-dialog" edit-product="{{$product->id}}" data-toggle="modal" class="glyphicon glyphicon-pencil">
+                                    </a>&nbsp;&nbsp;&nbsp;
+                                   <a href="#delete-product-dialog" product-id="{{$product->id}}" id="deleteProduct" data-toggle="modal" class="deleteProduct glyphicon glyphicon-trash"></a>
+                                    </td>
                                 </tr>
-                                <tr class="bg-warning">
-                                    <td>CEM1234</td>
-                                    <td>Fox Cement</td>
-                                    <td>Cement</td>
-                                    <td>PHP 143.00</td>
-                                    <td><span class="label label-warning">Few Stocks Left</span></td>
-                                    <td>Acetillore Hardware</td>
-                                    <td><a href="#view-product-dialog" data-toggle="modal" class="glyphicon glyphicon-eye-open"></a>&nbsp;&nbsp;&nbsp;<a href="#edit-product-dialog" data-toggle="modal" class="glyphicon glyphicon-pencil"></a>&nbsp;&nbsp;&nbsp;<a href="#delete-product-dialog" data-toggle="modal" class="glyphicon glyphicon-trash"></a></td>
-                                </tr>
-                                <tr class="bg-danger">
-                                    <td>CEM1234</td>
-                                    <td>Fox Cement</td>
-                                    <td>Cement</td>
-                                    <td>PHP 143.00</td>
-                                    <td><span class="label label-danger">Out of Stock</span></td>
-                                    <td>Acetillore Hardware</td>
-                                    <td><a href="#view-product-dialog" data-toggle="modal" class="glyphicon glyphicon-eye-open"></a>&nbsp;&nbsp;&nbsp;<a href="#edit-product-dialog" data-toggle="modal" class="glyphicon glyphicon-pencil"></a>&nbsp;&nbsp;&nbsp;<a href="#delete-product-dialog" data-toggle="modal" class="glyphicon glyphicon-trash"></a></td>
-                                </tr>
-                                <tr class="bg-success">
-                                    <td>CEM1234</td>
-                                    <td>Fox Cement</td>
-                                    <td>Cement</td>
-                                    <td>PHP 143.00</td>
-                                    <td><span class="label label-success">Available</span></td>
-                                    <td>Acetillore Hardware</td>
-                                    <td><a href="#view-product-dialog" data-toggle="modal" class="glyphicon glyphicon-eye-open"></a>&nbsp;&nbsp;&nbsp;<a href="#edit-product-dialog" data-toggle="modal" class="glyphicon glyphicon-pencil"></a>&nbsp;&nbsp;&nbsp;<a href="#delete-product-dialog" data-toggle="modal" class="glyphicon glyphicon-trash"></a></td>
-                                </tr>
-                                <tr class="bg-success">
-                                    <td>CEM1234</td>
-                                    <td>Fox Cement</td>
-                                    <td>Cement</td>
-                                    <td>PHP 143.00</td>
-                                    <td><span class="label label-success">Available</span></td>
-                                    <td>Acetillore Hardware</td>
-                                    <td><a href="#view-product-dialog" data-toggle="modal" class="glyphicon glyphicon-eye-open"></a>&nbsp;&nbsp;&nbsp;<a href="#edit-product-dialog" data-toggle="modal" class="glyphicon glyphicon-pencil"></a>&nbsp;&nbsp;&nbsp;<a href="#delete-product-dialog" data-toggle="modal" class="glyphicon glyphicon-trash"></a></td>
-                                </tr>
+                            @endforeach
+                               
                             </tbody>
                         </table>
-                        <ul class="pagination pull-right">
-                            <li><a href="#">&laquo;</a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#">&raquo;</a></li>
-                        </ul>
+                       {{$products->links()}}
                     </div>
 
                 </section><!-- /.content -->
             </aside><!-- /.right-side -->
         </div><!-- ./wrapper -->
 
-        <div class="modal fade" id="view-product-dialog" tabindex="-1" role="dialog" aria-labelledby="form-label" aria-hidden="true">
+        <div class="modal fade" id="view-product-dialog" data-view-product tabindex="-1" role="dialog" aria-labelledby="form-label" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">Fox Cement - View</h4>
-                    </div>
-                    <div class="modal-body">
-                        <table class="table">
-                            <tr>
-                                <td>Product ID: </td>
-                                <td>CEM1234</td>
-                            </tr>
-                            <tr>
-                                <td>Name: </td>
-                                <td>Fox Cement</td>
-                            </tr>
-                            <tr>
-                                <td>Type: </td>
-                                <td>Cement</td>
-                            </tr>
-                            <tr>
-                                <td>Price: </td>
-                                <td>PHP 143.00</td>
-                            </tr>
-                            <tr>
-                                <td>Availability: </td>
-                                <td><span class="label label-success">Available</span></td>
-                            </tr>
-                            <tr>
-                                <td>Vendor: </td>
-                                <td>Acetillore Hardware</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="modal-footer">
-                        <a href="#edit-product-dialog" data-toggle="modal" class="btn btn-flat btn-info cancel" data-dismiss="modal">Edit</a>
-                        <button class="btn btn-flat btn-danger cancel" data-dismiss="modal">Delete</button>
-                        <button class="btn btn-flat btn-primary cancel" data-dismiss="modal">Close</button>
-                    </div>
+                   
+                   <div view-product-con> 
+                   </div>
               </div>
             </div>
         </div>
         <div class="modal fade" id="edit-product-dialog" tabindex="-1" role="dialog" aria-labelledby="form-label" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">Fox Cement - Edit</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <label for="product_id">Product ID</label>
-                            <input type="text" class="form-control" value="CEM1234" /><br />
-                            <label for="name">Name</label>
-                            <input type="text" class="form-control" value="Fox Cement" /><br />
-                            <label for="type">Type</label>
-                            <select name="type" class="form-control">
-                                <option value="cement">Cement</option>
-                                <option value="cement">Cement</option>
-                                <option value="cement">Cement</option>
-                                <option value="cement">Cement</option>
-                                <option value="cement">Cement</option>
-                            </select><br />
-                            <label for="price">Price</label>
-                            <section class="input-group">
-                                <span class="input-group-addon">PHP</span>
-                                <input type="text" class="form-control" value="143.00" />
-                            </section><br />
-                            <label for="availability">Availability</label>
-                            <select name="availability" class="form-control">
-                                <option value="available">Available</option>
-                                <option value="available">Out of Stock</option>
-                                <option value="available">Few Stocks Left</option>
-                            </select><br />
-                            <label for="availability">Vendor</label>
-                            <select name="availability" class="form-control">
-                                <option value="available">Acetillore Hardware</option>
-                                <option value="available">Acetillore Hardware</option>
-                                <option value="available">Acetillore Hardware</option>
-                            </select>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-flat btn-info cancel" data-dismiss="modal">Update</button>
-                        <a href="#delete-product-dialog" data-toggle="modal" class="btn btn-flat btn-danger cancel" data-dismiss="modal">Delete</a>
-                        <button class="btn btn-flat btn-primary cancel" data-dismiss="modal">Close</button>
+                    
+                    <div data-edit-product>
+
                     </div>
               </div>
             </div>
@@ -203,43 +94,10 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         <h4 class="modal-title">Add Product</h4>
                     </div>
-                    <div class="modal-body">
-                        <form>
-                            <label for="product_id">Product ID</label>
-                            <input type="text" class="form-control" placeholder="CEM1234" /><br />
-                            <label for="name">Name</label>
-                            <input type="text" class="form-control" placeholder="Fox Cement" /><br />
-                            <label for="type">Type</label>
-                            <select name="type" class="form-control">
-                                <option value="cement">Cement</option>
-                                <option value="cement">Cement</option>
-                                <option value="cement">Cement</option>
-                                <option value="cement">Cement</option>
-                                <option value="cement">Cement</option>
-                            </select><br />
-                            <label for="price">Price</label>
-                            <section class="input-group">
-                                <span class="input-group-addon">PHP</span>
-                                <input type="text" class="form-control" placeholder="143.00" />
-                            </section><br />
-                            <label for="availability">Availability</label>
-                            <select name="availability" class="form-control">
-                                <option value="available">Available</option>
-                                <option value="available">Out of Stock</option>
-                                <option value="available">Few Stocks Left</option>
-                            </select><br />
-                            <label for="availability">Vendor</label>
-                            <select name="availability" class="form-control">
-                                <option value="available">Acetillore Hardware</option>
-                                <option value="available">Acetillore Hardware</option>
-                                <option value="available">Acetillore Hardware</option>
-                            </select>
-                        </form>
+                    <div add-product>                            
+
                     </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-flat btn-info cancel" data-dismiss="modal">Add</button>
-                        <button class="btn btn-flat btn-danger cancel" data-dismiss="modal">Cancel</button>
-                    </div>
+                    
               </div>
             </div>
         </div>
@@ -250,15 +108,14 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         <h4 class="modal-title">Fox Cement - Delete</h4>
                     </div>
-                    <div class="modal-body">
-                        Are you sure you want to delete this product?
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-flat btn-danger cancel" data-dismiss="modal">Yes</button>
-                        <button class="btn btn-flat btn-info cancel" data-dismiss="modal">No</button>
-                        <button class="btn btn-flat btn-warning cancel" data-dismiss="modal">Cancel</button>
+                    <div delete-con-modal>
+
                     </div>
               </div>
             </div>
         </div>
+@stop
+
+@section('other_scripts')
+    <script src="{{URL::to('js/product.js')}}" type="text/javascript"></script> 
 @stop

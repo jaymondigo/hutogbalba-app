@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableMaterialProperties extends Migration {
+class CreateTableTypes extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,10 +12,10 @@ class CreateTableMaterialProperties extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('material_properties', function($table){
+		Schema::create('types', function($table){
 			$table->increments('id');
-			$table->string('unit');
-			$table->string('value');
+			$table->string('name');
+			$table->integer('element');
 			$table->softDeletes();
 			$table->timeStamps();
 		});
@@ -28,7 +28,7 @@ class CreateTableMaterialProperties extends Migration {
 	 */
 	public function down()
 	{
-		Schema::dropIfExists('material_properties');
+		Schema::drop('types');
 	}
 
 }

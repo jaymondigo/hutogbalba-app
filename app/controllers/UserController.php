@@ -36,6 +36,7 @@ class UserController extends BaseController {
         $username = preg_replace( "/[^0-9a-zA-Z-]/", '', $username);  
         $user->username = $username;
         $user->password = Input::get( 'password' );
+        $user->type = Input::has( 'type' ) ? Input::get( 'type' ) :  'dreamer' ;
 
         // The password confirmation will be removed from model
         // before saving. This field will be used in Ardent's
@@ -129,6 +130,48 @@ class UserController extends BaseController {
         }
     }
 
+    public function postUpdateInfo(){
+        $user = User::find(Input::get('id'));
+        if(!is_object($user))
+            return Redirect::back();
+
+        $user->firstname = Input::get('firstname');
+        $user->lastname = Input::get('lastname');
+        $user->email = Input::get('email');
+        $user->updateUniques();
+
+        return $user->errors()->all(':message');
+    }
+
+    public function postUpdatePassword(){
+        $user = Auth::user();
+        if(!Hash::check(Input::get('old_password'), $user->password)) 
+        {
+            return Redirect::back()
+                            ->with('password-error', 'Old password is invalid');
+        }
+        $user->password = Input::get('password');
+        $user->password_confirmation = Input::get('password_confirmation');
+        $user->updateUniques(); 
+        if(count($user->errors()->all(':message'))>0)
+            return Redirect::back()
+                            ->with('password-error', $user->errors()->all(':message'));
+        
+        return Redirect::back()
+                        ->with('password-success','Password successfully changed');
+    }
+
+    public function postUploadAvatar(){
+        $user = User::find(Input::get('id'));
+        if(!is_object($user))
+            return Redirect::back();
+
+        $user->avatar = Input::file('avatar');
+        $user->updateUniques();
+
+        return Redirect::back()
+                        ->with('avatar_errors',$user->errors()->all(':message'));
+    }
     /**
      * Attempt to confirm account with code
      *

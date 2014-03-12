@@ -24,7 +24,7 @@
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header bg-light-blue">
-                                    <img src="img/avatar6.png" class="img-circle" alt="User Image" />
+                                    <img src="{{URL::to(Auth::user()->avatar->url('medium'))}}" class="img-circle" alt="User Image" />
                                     <p>
                                         {{Auth::user()->fullname}} - {{Auth::user()->type}}
                                         <small>Member since {{date('F Y', strtotime(Auth::user()->created_at))}}</small>
@@ -33,7 +33,7 @@
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                        <a class="btn btn-default btn-flat" href="{{URL::to('home/profile')}}">Profile</a>
                                     </div>
                                     <div class="pull-right">
                                         <a href="{{{ (Confide::checkAction('UserController@logout')) ?: 'signout' }}}" class="btn btn-default btn-flat">Sign out</a>

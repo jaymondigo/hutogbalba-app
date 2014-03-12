@@ -5,12 +5,12 @@
                     <!-- Sidebar user panel -->
                     <div class="user-panel">
                         <div class="pull-left image">
-                            <img src="img/avatar6.png" class="img-circle" alt="User Image" />
+                            <img src="{{URL::to(Auth::user()->avatar->url('medium'))}}" class="img-circle" alt="User Image" />
                         </div>
                         <div class="pull-left info">
                             <p>Hello, {{Auth::user()->firstname}}</p>
 
-                            <a href="#"><i class="fa fa-circle text-success"></i> {{Auth::user()->online_status}}</a>
+                            <a href="#edit-profile-dialog" data-toggle="modal"><i class="fa fa-circle text-success"></i> {{Auth::user()->online_status}}</a>
                         </div>
                     </div>
                     <!-- search form -->

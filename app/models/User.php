@@ -3,6 +3,19 @@
 use Zizaco\Confide\ConfideUser;
 
 class User extends ConfideUser {
+	use Codesleeve\Stapler\Stapler;
+
+	public function __construct(array $attributes = array()) {
+      $this->hasAttachedFile('avatar', [
+          'styles' => [
+            'medium' => '300x300',
+            'thumb' => '100x100'
+          ],
+          'default_url' => '/:attachment/:style/missing.jpg'
+      ]);
+
+      parent::__construct($attributes);
+  	}
 
 	public static $rules = array(
 		'firstname' => 'required',
@@ -61,6 +74,5 @@ class User extends ConfideUser {
 	public function getFullnameAttribute(){
 		return $this->firstname.' '.$this->lastname;
 	}
-
 }
  
