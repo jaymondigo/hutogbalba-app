@@ -36,7 +36,7 @@ class DreamerController extends BaseController {
 	}
 
 	public function getMyDreams(){
-		// return HouseDesign::where('')
+		return HouseDesign::where('dreamer_id', Auth::user()->id)->get();
 	}
 
 }
