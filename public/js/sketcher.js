@@ -85,7 +85,10 @@
                 if (data.success) {
                     DreamBuilder.ID = data.ID;
                     $('#view-3d').attr('house-id', data.ID);
-                    //save successful
+                    $alert({
+                        type: 'success',
+                        message: 'Dream house design successfully save!'
+                    });
                 }
             }
         });
