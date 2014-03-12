@@ -52,12 +52,16 @@
                 $designs.empty();
                 var $ul = $('<ul></ul>');
                 $.each(data, function(i, design) {
+                    if (design.id == DreamBuilder.ID)
+                        return;
+
                     var $li = $('<li></li>');
                     $li.attr({
                         id: design.id,
                         'data-date-created': design.dateCreated
                     });
-                    $li.text(design.name);
+                    $a = "<a href='javascript:void(0)' open-design='" + design.id + "'>" + design.name + "</a>";
+                    $li.html($a);
                     $ul.append($li);
                 });
                 $designs.append($ul);
@@ -74,23 +78,54 @@
             });
             return false;
         }
+
+        if (DreamBuilder.ID == 0)
+            $('#save-dialog').modal('show');
+        else
+            $('#saveHouse').click();
+
+    });
+
+    $('#saveHouse').click(function() {
+        if (DreamBuilder.NAME == '')
+            DreamBuilder.NAME = $('[name="design_name"]').val();
+
         $.ajax({
             url: baseUrl + '/dreamer/save-dream',
             type: 'POST',
             data: {
                 id: DreamBuilder.ID,
+                name: DreamBuilder.NAME,
                 house: DreamBuilder.house
             },
             success: function(data) {
                 if (data.success) {
+                    $('#save-dialog').modal('hide');
                     DreamBuilder.ID = data.ID;
                     $('#view-3d').attr('house-id', data.ID);
                     $alert({
                         type: 'success',
                         message: 'Dream house design successfully save!'
                     });
+                } else {
+                    DreamBuilder.NAME = '';
+                    $('.save-notification').show();
+                    $('[save-notification-content]').html(data.errors);
                 }
             }
+        });
+    });
+
+    $(document).on('click', '[open-design]', function() {
+        $id = $(this).attr('open-design');
+        $.get(baseUrl + '/dreamer/dream-house/' + $id, function(resp) {
+            DreamBuilder.ID = resp.ID;
+            DreamBuilder.NAME = resp.name;
+            DreamBuilder.house = JSON.parse(resp.properties);
+            $('#open-dialog').modal('hide');
+
+            //create 2d
+
         });
     });
 

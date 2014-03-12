@@ -482,6 +482,33 @@
                     </div>
                 </div>
 
+                <div class="modal fade" id="save-dialog" tabindex="-1" role="dialog" aria-labelledby="form-label" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title">Save Design</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="save-notification" style="display:none;">
+                                    <div id="alert-con" class="alert alert-danger" style="padding-left:10px; margin-left:0px;"> 
+                                      <a href="#" class="alert-link" save-notification-content>
+                                      Alert!
+                                      </a>
+                                    </div>
+                                </div>
+                                <label for="design_name" >Name</label>
+                                <input type="text" placeholder="My first dream house" class="form-control" name="design_name">
+                            </div>
+                            <div class="modal-footer">
+                                 <button class="btn btn-flat btn-success" id="saveHouse">Save</button>
+                                <button class="btn btn-flat btn-primary" data-dismiss="modal">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
 
                 <div id="contextMenu" style="position: absolute; display: none;" class="dropdown clearfix">
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" style="display:block;position:static;margin-bottom:5px;">

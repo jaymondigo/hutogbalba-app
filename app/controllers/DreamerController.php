@@ -32,9 +32,19 @@ class DreamerController extends BaseController {
 		 
 		$obj->properties = json_encode(Input::get('house'));
 		$obj->dreamer_id = Auth::user()->id;
+		$obj->name = Input::get('name');
 		$obj->save();
-
-		return array('success'=>true, 'ID'=>$obj->id);
+		
+		
+		if(count($obj->validationErrors)<=0)
+			return array('success'=>true, 'ID'=>$obj->id);
+		else{	
+			$errors = '';
+			foreach(json_decode($obj->validationErrors, true) as $i => $data){
+				$errors .= $data[0]."<br/>";
+			}
+			return array('success'=>false, 'errors'=>$errors);
+		}
 	}
 
 	public function getMyDreams(){

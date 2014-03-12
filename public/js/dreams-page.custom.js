@@ -34,8 +34,9 @@ $(document).on('click', '#view-3d', function() {
     var strWindowUrl = baseUrl + '/dreamer/preview3d/' + houseId;
     // window.open(strWindowUrl, "_blank", strWindowFeatures);
     if (childWindow == '' || childWindow.closed) {
-        childWindow = window.open(strWindowUrl, "_blank", "scrollbars=1,resizable=1");
+        childWindow = window.open(strWindowUrl, "_blank", "scrollbars=no,resizable=no");
     } else {
         childWindow.location.reload();
     }
+    childWindow.focus();
 });

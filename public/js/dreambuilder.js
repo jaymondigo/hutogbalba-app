@@ -2,6 +2,8 @@
 
     var DreamBuilder = {
 
+        NAME: '',
+
         ID: 0,
 
         THREED: null,
