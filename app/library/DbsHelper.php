@@ -14,7 +14,7 @@
 					$left_navs = array(
 							array('label'=>'Dashboard', 'link'=>URL::to('home'),'icon'=>'fa fa-dashboard', 'active'=>strpos($uri, 'home')&&!strpos($uri, 'profile')),
 							array('label'=>'Profile', 'link'=>URL::to('home/profile'),'icon'=>'fa fa-user', 'active'=>strpos($uri, 'profile')),
-							array('label'=>'Dreams', 'link'=>URL::to('dremear/dreams'),'icon'=>'fa fa-moon-o', 'active'=>strpos($uri, 'dreams')),								
+							array('label'=>'Dreams', 'link'=>URL::to('dreamer/dreams'),'icon'=>'fa fa-moon-o', 'active'=>strpos($uri, 'dreams')),								
 						);
 
 					break;

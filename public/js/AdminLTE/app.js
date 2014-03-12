@@ -125,6 +125,7 @@ $(function() {
     });
 
     /* For demo purposes */
+    /*
     var demo = $("<div />").css({
         position: "fixed",
         top: "150px",
@@ -174,6 +175,7 @@ $(function() {
 
     $("body").append(demo);
     $("body").append(demo_settings);
+    */
 });
 function change_layout() {
     $("body").toggleClass("fixed");

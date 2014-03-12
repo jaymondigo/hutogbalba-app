@@ -32,6 +32,26 @@
                                 </a>
                             </li>
                         @endforeach 
+
+                        @if(strpos($_SERVER['REQUEST_URI'], 'dreams'))
+                            <li>
+                                <a>
+                                    <i class="fa fa-crosshairs"></i> <span>Legend</span>
+                                    <div class="form-group">
+                                        <label>Door</label><br >
+                                        <img src="{{URL::to('img/door.png')}}" width="150px" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Room</label><br />
+                                        <img src="{{URL::to('img/room.png')}}" width="150px" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Window</label><br />
+                                        <img src="{{URL::to('img/window.png')}}" width="150px" />
+                                    </div> 
+                                </a>
+                            </li>
+                        @endif
                     </ul>
                 </section>
                 <!-- /.sidebar -->
