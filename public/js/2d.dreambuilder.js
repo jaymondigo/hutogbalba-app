@@ -272,7 +272,7 @@
             x: obj.x,
             y: obj.y,
             width: obj.width,
-            length: obj.length
+            length: obj.length,
             type: obj.type
         });
 
