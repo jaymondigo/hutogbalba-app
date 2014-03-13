@@ -204,7 +204,7 @@
                         x: door.x,
                         y: door.y,
                         width: parseInt(door.width),
-                        length: parseInt(door.length)
+                        length: parseInt(door.length),
                         type: door.type
                     });
                 });
