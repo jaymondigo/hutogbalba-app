@@ -40,9 +40,10 @@ $(document).on('click', '#view-3d', function() {
     // window.open(strWindowUrl, "_blank", strWindowFeatures);
     if (childWindow == '' || childWindow.closed) {
         childWindow = window.open(strWindowUrl, "_blank", "scrollbars=no,resizable=no");
-    } else {
-        childWindow.location.reload();
     }
+
+    childWindow.location.href = strWindowUrl;
+
     childWindow.focus();
 });
 
@@ -50,5 +51,26 @@ $(document).on('click', '[view-dream]', function() {
     id = $(this).data('id');
     $.get(baseUrl + '/dreamer/preview-dream/' + id, function(resp) {
         $('[dream-content]').html(resp);
+    });
+});
+
+$(document).on('click', '[view-estimate]', function() {
+    houseId = $('#view-3d').attr('house-id');
+
+    if (houseId == '') {
+        $DBSAlert({
+            type: 'warning',
+            message: 'Please save your house design first!'
+        });
+        return false;
+    }
+    $.get(baseUrl + '/dreamer/estimate/' + houseId, function(resp) {
+        $('[estimate-content]').html(resp);
+    });
+});
+$(document).on('click', '[view-options]', function() {
+    id = $(this).data('id');
+    $.get(baseUrl + '/dreamer/options', function(resp) {
+        $('[options-content]').html(resp);
     });
 });

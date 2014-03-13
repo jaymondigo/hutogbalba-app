@@ -82,4 +82,13 @@ class DreamerController extends BaseController {
 		return View::make('partials.dream_house.view')
 					->with('dream', $obj);
 	}
+	public function getEstimate($id){
+		$obj = HouseDesign::find($id);
+		return View::make('partials.estimate.view')
+					->with('dream', $obj);
+	}
+
+	public function getOptions(){
+		return View::make('partials.options.view');
+	}
 }

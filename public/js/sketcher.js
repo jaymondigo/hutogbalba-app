@@ -22,6 +22,8 @@
         DreamBuilder.house.rooms = [];
         DreamBuilder.house.windows = [];
         DreamBuilder.house.doors = [];
+        $('#sketchpad').empty(); //clear the sketchpad
+
     };
 
     var addDeleteBtn = function() {
@@ -32,7 +34,6 @@
         $('#delete').remove();
     }
     var init = function() {
-        $('#sketchpad').empty(); //clear the sketchpad
         //set the new house dimensions
         DreamBuilder.setLength(DreamBuilder.house.length).setWidth(DreamBuilder.house.width).setHeight(DreamBuilder.house.height);
         d = new DreamBuilder.TWOD();
@@ -140,8 +141,9 @@
     $(document).on('click', '[open-design]', function() {
         $id = $(this).attr('open-design');
         addDeleteBtn();
+        clearSketchpad();
+
         $.get(baseUrl + '/dreamer/dream-house/' + $id, function(resp) {
-            clearSketchpad();
             DreamBuilder.ID = resp.id;
             DreamBuilder.NAME = resp.name;
             $('[name="design_name"]').val(resp.name);

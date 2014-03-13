@@ -70,13 +70,13 @@
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">View <b class="caret"></b></a>
                                         <ul class="dropdown-menu">
                                             <li><a href="javascript:void(0)" id="view-3d" house-id="">3D</a></li>
-                                            <li><a href="estimate.php" target="_blank" tabindex="-1">Estimate</a></li>
+                                            <li><a href="#estimate-dialog" data-toggle="modal" tabindex="-1" view-estimate>Estimate</a></li>
                                         </ul>
                                     </li>
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Help <b class="caret"></b></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="#" id="options">Options</a></li>
+                                            <li><a id="options" href="#options-dialog" data-toggle="modal" view-options>Options</a></li>
                                             <li><a href="#about-dialog" data-toggle="modal" id="about">About</a></li>
                                         </ul>
                                     </li>
@@ -165,10 +165,10 @@
                                         <div class="form-group">
                                             <label for="wall">Available Doors: </label>
                                             <ul class="list-unstyled">
-                                                <li><label><input type="radio" checked name="door-dim" value="6.6x2.10"> 6'6" &times; 2'10"</label></li>
-                                                <li><label><input type="radio" name="door-dim" value="6.8x2.10"> 6'8" &times; 2'10"</label></li>
-                                                <li><label><input type="radio" name="door-dim" value="7.0x2.10"> 7'0" &times; 2'10"</label></li>
-                                                <li><label><input type="radio" name="door-dim" value="8.0x2.10"> 8'0" &times; 2'10"</label></li>
+                                                <li><label><input type="radio" checked name="door-dim" value="6.6x2.10" data-type="A"> 6'6" &times; 2'10"</label></li>
+                                                <li><label><input type="radio" name="door-dim" value="6.8x2.10" data-type="B"> 6'8" &times; 2'10"</label></li>
+                                                <li><label><input type="radio" name="door-dim" value="7.0x2.10" data-type="C"> 7'0" &times; 2'10"</label></li>
+                                                <li><label><input type="radio" name="door-dim" value="8.0x2.10" data-type="D"> 8'0" &times; 2'10"</label></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -514,6 +514,22 @@
                                  <button class="btn btn-flat btn-success" id="saveHouse">Save</button>
                                 <button class="btn btn-flat btn-primary" data-dismiss="modal">Cancel</button>
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="estimate-dialog" tabindex="-1" role="dialog" aria-labelledby="form-label" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content" estimate-content>
+                           
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="options-dialog" tabindex="-1" role="dialog" aria-labelledby="form-label" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content" options-content>
+                           
                         </div>
                     </div>
                 </div>
