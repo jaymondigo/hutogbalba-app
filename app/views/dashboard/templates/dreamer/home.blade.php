@@ -33,9 +33,8 @@
                                      
                                 </div>
                                 <div class="icon">
-                                    @if(isset($dream->pictures[0]))
-                                    <img src="{{URL::to($dream->pictures[0]->picture->url())}}" />
-                                    @endif
+                                    <i class="fa fa-home"></i>
+                                     
                                 </div>
                                 <a href="javascript:void(0)" data-id="{{$dream->id}}" view-dream class="small-box-footer">
                                     View Dream House <i class="fa fa-arrow-circle-right"></i>
