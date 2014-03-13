@@ -56,12 +56,28 @@
     });
     $('#screenshot').click(function(e) {
         screenshot(function(url) {
-            $.post(baseUrl + '/dreamer/upload-screenshot', {
-                id: DreamBuilder.ID,
-                url: url
-            }, function(resp) {
-                console.log(resp);
+            blob = window.dataURLtoBlob && window.dataURLtoBlob(url);
+            var formData = new FormData();
+            formData.append('picture', blob, 'picture.png');
+            formData.append('id', DreamBuilder.ID);
+            $.ajax({
+                url: baseUrl + '/dreamer/upload-screenshot',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                type: 'POST',
+                success: function(data) {
+                    alert('screenshot successfully saved!');
+                }
             });
+
+            // $.post(baseUrl + '/dreamer/upload-screenshot', {
+            //     id: DreamBuilder.ID,
+            //     url: url
+            // }, function(resp) {
+            //     console.log(resp);
+            // });
             //window.open(url, '_blank ');
         });
     });

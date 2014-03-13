@@ -24,6 +24,13 @@
         DreamBuilder.house.doors = [];
     };
 
+    var addDeleteBtn = function() {
+        if ($('#delete').length <= 0)
+            $('[file-menu]').append('<li><a href="#" id="delete">Delete</a></li>');
+    }
+    var rmDeleteBtn = function() {
+        $('#delete').remove();
+    }
     var init = function() {
         $('#sketchpad').empty(); //clear the sketchpad
         //set the new house dimensions
@@ -82,7 +89,7 @@
     $('#save').click(function(e) {
 
         if (typeof DreamBuilder.house.length == 'undefined' || DreamBuilder.house.length <= 0) {
-            $alert({
+            $DBSAlert({
                 message: 'Nothing to save. Please create a new house design.',
                 type: 'warning'
             });
@@ -110,12 +117,15 @@
             },
             success: function(data) {
                 if (data.success) {
+                    if ($('#delete').length <= 0)
+                        addDeleteBtn();
+
                     $('#save-dialog').modal('hide');
                     DreamBuilder.ID = data.ID;
                     DreamBuilder.NAME = data.name;
                     $('[name="design_name"]').val(data.name);
                     $('#view-3d').attr('house-id', data.ID);
-                    $alert({
+                    $DBSAlert({
                         type: 'success',
                         message: 'Dream house design successfully save!'
                     });
@@ -129,6 +139,7 @@
 
     $(document).on('click', '[open-design]', function() {
         $id = $(this).attr('open-design');
+        addDeleteBtn();
         $.get(baseUrl + '/dreamer/dream-house/' + $id, function(resp) {
             clearSketchpad();
             DreamBuilder.ID = resp.id;
@@ -137,7 +148,8 @@
             $('#open-dialog').modal('hide');
             $('[house-id]').attr('house-id', resp.id);
             //create 2d
-            var data = JSON.parse(resp.properties);
+            data = resp.properties;
+            var data = JSON.parse(data);
 
             DreamBuilder.house.length = data.length;
             DreamBuilder.house.width = data.width;
@@ -196,7 +208,13 @@
             }
         });
     });
-
+    $(document).on('click', '#delete', function() {
+        $.post(baseUrl + '/dreamer/delete-dream', {
+            id: DreamBuilder.ID
+        }, function(resp) {
+            document.location.reload();
+        });
+    });
     $('#step2-form').submit(function(e) {
         DreamBuilder.house.numFloors = pi('select[name=num-floors]');
         DreamBuilder.house.terrain = pi('input[name=terrain]');
@@ -241,6 +259,7 @@
         //reset house properties then initialize new
         clearSketchpad();
         init();
+        rmDeleteBtn();
     });
 
     $('#new-room-form').submit(function(e) {

@@ -45,5 +45,6 @@
     DreamBuilder.ID = "{{$houseDesign->id}}";
     </script>
     <script type="text/javascript" src="{{URL::to('js/3d.js')}}"></script>
+    <script type="text/javascript" src="{{URL::to('js/canvas-to-blob.min.js')}}"></script>
 </body>
 </html>
