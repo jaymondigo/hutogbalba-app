@@ -84,6 +84,7 @@ class DreamerController extends BaseController {
 	}
 	public function getEstimate($id){
 		$obj = HouseDesign::find($id);
+		$obj->materials = json_decode($obj->materials);
 		return View::make('partials.estimate.view')
 					->with('dream', $obj);
 	}

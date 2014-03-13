@@ -4,7 +4,20 @@
 </div>
 <div class="modal-body">
     <div class="row" style="text-align: center;"> 
-         
+
+         <table>
+         @foreach()
+         <tr>
+         <td>
+         	
+         </td>
+         <td>
+         	
+         </td>
+         </tr>
+
+          a
+         </table>
     </div>
 </div>
 <div class="modal-footer">
