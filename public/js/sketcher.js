@@ -205,6 +205,7 @@
                         y: door.y,
                         width: parseInt(door.width),
                         length: parseInt(door.length)
+                        type: door.type
                     });
                 });
             }
@@ -289,7 +290,8 @@
             y: 0,
             width: width,
             length: length,
-            where: where
+            where: where,
+            type: $('input[name=door-dim]').data('type')
         });
         $('#new-door-dialog').modal('hide');
         return false;
