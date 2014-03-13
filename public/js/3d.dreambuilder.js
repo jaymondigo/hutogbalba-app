@@ -162,7 +162,7 @@
     var Roof = function(obj) {
         var geometry = new THREE.CubeGeometry(0.1, obj.height, obj.width);
         var material = new THREE.MeshPhongMaterial({
-            map: THREE.ImageUtils.loadTexture(baseUrl + '/img/roof.jpg')
+            map: THREE.ImageUtils.loadTexture(baseUrl + '/img/roof/' + DreamBuilder.roof.element + '.png')
         });
         var mesh = new THREE.Mesh(geometry, material);
         //tilt roof 66 deg
@@ -182,7 +182,8 @@
 
     var Floor = function(obj) {
         var geometry = new THREE.CubeGeometry(obj.length, obj.width, 1);
-        var t = THREE.ImageUtils.loadTexture(baseUrl + '/img/floor-tiles.jpg');
+        var f = DreamBuilder.floor.type == 'ceramic_tile' ? 'ceramic_tile.png' : 'hardwood_floor.png';
+        var t = THREE.ImageUtils.loadTexture(baseUrl + '/img/floor/' + f);
         t.wrapS = t.wrapT = THREE.RepeatWrapping;
         var material = new THREE.MeshPhongMaterial({
             map: t
@@ -205,7 +206,7 @@
                 move = 'y';
                 break;
         }
-        var t = THREE.ImageUtils.loadTexture(baseUrl + '/img/wall-bricks.jpg');
+        var t = THREE.ImageUtils.loadTexture(baseUrl + '/img/wall/' + DreamBuilder.wall.element + '.png');
         t.wrapS = t.wrapT = THREE.RepeatWrapping;
         var material = new THREE.MeshPhongMaterial({
             map: t

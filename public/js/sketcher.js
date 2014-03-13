@@ -15,6 +15,9 @@
     };
 
     var clearSketchpad = function() {
+        DreamBuilder.rooms = 0;
+        DreamBuilder.doors = 0;
+        DreamBuilder.windows = 0;
         DreamBuilder.ID = 0;
         DreamBuilder.house.rooms = [];
         DreamBuilder.house.windows = [];
@@ -186,6 +189,7 @@
                     d.createWindow({
                         where: win.where,
                         x: win.x,
+                        y: win.y,
                         width: win.width,
                         length: win.length
                     });
@@ -196,6 +200,7 @@
                     d.createDoor({
                         where: door.where,
                         x: door.x,
+                        y: door.y,
                         width: door.width,
                         length: door.length
                     });
@@ -279,6 +284,7 @@
         var length = (parseInt(l[0]) * 12 + parseInt(l[1])) * 2.54;
         d.createDoor({
             x: 0,
+            y: 0,
             width: width,
             length: length,
             where: where
@@ -297,6 +303,7 @@
         var length = (parseInt(l[0]) * 12 + parseInt(l[1])) * 2.54;
         d.createWindow({
             x: 0,
+            y: 0,
             width: width,
             length: length,
             where: where
