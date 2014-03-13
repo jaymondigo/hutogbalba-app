@@ -151,9 +151,9 @@
             data = resp.properties;
             var data = JSON.parse(data);
 
-            DreamBuilder.house.length = data.length;
-            DreamBuilder.house.width = data.width;
-            DreamBuilder.house.height = data.height;
+            DreamBuilder.house.length = parseInt(data.length);
+            DreamBuilder.house.width = parseInt(data.width);
+            DreamBuilder.house.height = parseInt(data.height);
             DreamBuilder.house.wall = {
                 dimension: data.wall.thickness,
                 element: data.wall.element
@@ -178,8 +178,8 @@
                     d.createRoom({
                         px: room.x,
                         py: room.y,
-                        width: room.width,
-                        length: room.length,
+                        width: parseInt(room.width),
+                        length: parseInt(room.length),
                         name: room.name
                     });
                 });
@@ -190,8 +190,8 @@
                         where: win.where,
                         x: win.x,
                         y: win.y,
-                        width: win.width,
-                        length: win.length
+                        width: parseInt(win.width),
+                        length: parseInt(win.length)
                     });
                 });
             }
@@ -201,8 +201,8 @@
                         where: door.where,
                         x: door.x,
                         y: door.y,
-                        width: door.width,
-                        length: door.length
+                        width: parseInt(door.width),
+                        length: parseInt(door.length)
                     });
                 });
             }
