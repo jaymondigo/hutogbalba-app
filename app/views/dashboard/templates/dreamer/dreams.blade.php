@@ -395,7 +395,7 @@
                                                 <option value="wood_flooring">Wood Flooring</option>
                                             </select>
                                         </div>
-                                        <div class="col-lg-4 col-md-4">
+                                        <!-- <div class="col-lg-4 col-md-4">
                                             <select class="form-control" name="tile-dim">
                                                 <option value="5.1x5.1">51 mm &times; 51 mm</option>
                                                 <option value="10.2x10.2">102 mm &times; 102 mm</option>
@@ -405,14 +405,14 @@
                                                 <option value="33.1x33.1">331 mm &times; 331 mm</option>
                                                 <option value="40.7x40.7">407 mm &times; 407 mm</option>
                                             </select>
-                                        </div>
-                                        <div class="col-lg-4 col-md-4">
+                                        </div> -->
+                                        <!-- <div class="col-lg-4 col-md-4">
                                             <select class="form-control" name="wood-element">
                                                 <option value="hardwood_floor">Hardwood Floor</option>
                                                 <option value="laminate_floor">Laminate Floor</option>
                                                 <option value="parquet_floor">Parquet Floor</option>
                                             </select>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
