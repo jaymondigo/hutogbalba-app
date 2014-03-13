@@ -79,7 +79,6 @@ class DreamerController extends BaseController {
 
 	public function getPreviewDream($id){
 		$obj = HouseDesign::with('pictures')->where('id', $id)->first();
-
 		return View::make('partials.dream_house.view')
 					->with('dream', $obj);
 	}

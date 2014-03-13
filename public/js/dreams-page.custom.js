@@ -47,7 +47,8 @@ $(document).on('click', '#view-3d', function() {
 });
 
 $(document).on('click', '[view-dream]', function() {
-    $.get(baseUrl + '/dreamer/preview-dream', function() {
-
+    id = $(this).data('id');
+    $.get(baseUrl + '/dreamer/preview-dream/' + id, function(resp) {
+        $('[dream-content]').html(resp);
     });
 });

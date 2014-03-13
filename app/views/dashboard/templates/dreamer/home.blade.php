@@ -11,7 +11,7 @@
                 <section class="content-header">
                     <h1>
                         Dashboard
-                        <small>Your Dream Houses</small>
+                        <small>My Dream Houses</small>
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -27,18 +27,20 @@
                             <!-- small box -->
                             <div class="small-box bg-aqua">
                                 <div class="inner">
-                                    <h4>
+                                    <h2>
                                         {{$dream->name}}
                                     </h4>
-                                     
+                                     <small>{{date('F d, Y', strtotime($dream->created_at))}}</small>
                                 </div>
                                 <div class="icon">
                                     <i class="fa fa-home"></i>
                                      
                                 </div>
-                                <a href="javascript:void(0)" data-id="{{$dream->id}}" view-dream class="small-box-footer">
+                                @if(count($dream->pictures)>0)
+                                <a href="#view-dialog" data-id="{{$dream->id}}" view-dream class="small-box-footer" data-toggle="modal">
                                     View Dream House <i class="fa fa-arrow-circle-right"></i>
                                 </a>
+                                @endif
                             </div>
                         </div><!-- ./col -->
                     @endforeach
@@ -48,6 +50,18 @@
             </aside><!-- /.right-side -->
         </div><!-- ./wrapper -->
 
-        <!-- add new calendar event modal -->
+        <!-- modal -->
+        <div class="modal fade" id="view-dialog" tabindex="-1" role="dialog" aria-labelledby="form-label" aria-hidden="true">
+            <div class="modal-dialog" dream-content style="width:100%;height:100%;background:white;margin-top:0px;">
+               
+            </div>
+        </div>
+@stop
 
+@section('other_scripts') 
+    <script type="text/javascript">
+        window.baseUrl = $('[base-url]').attr('base-url');
+    </script>
+    <script src="{{URL::to('js/dreams-page.custom.js')}}" type="text/javascript"></script>
+     
 @stop
