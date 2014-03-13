@@ -10,9 +10,9 @@ class HouseDesign extends Ardent {
 		return $this->hasMany('HousePicture', 'house_id');
 	}
 
-	public function afterCreate() {
+	public function estimateMaterials() {
 		$properties = json_decode($this->properties);
-		$roof = DbsHelper::cm2ft($properties->width) * DbsHelper::cm2ft($properties->length * 1.5);
+		$roof = DbsHelper::cm2in($properties->width) * DbsHelper::cm2in($properties->length * 1.5);
 		$wall = (DbsHelper::cm2ft($properties->width) * DbsHelper::cm2ft($properties->height) * 2) + (DbsHelper::cm2ft($properties->length) * DbsHelper::cm2ft($properties->height) * 2);
 		$floor = DbsHelper::cm2ft($properties->width) * DbsHelper::cm2ft($properties->length) * DbsHelper::cm2ft($properties->terrain);
 		$windows = 0;
@@ -57,5 +57,7 @@ class HouseDesign extends Ardent {
 		}
 		foreach($doors as $key => $value)
 			$materials[$key] = $value;
+		$this->materials = json_encode($materials);
+		$this->updateUniques();
 	}
 }

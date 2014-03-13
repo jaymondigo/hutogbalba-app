@@ -39,7 +39,7 @@ class DreamerController extends BaseController {
 			$obj->save();
 		else
 			$obj->updateUniques();
-		
+		$obj->estimateMaterials();
 		if(count($obj->validationErrors)<=0)
 			return array('success'=>true, 'ID'=>$obj->id, 'name'=>$obj->name);
 		else{	
