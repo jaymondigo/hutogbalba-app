@@ -13,30 +13,32 @@ class HouseDesign extends Ardent {
 	public function afterCreate() {
 		$properties = json_decode($this->properties);
 		$roof = DbsHelper::cm2ft($properties->width) * DbsHelper::cm2ft($properties->length * 1.5);
-		$wall = (DbsHelper::cm2ft($properties->width) * DbsHelper::cm2ft($properties->height) * 2) + (DbsHelper::cm2ft($properties->length * DbsHelper::cm2ft($properties->height) * 2);
+		$wall = (DbsHelper::cm2ft($properties->width) * DbsHelper::cm2ft($properties->height) * 2) + (DbsHelper::cm2ft($properties->length) * DbsHelper::cm2ft($properties->height) * 2);
 		$floor = DbsHelper::cm2ft($properties->width) * DbsHelper::cm2ft($properties->length) * DbsHelper::cm2ft($properties->terrain);
-		$rooms = 0;
-		foreach($properties->rooms as $room) {
-			if(is_object($room))
-				$rooms += ($room->width * $room->height * 2) + ($room->length * $room->height * 2);
-		}
 		$windows = 0;
-		foreach($properties->windows as $window) {
-			if(is_object($window))
-				$windows += $window->width * $window->length;
+		if(isset($properties->windows) && is_object($properties->windows)) {
+			foreach($properties->windows as $window) {
+				if(is_object($window))
+					$windows += $window->width * $window->length;
+			}
 		}
 		$rooms = 0;
-		foreach($properties->rooms as $room) {
-			if(is_object($room))
-				$rooms += (DbsHelper::cm2ft($room->width) * DbsHelper::cm2ft($properties->height) * 2) + (DbsHelper::cm2ft($room->length * DbsHelper::cm2ft($properties->height) * 2);
+		$hb = 0;
+		if(isset($properties->rooms) && is_object($properties->rooms)) {
+			foreach($properties->rooms as $room) {
+				if(is_object($room))
+					$rooms += (DbsHelper::cm2ft($room->width) * DbsHelper::cm2ft($properties->height) * 2) + (DbsHelper::cm2ft($room->length) * DbsHelper::cm2ft($properties->height) * 2);
+			}
+			$hb = DbsHelper::getHollowBlocks($rooms);
 		}
-		$hb = DbsHelper::getHollowBlocks($rooms);
 		$doors = array();
-		foreach($properties->doors as $door) {
-			if(isset($doors[$door->type])
-				$doors[$door->type]++;
-			else
-				$doors[$door->type] = 1;
+		if(isset($properties->doors) && is_object($properties->doors)) {
+			foreach($properties->doors as $door) {
+				if(isset($doors[$door->type]))
+					$doors[$door->type]++;
+				else
+					$doors[$door->type] = 1;
+			}
 		}
 		$materials = array(
 			$properties->roof->element => DbsHelper::getShingles($roof),
