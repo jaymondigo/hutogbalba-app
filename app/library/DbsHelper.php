@@ -55,9 +55,16 @@
 			return $cm / 2.54;
 		}
 
-		public static function getTiles($width, $length, $dim = 9) {
+		public static function cm2ft($cm) {
+			return $cm / 12.54 / 12;
+		}
+
+		public function ft2cm($ft) {
+			return $ft * 12 * 2.54;
+		}
+
+		public static function getTiles($area, $dim = 9) {
 			$tiles = 0;
-			$area = $width * $length;
 			switch($dim) {
 				case 4:
 					$tiles = $area / 0.1089;
@@ -78,30 +85,33 @@
 			return $tiles;
 		}
 
-		public static function getShingles($width, $length) {
-			return $width * $length / 100;
+		public static function getShingles($area) {
+			return $area / 100;
 		}
 
-		public static function getSandGravel($width, $length, $depth) {
-			$cubeF = $width * $length * $depth;
+		public static function getSandGravel($cubeF) {
 			$cubeY = $cubeF / 27; // convert to yards
 			return $cubeY * 1.25; // tons
 		}
 
-		public static function getBricks($width, $length) {
-			return $width * $length / 100 * 3;
+		public static function getBricks($area) {
+			return $area / 100 * 3;
 		}
 
-		public static function getPlywoodSheets($width, $length) {
-			return $width * $length / 32;
+		public static function getPlywoodSheets($area) {
+			return $area / 32;
 		}
 
-		public static function getHollowBlocks($width, $length) {
-			return $width * $length * 2;
+		public static function getHollowBlocks($area) {
+			return $area * 2;
 		}
 
 		public static function getMortar($blocks) {
 			return $blocks / 11;
+		}
+
+		public static function getJalousie($windows) {
+			return $windows / 750;
 		}
 
 	}
