@@ -118,13 +118,13 @@
                                             </section><br />
                                             <label for="room-length">a. Length: </label>
                                             <section class="input-group">
-                                                <input required min="200" value="200" name="room-length" type="number" class="form-control" />
-                                                <span class="input-group-addon">cm</span>
+                                                <input required min="200" value="200" name="room-length" type="text" class="form-control" />
+                                                <span class="input-group-addon">m</span>
                                             </section><br />
                                             <label for="room-width">b. Width: </label>
                                             <section class="input-group">
-                                                <input required min="200" value="200" name="room-width" type="number" class="form-control" />
-                                                <span class="input-group-addon">cm</span>
+                                                <input required min="200" value="200" name="room-width" type="text" class="form-control" />
+                                                <span class="input-group-addon">m</span>
                                             </section><br />
                                             <label for="room-name">Room Label: </label>
                                             <input type="text" name="room-name" class="form-control" />
@@ -259,19 +259,19 @@
                                     <legend>Floors</legend>
                                     <div class="row">
                                         <div class="col-lg-8 col-md-8">
-                                            <label for="num-floors">Number of Floors: </label>
+                                            <label for="num-floors">text of Floors: </label>
                                             <select name="num-floors" class="form-control">
                                                 <option value="1">1</option>
                                             </select><br />
                                             <label for="terrain">a. Ground floor Height above the terrain: </label>
                                             <section class="input-group">
                                                 <input value="30" disabled name="terrain" type="text" class="form-control" />
-                                                <span class="input-group-addon">cm</span>
+                                                <span class="input-group-addon">m</span>
                                             </section><br />
                                             <label for="height">b. Floor to Ceiling Height: </label>
                                             <section class="input-group">
-                                                <input required name="height" value="244" type="number" min="244" class="form-control" />
-                                                <span class="input-group-addon">cm</span>
+                                                <input required name="height" value="244" type="text" min="244" class="form-control" />
+                                                <span class="input-group-addon">m</span>
                                             </section>
                                         </div>
                                         <div class="col-lg-4 col-md-4">
@@ -315,13 +315,13 @@
                                             </section><br />
                                             <label for="length">a. Length: </label>
                                             <section class="input-group">
-                                                <input required name="length" min="250" value="250" type="number" class="form-control" />
-                                                <span class="input-group-addon">cm</span>
+                                                <input required name="length" min="250" value="250" type="text" class="form-control" />
+                                                <span class="input-group-addon">m</span>
                                             </section><br />
                                             <label for="width">b. Width: </label>
                                             <section class="input-group">
-                                                <input required name="width" min="250" value="250" type="number" class="form-control" />
-                                                <span class="input-group-addon">cm</span>
+                                                <input required name="width" min="250" value="250" type="text" class="form-control" />
+                                                <span class="input-group-addon">m</span>
                                             </section>
                                         </fieldset>
                                     </div>
@@ -373,8 +373,8 @@
                                     <div class="row">
                                         <div class="col-lg-4 col-md-4">
                                             <select class="form-control" name="wall-dim">
-                                                <option value="10">10 cm</option>
-                                                <option value="15">15 cm</option>
+                                                <option value="10">10 m</option>
+                                                <option value="15">15 m</option>
                                             </select>
                                         </div>
                                         <div class="col-lg-8 col-md-8">
