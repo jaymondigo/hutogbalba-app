@@ -10,6 +10,7 @@
 
         success: function(data) {
 
+            DreamBuilder.divider = 1000 / data.length;
             DreamBuilder.house.length = data.length;
             DreamBuilder.house.width = data.width;
             DreamBuilder.house.height = data.height;

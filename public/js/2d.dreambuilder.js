@@ -15,6 +15,14 @@
         return false;
     };
 
+    var cm2px = function (cm) {
+        return cm * 37.795275591
+    };
+
+    var px2cm = function (px) {
+        return px / 37.795275591;
+    };
+
     Raphael.st.draggable = function(obj) {
         var me = this;
         var lx = 0;
@@ -25,8 +33,8 @@
         var moveFnc = function(dx, dy) {
             var x = dx + ox;
             var y = dy + oy;
-            var xx = DreamBuilder.get('length') - obj.width; //set the vertical limit: the edge of the room must not exceed to the edge of the house
-            var yy = DreamBuilder.get('width') - obj.length; //set the horizontal limit
+            var xx = DreamBuilder.get('length') * DreamBuilder.divider - obj.width; //set the vertical limit: the edge of the room must not exceed to the edge of the house
+            var yy = DreamBuilder.get('width') * DreamBuilder.divider - obj.length; //set the horizontal limit
             lx = (x >= 0 ? (x <= xx ? x : xx) : 0); // set x to zero if the drag x is less than zero, and set the max if drag x exceeds the limit
             ly = (y >= 0 ? (y <= yy ? y : yy) : 0); // set y to zero if the drag x is less than zero, and set the max if drag y exceeds the limit
             me.transform('t' + lx + ',' + ly); //move the room to x,y ordinates
@@ -37,8 +45,8 @@
         var endFnc = function() {
             ox = lx;
             oy = ly;
-            DreamBuilder.house[obj.property][obj.index].x = ox; //set the current x to house object
-            DreamBuilder.house[obj.property][obj.index].y = oy; //set the curretn y to house object
+            DreamBuilder.house[obj.property][obj.index].x = ox / DreamBuilder.divider; //set the current x to house object
+            DreamBuilder.house[obj.property][obj.index].y = oy / DreamBuilder.divider; //set the curretn y to house object
         };
 
         this.drag(moveFnc, startFnc, endFnc);
@@ -47,7 +55,7 @@
     };
 
     Raphael.st.dragVertical = function(obj) {
-        var limit = DreamBuilder.get('width') - obj.width;
+        var limit = DreamBuilder.get('width') * DreamBuilder.divider - obj.width;
         var me = this;
         var lx = 0;
         var ly = 0;
@@ -67,8 +75,8 @@
         var endFnc = function() {
             ox = lx;
             oy = ly;
-            DreamBuilder.house[obj.property][obj.index].x = ox; // set x to the house object
-            DreamBuilder.house[obj.property][obj.index].y = oy; //set y to the house object
+            DreamBuilder.house[obj.property][obj.index].x = ox / DreamBuilder.divider; // set x to the house object
+            DreamBuilder.house[obj.property][obj.index].y = oy / DreamBuilder.divider; //set y to the house object
         };
 
         this.drag(moveFnc, startFnc, endFnc);
@@ -77,7 +85,7 @@
     };
 
     Raphael.st.dragHorizontal = function(obj) {
-        var limit = DreamBuilder.get('length') - obj.width;
+        var limit = DreamBuilder.get('length') * DreamBuilder.divider - obj.width;
         var me = this;
         var lx = 0;
         var ly = 0;
@@ -96,8 +104,8 @@
         var endFnc = function() {
             ox = lx;
             oy = ly;
-            DreamBuilder.house[obj.property][obj.index].x = ox;
-            DreamBuilder.house[obj.property][obj.index].y = oy;
+            DreamBuilder.house[obj.property][obj.index].x = ox / DreamBuilder.divider;
+            DreamBuilder.house[obj.property][obj.index].y = oy / DreamBuilder.divider;
         };
 
         this.drag(moveFnc, startFnc, endFnc);
@@ -131,7 +139,7 @@
 
     var init = function() {
         //initialize new Raphael object
-        paper = new Raphael('sketchpad', DreamBuilder.get('length') + offsetY * 2, DreamBuilder.get('width') + offsetX * 2);
+        paper = new Raphael('sketchpad', DreamBuilder.get('length') * DreamBuilder.divider + offsetY * 2, DreamBuilder.get('width') * DreamBuilder.divider + offsetX * 2);
     };
 
     var d = DreamBuilder.TWOD = function() {
@@ -142,7 +150,27 @@
 
     d.prototype.createFloor = function() {
         //draw a square that represents the floor
-        floor = paper.rect(offsetX, offsetY, DreamBuilder.get('length'), DreamBuilder.get('width'));
+        floor = paper.rect(offsetX, offsetY, DreamBuilder.get('length') * DreamBuilder.divider, DreamBuilder.get('width') * DreamBuilder.divider);
+        var fiftycm = 50 * DreamBuilder.divider;
+        var i = fiftycm + offsetX;
+        while (i <= DreamBuilder.get('length') * DreamBuilder.divider + offsetX) {
+            var line = paper.path('M' + i + ',' + offsetY + 'L' + i + ',' + (DreamBuilder.get('width') * DreamBuilder.divider + offsetY));
+            line.attr({
+                'stroke': 'silver'
+            });
+            i += fiftycm;
+        }
+        i = fiftycm + offsetY;
+        while (i <= DreamBuilder.get('width') * DreamBuilder.divider + offsetY) {
+            var line = paper.path('M' + offsetX + ',' + i + 'L' + (DreamBuilder.get('length') * DreamBuilder.divider + offsetX) + ',' + i);
+            line.attr({
+                'stroke': 'silver'
+            });
+            i += fiftycm;
+        }
+        var m = paper.text((fiftycm / 2) + offsetX, offsetY / 2, '0.5 m');
+        var mm = paper.path('M' + offsetX + ',' + offsetY / 2 + 'L' + (((fiftycm / 2) - 20) + offsetX) + ',' + offsetY / 2 +
+            'M' + ((fiftycm / 2) + 20 + offsetX) + ',' + offsetY / 2 + 'L' + (fiftycm + offsetX) + ',' + offsetY / 2);
     };
 
     var verticalDash = function(obj) {
@@ -187,7 +215,7 @@
         var set = paper.set();
         set.index = DreamBuilder.rooms;
         set.property = 'rooms';
-        var room = paper.rect(x, y, obj.width, obj.length);
+        var room = paper.rect(x, y, obj.width * DreamBuilder.divider, obj.length * DreamBuilder.divider);
         room.attr({
             fill: 'silver'
         });
@@ -196,7 +224,7 @@
         verticalDash({
             x: x + 15,
             y: y + 15,
-            width: obj.width + 15,
+            width: obj.width * DreamBuilder.divider + 15,
             label: obj.width,
             lat: 1,
             set: set
@@ -204,8 +232,8 @@
 
         verticalDash({
             x: x + 15,
-            y: obj.length + offsetY - 15,
-            width: obj.width + 15,
+            y: obj.length * DreamBuilder.divider + offsetY - 15,
+            width: obj.width * DreamBuilder.divider + 15,
             label: obj.width,
             lat: -1,
             set: set
@@ -214,16 +242,16 @@
         horizontalDash({
             x: x + 15,
             y: y + 15,
-            length: obj.length + offsetY - 15,
+            length: obj.length * DreamBuilder.divider + offsetY - 15,
             label: obj.length,
             lat: 1,
             set: set
         });
 
         horizontalDash({
-            x: obj.width + offsetX - 15,
+            x: obj.width * DreamBuilder.divider + offsetX - 15,
             y: y + 15,
-            length: obj.length + offsetY - 15,
+            length: obj.length * DreamBuilder.divider + offsetY - 15,
             label: obj.length,
             lat: -1,
             set: set
@@ -233,7 +261,7 @@
 
         var name = obj.name ? obj.name : 'ROOM' + DreamBuilder.rooms;
         //display the room label
-        var label = paper.text(obj.width / 2 + offsetX, obj.length / 2 + offsetY, name);
+        var label = paper.text(obj.width * DreamBuilder.divider / 2 + offsetX, obj.length * DreamBuilder.divider / 2 + offsetY, name);
 
         label.attr({
             'font-size': 15,
@@ -244,10 +272,10 @@
         set.push(label);
 
         set.draggable({
-            width: obj.width,
-            length: obj.length,
-            x: obj.px,
-            y: obj.py,
+            width: obj.width * DreamBuilder.divider,
+            length: obj.length * DreamBuilder.divider,
+            x: obj.px * DreamBuilder.divider,
+            y: obj.py * DreamBuilder.divider,
             index: DreamBuilder.rooms - 1,
             property: 'rooms'
         });
@@ -266,6 +294,7 @@
     };
 
     d.prototype.createDoor = function(obj) {
+        var xxx;
         //cache the door to the house object
         DreamBuilder.house.doors.push({
             where: obj.where,
@@ -283,28 +312,32 @@
                 x = offsetX / 2;
                 y = offsetY;
                 xx = offsetX / 2;
-                yy = obj.width;
+                yy = obj.width * DreamBuilder.divider;
+                xxx = obj.y;
                 drag = 'dragVertical';
                 break;
             case 'top':
                 x = offsetX;
                 y = offsetY / 2;
-                xx = obj.width;
+                xx = obj.width * DreamBuilder.divider;
                 yy = offsetY / 2;
+                xxx = obj.x;
                 drag = 'dragHorizontal';
                 break;
             case 'right':
-                x = DreamBuilder.get('length') + offsetX;
+                x = DreamBuilder.get('length') * DreamBuilder.divider + offsetX;
                 y = offsetY;
                 xx = offsetX / 2;
-                yy = obj.width;
+                yy = obj.width * DreamBuilder.divider;
+                xxx = obj.y;
                 drag = 'dragVertical';
                 break;
             case 'bottom':
                 x = offsetX;
-                y = DreamBuilder.get('width') + offsetY;
-                xx = obj.width;
+                y = DreamBuilder.get('width') * DreamBuilder.divider + offsetY;
+                xx = obj.width * DreamBuilder.divider;
                 yy = offsetY / 2;
+                xxx = obj.x;
                 drag = 'dragHorizontal';
                 break;
         }
@@ -330,8 +363,8 @@
             return false;
         });
         set[drag]({
-            width: obj.width,
-            x: obj.x,
+            width: obj.width * DreamBuilder.divider,
+            x: xxx * DreamBuilder.divider,
             index: DreamBuilder.doors,
             property: 'doors'
         });
@@ -339,6 +372,7 @@
     };
 
     d.prototype.createWindow = function(obj) {
+        var xxx;
         //cache the window to the house object
         DreamBuilder.house.windows.push({
             where: obj.where,
@@ -355,37 +389,41 @@
                 x = offsetX / 2;
                 y = offsetY;
                 xx = offsetX / 2;
-                yy = obj.width;
+                yy = obj.width * DreamBuilder.divider;
                 lx = 0;
                 ly = yy;
+                xxx = obj.y;
                 drag = 'dragVertical';
                 break;
             case 'top':
                 x = offsetX;
                 y = offsetY / 2;
-                xx = obj.width;
+                xx = obj.width * DreamBuilder.divider;
                 yy = offsetY / 2;
                 drag = 'dragHorizontal';
-                lx = obj.width;
+                lx = obj.width * DreamBuilder.divider;
                 ly = 0;
+                xxx = obj.x;
                 break;
             case 'right':
-                x = DreamBuilder.get('length') + offsetX;
+                x = DreamBuilder.get('length') * DreamBuilder.divider + offsetX;
                 y = offsetY;
                 xx = offsetX / 2;
-                yy = obj.width;
+                yy = obj.width * DreamBuilder.divider;
                 drag = 'dragVertical';
-                lx = DreamBuilder.get('length') + xx;
+                lx = DreamBuilder.get('length') * DreamBuilder.divider + xx;
                 ly = yy;
+                xxx = obj.y;
                 break;
             case 'bottom':
                 x = offsetX;
-                y = DreamBuilder.get('width') + offsetY;
-                xx = obj.width;
+                y = DreamBuilder.get('width') * DreamBuilder.divider + offsetY;
+                xx = obj.width * DreamBuilder.divider;
                 yy = offsetY / 2;
                 drag = 'dragHorizontal';
-                lx = obj.width;
-                ly = DreamBuilder.get('width') + yy;
+                lx = obj.width * DreamBuilder.divider;
+                ly = DreamBuilder.get('width') * DreamBuilder.divider + yy;
+                xxx = obj.x;
                 break;
         }
 
@@ -415,8 +453,8 @@
         });
 
         set[drag]({
-            width: obj.width,
-            x: obj.x,
+            width: obj.width * DreamBuilder.divider,
+            x: xxx * DreamBuilder.divider,
             index: DreamBuilder.windows,
             property: 'windows'
         });

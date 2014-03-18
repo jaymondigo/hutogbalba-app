@@ -34,6 +34,7 @@
         $('#delete').remove();
     }
     var init = function() {
+        DreamBuilder.divider = 1000 / DreamBuilder.house.length;
         //set the new house dimensions
         DreamBuilder.setLength(DreamBuilder.house.length).setWidth(DreamBuilder.house.width).setHeight(DreamBuilder.house.height);
         d = new DreamBuilder.TWOD();
@@ -156,6 +157,9 @@
             DreamBuilder.house.length = parseInt(data.length);
             DreamBuilder.house.width = parseInt(data.width);
             DreamBuilder.house.height = parseInt(data.height);
+
+            DreamBuilder.divider = 1000 / DreamBuilder.house.length;
+
             DreamBuilder.house.wall = {
                 dimension: data.wall.thickness,
                 element: data.wall.element
