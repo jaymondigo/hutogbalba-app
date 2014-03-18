@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dream Builder Solutions :: Floor Plan View</title>
+	<link href="{{URL::to('css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+        <!-- font Awesome -->
+    <link href="{{URL::to('css/font-awesome.min.css')}}" rel="stylesheet" type="text/css" />
+    <!-- Ionicons -->
+    <link href="{{URL::to('css/ionicons.min.css')}}" rel="stylesheet" type="text/css" />
+    <!-- Morris chart -->
+    <link href="{{URL::to('css/morris/morris.css')}}" rel="stylesheet" type="text/css" />
+    <!-- jvectormap -->
+    <link href="{{URL::to('css/jvectormap/jquery-jvectormap-1.2.2.css')}}" rel="stylesheet" type="text/css" />
+    <!-- fullCalendar -->
+    <link href="{{URL::to('css/fullcalendar/fullcalendar.css')}}" rel="stylesheet" type="text/css" />
+    <!-- Daterange picker -->
+    <link href="{{URL::to('css/daterangepicker/daterangepicker-bs3.css')}}" rel="stylesheet" type="text/css" />
+    <!-- bootstrap wysihtml5 - text editor -->
+    <link href="{{URL::to('css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}" rel="stylesheet" type="text/css" />
+    <!-- Theme style -->
+    <link href="{{URL::to('css/AdminLTE.css')}}" rel="stylesheet" type="text/css" />
+    <style type="text/css" media="screen">
+    	#floorplan img{
+    		/*width: 100%;*/
+    	}	
+    </style>
+</head>
+<body>
+<div id="floorplan-svg"></div>
+<canvas id="floorplan-canvas"></canvas>
+<div id="floorplan"></div>
+
+ <script type="text/javascript" src="{{URL::to('js/jquery-2.0.3.min.js')}}"></script>
+<script type="text/javascript">
+        window.baseUrl = $('[base-url]').attr('base-url');
+    </script>
+<script type="text/javascript" src="{{URL::to('js/raphael.js')}}"></script>
+<script type="text/javascript" src="{{URL::to('js/StackBlur.js')}}"></script>
+<script type="text/javascript" src="{{URL::to('js/rgbcolor.js')}}"></script>
+<script type="text/javascript" src="{{URL::to('js/canvg.js')}}"></script>
+<script type="text/javascript" src="{{URL::to('js/floorplan.js')}}"></script>
+ 
+<script type="text/javascript">
+	$(document).ready(function(){
+		$data = {{json_encode(json_decode($house, true))}};
+		$house = JSON.parse($data.properties);
+		console.log($data);
+		var f = new Floorplan({
+				width: parseInt($house.width),
+				length: parseInt($house.length),
+				name: $data.name,
+			});
+		f.createFloor();
+		if(typeof $house.rooms !='undefined'){
+			$.each($house.rooms, function(i, room){
+				f.createRoom({
+					x: parseInt(room.x),
+					y: parseInt(room.y),
+					width: parseInt(room.width),
+					length: parseInt(room.length),
+					name: room.name
+				});
+			});	
+		}
+		if(typeof $house.doors !='undefined'){
+			$.each($house.doors, function(i, door){
+				f.createDoor({
+					where: door.where,
+					x: parseInt(door.x),
+					y: parseInt(door.y),
+					width: parseInt(door.width),
+					length: parseInt(door.length)
+				});
+			});
+		}
+		 
+		if(typeof $house.windows != 'undefined'){
+			$.each($house.windows, function(i, win){
+				f.createWindow({
+					where: win.where,
+					x: parseInt(win.x),
+					y: parseInt(win.y),
+					width: parseInt(win.width),
+					length: parseInt(win.length)
+				});
+			});
+		}		  
+		
+		convertToImage();
+	})
+</script>
+</body>
+</html>

@@ -70,6 +70,7 @@
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">View <b class="caret"></b></a>
                                         <ul class="dropdown-menu">
                                             <li><a href="javascript:void(0)" id="view-3d" house-id="">3D</a></li>
+                                            <li><a href="javascript:void(0)" id="view-floorplan" house-id="">Floorplan</a></li>
                                             <li><a href="#estimate-dialog" data-toggle="modal" tabindex="-1" view-estimate>Estimate</a></li>
                                         </ul>
                                     </li>

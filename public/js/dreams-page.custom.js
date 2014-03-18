@@ -47,6 +47,29 @@ $(document).on('click', '#view-3d', function() {
     childWindow.focus();
 });
 
+$(document).on('click', '#view-floorplan', function() {
+    houseId = $(this).attr('house-id');
+
+    if (houseId == '') {
+        $DBSAlert({
+            type: 'warning',
+            message: 'Please save your house design first!'
+        });
+        return false;
+    }
+    // var strWindowFeatures = "menubar=yes,location=yes,resizable=yes,scrollbars=yes,status=yes";
+    // var strWindowName = 'Preview 3D - House Design ID #' + houseId;
+    var strWindowUrl = baseUrl + '/dreamer/preview-floorplan/' + houseId;
+    // window.open(strWindowUrl, "_blank", strWindowFeatures);
+    if (childWindow == '' || childWindow.closed) {
+        childWindow = window.open(strWindowUrl, "_blank", "scrollbars=no,resizable=no");
+    }
+
+    childWindow.location.href = strWindowUrl;
+
+    childWindow.focus();
+});
+
 $(document).on('click', '[view-dream]', function() {
     id = $(this).data('id');
     $.get(baseUrl + '/dreamer/preview-dream/' + id, function(resp) {
@@ -66,6 +89,16 @@ $(document).on('click', '[view-estimate]', function() {
     }
     $.get(baseUrl + '/dreamer/estimate/' + houseId, function(resp) {
         $('[estimate-content]').html(resp);
+        $('.product-type').each(function(i, product) {
+            type = $(this).attr('type');
+            $.get(baseUrl + '/product/select/' + type, {
+                i: i
+            }, function(resp) {
+                $('[type="' + resp['type'] + '"]').html(resp['data']);
+                $('[p-price=' + resp['type'] + ']').html($('[name="price[' + i + ']"]').val());
+                // $('')
+            }, 'json');
+        });
     });
 });
 $(document).on('click', '[view-options]', function() {

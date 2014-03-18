@@ -1,104 +1,104 @@
-(function () {
+(function() {
 
-	$.ajax({
+    $.ajax({
 
-		url: 'samples/house.json',
+        url: 'samples/house.json',
 
-		type: 'GET',
+        type: 'GET',
 
-		dataType: 'json',
+        dataType: 'json',
 
-		success: function (data) {
+        success: function(data) {
 
-			DreamBuilder.house.length = data.length;
-			DreamBuilder.house.width = data.width;
-			DreamBuilder.house.height = data.height;
-			DreamBuilder.house.wall = {
-				dimension: data.wall.thickness,
-				element: data.wall.element
-			};
-			DreamBuilder.house.floor = {
-				type: data.floor.type,
-				tile: data.floor.tile,
-				wood: data.floor.wood
-			};
-			DreamBuilder.house.roof = {
-				type: data.roof.type,
-				pitch: data.roof.pitch,
-				element: data.roof.element
-			};
-			DreamBuilder.house.numFloors = data.numFloors;
-			DreamBuilder.house.terrain = data.terrain;
+            DreamBuilder.house.length = data.length;
+            DreamBuilder.house.width = data.width;
+            DreamBuilder.house.height = data.height;
+            DreamBuilder.house.wall = {
+                dimension: data.wall.thickness,
+                element: data.wall.element
+            };
+            DreamBuilder.house.floor = {
+                type: data.floor.type,
+                tile: data.floor.tile,
+                wood: data.floor.wood
+            };
+            DreamBuilder.house.roof = {
+                type: data.roof.type,
+                pitch: data.roof.pitch,
+                element: data.roof.element
+            };
+            DreamBuilder.house.numFloors = data.numFloors;
+            DreamBuilder.house.terrain = data.terrain;
 
 
-			$('#sketchpad').empty();
+            $('#sketchpad').empty();
 
-			DreamBuilder.setLength(DreamBuilder.house.length).setWidth(DreamBuilder.house.width).setHeight(DreamBuilder.house.height);
+            DreamBuilder.setLength(DreamBuilder.house.length).setWidth(DreamBuilder.house.width).setHeight(DreamBuilder.house.height);
 
-			d = new DreamBuilder.TWOD();
+            d = new DreamBuilder.TWOD();
 
-			d.createFloor();
+            d.createFloor();
 
-			$.each(data.rooms, function (i, room) {
+            $.each(data.rooms, function(i, room) {
 
-				d.createRoom({
+                d.createRoom({
 
-					px: room.x,
+                    px: room.x,
 
-					py: room.y,
+                    py: room.y,
 
-					width: room.width,
+                    width: room.width,
 
-					length: room.length,
+                    length: room.length,
 
-					name: room.name
+                    name: room.name
 
-				});
+                });
 
-			});
+            });
 
-			$.each(data.windows, function (i, win) {
+            $.each(data.windows, function(i, win) {
 
-				d.createWindow({
+                d.createWindow({
 
-					where: win.where,
+                    where: win.where,
 
-					x: win.x,
+                    x: win.x,
 
-					width: win.width,
+                    width: win.width,
 
-					length: win.length
+                    length: win.length
 
-				});
+                });
 
-			});
+            });
 
-			$.each(data.doors, function (i, door) {
+            $.each(data.doors, function(i, door) {
 
-				d.createDoor({
+                d.createDoor({
 
-					where: door.where,
+                    where: door.where,
 
-					x: door.x,
+                    x: door.x,
 
-					width: door.width,
+                    width: door.width,
 
-					length: door.length
+                    length: door.length
 
-				});
+                });
 
-			});
+            });
 
-			window.d = d;
+            window.d = d;
 
-		},
+        },
 
-		error: function (xhr, error) {
+        error: function(xhr, error) {
 
-			console.error(error);
+            console.error(error);
 
-		}
+        }
 
-	});
+    });
 
 })();

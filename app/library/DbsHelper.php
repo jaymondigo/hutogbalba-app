@@ -114,5 +114,37 @@
 			return $windows / 750;
 		}
 
+		public static function unit($material){
+			$unit = '';
+			switch ($material) {
+				case 'asphalt_shingles':
+					$unit = '';
+					break;
+				case 'sand':
+					$unit = 'tons';
+					break;
+				case 'ceramic_tile':
+					$unit = '';
+					break;
+				case 'jalousie':
+					$unit = '';
+					break;
+				case 'hollow_blocks':
+					$unit = '';
+					break;
+				case 'cement':
+					$unit = '';
+					break;
+				case 'horizontal_sliding_wall':
+					$unit = '';
+					break; 
+				default:
+					# code...
+					break;
+			}
+
+			return $unit;
+		}
+
 	}
 ?>

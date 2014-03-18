@@ -70,5 +70,19 @@ class ProductController extends BaseController {
 
 		return Redirect::back();
 	}
+
+	public function getSelect($t){
+		$index = Input::get('i'); 
+		$type = str_replace('_', ' ', $t); 
+
+		$obj = Material::join('types','types.id', '=','materials.type')
+						->where('types.name', 'LIKE', $type.'%')
+						->get(array('materials.*', 'types.name AS type')); 
+        
+		return View::make('partials.product.options')
+					->with('products', $obj)
+					->with('type', $t)
+					->with('i', $index);	
+	}
  
 }

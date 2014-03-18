@@ -179,7 +179,7 @@
             y: obj.py,
             width: obj.width,
             length: obj.length,
-            name: name
+            name: obj.name
         });
         //set the initial position to the edge
         var x = offsetX;
