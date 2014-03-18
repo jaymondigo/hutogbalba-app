@@ -2,7 +2,7 @@
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     <h4 class="modal-title">{{$dream->name}} - Estimate </h4>
 </div>
-<div class="modal-body">
+<div class="modal-body"> 
     <div class="row"> 
          <table class="table table-hover">
          	<caption><b>Estimate Cost Of All The Materials Used</b></caption>
@@ -29,6 +29,7 @@
          	</tbody>
          </table>
          <div class="pull-right" style="margin-right: 68px;"><label>Total Cost:  &nbsp;&#x20B1;</label> {{0}}</div>
+ 
     </div>
 </div>
 <div class="modal-footer">

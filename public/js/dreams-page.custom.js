@@ -96,9 +96,10 @@ $(document).on('click', '[view-estimate]', function() {
             }, function(resp) {
                 $('[type="' + resp['type'] + '"]').html(resp['data']);
                 $('[p-price=' + resp['type'] + ']').html($('[name="price[' + i + ']"]').val());
-                // $('')
+                // $('')    
             }, 'json');
         });
+        u
     });
 });
 $(document).on('click', '[view-options]', function() {
