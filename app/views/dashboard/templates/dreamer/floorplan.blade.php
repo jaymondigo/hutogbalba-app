@@ -26,10 +26,12 @@
     </style>
 </head>
 <body>
-<button onclick="window.close()" class="btn btn-warning" back>Back</button>&nbsp;&nbsp;&nbsp;&nbsp;
-<div class="btn-group">
+<div class="container" style="margin-top:10px;">
+	<button onclick="window.close()" class="btn btn-warning" back>Back</button>&nbsp;&nbsp;&nbsp;&nbsp;
+	<div class="btn-group">
 	<button class="btn btn-default" print>Print</button>
 	<a class="btn btn-success" download draggable="true">Download</a>
+</div>
 </div>
 <br/><br/>
 <div id="floorplan-svg"></div>

@@ -103,6 +103,9 @@
         else
             $('#saveHouse').click();
 
+        $('[action-tools]').prop('disabled', false).removeAttr('disabled');
+        $('[action-view]').prop('disabled', false).removeAttr('disabled');
+
     });
 
     $('#saveHouse').click(function() {
@@ -121,6 +124,9 @@
                 if (data.success) {
                     if ($('#delete').length <= 0)
                         addDeleteBtn();
+
+                    $('[action-tools]').prop('disabled', false).removeAttr('disabled');
+                    $('[action-view]').prop('disabled', false).removeAttr('disabled');
 
                     $('#save-dialog').modal('hide');
                     DreamBuilder.ID = data.ID;
@@ -213,6 +219,9 @@
                     });
                 });
             }
+
+            $('[action-tools]').prop('disabled', false).removeAttr('disabled');
+            $('[action-view]').prop('disabled', false).removeAttr('disabled');
         });
     });
     $(document).on('click', '#delete', function() {

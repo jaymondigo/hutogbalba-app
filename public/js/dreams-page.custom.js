@@ -108,8 +108,3 @@ $(document).on('click', '[view-options]', function() {
         $('[options-content]').html(resp);
     });
 });
-
-$(document).on('click', 'a[disabled]', function(e) {
-    e.stopPropagation();
-    return false;
-});

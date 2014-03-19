@@ -67,7 +67,7 @@
                                         </ul>
                                     </li>
                                     <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tools <b class="caret"></b></a>
+                                        <a href="#" action-tools class="dropdown-toggle" data-toggle="dropdown">Tools <b class="caret"></b></a>
                                         <ul class="dropdown-menu">
                                             <li><a href="#new-room-dialog" data-toggle="modal" id="new-room">New Room</a></li>
                                             <li><a href="#new-door-dialog" data-toggle="modal" id="new-door">New Door</a></li>
@@ -75,7 +75,7 @@
                                         </ul>
                                     </li>
                                     <li class="dropdown">
-                                        <a href="#" disabled class="dropdown-toggle" data-toggle="dropdown">View <b class="caret"></b></a>
+                                        <a href="#" action-view class="dropdown-toggle" data-toggle="dropdown">View <b class="caret"></b></a>
                                         <ul class="dropdown-menu">
                                             <li><a href="javascript:void(0)" id="view-3d" house-id="">3D</a></li>
                                             <li><a href="javascript:void(0)" id="view-floorplan" house-id="">Floorplan</a></li>
@@ -566,5 +566,16 @@
     <script src="{{URL::to('js/dreambuilder.js')}}" type="text/javascript"></script>
     <script src="{{URL::to('js/2d.dreambuilder.js')}}" type="text/javascript"></script>
     <script src="{{URL::to('js/sketcher.js')}}" type="text/javascript"></script>
+    <script type="text/javascript">
+        if (typeof DreamBuilder != 'undefined' && (DreamBuilder.ID == 0 || DreamBuilder.ID == '')) {
+            $('[action-tools]').prop('disabled', true).attr('disabled', 'disabled');
+            $('[action-view]').prop('disabled', true).attr('disabled', 'disabled');
+        }
+
+        $(window).bind('beforeunload', function(){
+             
+            return 'Make sure that everything is saved before leaving this page.';
+        });
+    </script>
     
 @stop
