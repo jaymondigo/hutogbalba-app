@@ -146,18 +146,18 @@
             var labelBottom = horizontalLine.call(this, yb);
         };
         Floorplan.prototype.createRoom = function(obj) {
-            var room = paper.rect(obj.x + offsetX, obj.y + offsetY, obj.length, obj.width);
+            var room = paper.rect(obj.x + offsetX, obj.y + offsetY, obj.width, obj.length);
             room.attr({
                 'stroke': 'gray',
                 'stroke-width': '4'
             });
-            var label = paper.text(obj.x + offsetX + obj.length / 2, obj.y + offsetY + obj.width / 2, obj.name);
+            var label = paper.text(obj.x + offsetX + obj.width / 2, obj.y + offsetY + obj.length / 2, obj.name);
             label.attr({
                 'font-size': '15px',
                 'font-weight': 'bold'
             });
-            var m1 = paper.text(obj.x + offsetX + obj.length / 2, obj.y + offsetY + obj.width / 2 + 25, (obj.width / 100).toFixed(2) + ' m');
-            var m2 = paper.text(obj.x + offsetX + obj.length / 2 + 50, obj.y + offsetY + obj.width / 2, (obj.length / 100).toFixed(2) + ' m');
+            var m1 = paper.text(obj.x + offsetX + obj.width / 2, obj.y + offsetY + obj.length / 2 + 25, (obj.length / 100).toFixed(2) + ' m');
+            var m2 = paper.text(obj.x + offsetX + obj.width / 2 + 50, obj.y + offsetY + obj.length / 2, (obj.width / 100).toFixed(2) + ' m');
         };
         Floorplan.prototype.createDoor = function(obj) {
             var doorFunc, x, y, l, dx, dy;
