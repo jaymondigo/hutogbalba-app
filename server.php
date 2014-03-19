@@ -21,3 +21,4 @@ require_once $paths['public'].'/index.php';
 
 //ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDzZQ8F7zANtBFoTI/E9FpQdH5TCR2RIkkrSS79TGGdvr8gPCVt4ohPuyOAL96M6T4UcP/V+ZbcQyh4ZdH3J5AxbCw5cNOXneOSqQO3/mpvqlCIyQiEBU/LR9OmwFMDE6rPnM26nkx/s6QKUQnie1ukPX70K+zALlmQA2OoEBlHElYTBvhfzBm+1TnQMG/ySdXxBSwJEtD82f5JPycL9iaRm4oEyt81DR2Bc2bzoCfXekFYoMpP8DHMXDp0a6yjvfsvX7lnH4f0dSltK+d9kqom/oeQIeUQkOWEPkI4Cs4OO4UhjhPh/IzJqeHRb3pIL3be9WL051LPF2coybNoE+bb jillberth@JILL-DBS
 
+//cat ~/.ssh/id_rsa.pub[public key sa partner] >> ~/.ssh/authorized_keys
