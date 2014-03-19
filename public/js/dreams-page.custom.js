@@ -25,9 +25,9 @@ window.$DBSAlert = function(params) {
 }
 
 $(document).on('click', '#view-3d', function() {
-    houseId = $(this).attr('house-id');
+    houseId = DreamBuilder.ID;
 
-    if (houseId == '') {
+    if (houseId == '' || houseId == 0) {
         $DBSAlert({
             type: 'warning',
             message: 'Please save your house design first!'
@@ -50,7 +50,7 @@ $(document).on('click', '#view-3d', function() {
 $(document).on('click', '#view-floorplan', function() {
     houseId = parseInt(DreamBuilder.ID);
 
-    if (typeof houseId != 'number' || houseId == NaN) {
+    if (typeof houseId != 'number' || houseId == NaN || houseId == 0) {
         $DBSAlert({
             type: 'warning',
             message: 'Please save your house design first!'
@@ -80,7 +80,7 @@ $(document).on('click', '[view-dream]', function() {
 $(document).on('click', '[view-estimate]', function() {
     houseId = parseInt(DreamBuilder.ID);
 
-    if (typeof houseId != 'number' || houseId == NaN) {
+    if (typeof houseId != 'number' || houseId == NaN || houseId == '' || houseId == 0) {
         $DBSAlert({
             type: 'warning',
             message: 'Please save your house design first!'

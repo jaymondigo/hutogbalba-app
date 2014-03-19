@@ -20,8 +20,9 @@
     <!-- Theme style -->
     <link href="{{URL::to('css/AdminLTE.css')}}" rel="stylesheet" type="text/css" />
     <style type="text/css" media="screen">
-    	#floorplan img{
-    		/*width: 100%;*/
+    	#floorplan, #floorplan img{ 
+    		text-align: center;
+    		margin:0 auto;
     	}	
     </style>
 </head>
@@ -109,7 +110,7 @@
 						+'</scr'+'ipt>'
 						+'</body>'+
 						'<html>';
-			link = 'about:blank';
+			link = 'floorplan-'+{{'"'.$house->id.'_'.date('y-m-d').'.png"'}};
 			print = window.open(link, '_new');
 			print.document.open();
 			print.document.write(printAble);
@@ -117,7 +118,7 @@
 		});
  		
  		img = $('img');
-		$('[download]').attr('download','floorplan-'+{{'"'.$house->id.'-'.date('y-m-d').'.png"'}});
+		$('[download]').attr('download','floorplan-'+{{'"'.$house->id.'_'.date('y-m-d').'.png"'}});
 		url = img.attr('src').replace('image/png','image/octet-stream');
 		$('[download]').attr('href',url); 
 	});
