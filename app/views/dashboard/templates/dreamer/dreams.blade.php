@@ -7,6 +7,9 @@
         background: none !important;        
         cursor: not-allowed !important;
     }
+    .popover{
+        width:250px;
+    }
 </style>
 @section('main_content')
             <div class="wrapper row-offcanvas row-offcanvas-left">
@@ -121,21 +124,21 @@
                                             <legend>Room Size</legend>
                                             <label for="room-area">Area: </label>
                                             <section class="input-group">
-                                                <input value="4" name="room-area" type="text" class="form-control" disabled data-original-title="Room area here"/>
+                                                <input value="4" name="room-area" type="text" class="form-control" disabled data-content="Please edit this" data-original-title="Room area here"/>
                                                 <span class="input-group-addon">m<sup>2</sup></span>
                                             </section><br />
                                             <label for="room-length">a. Length: </label>
                                             <section class="input-group">
-                                                <input required min="200" value="200" name="room-length" type="text" class="form-control" />
-                                                <span class="input-group-addon" data-original-title="Length of the room">m</span>
+                                                <input required min="200" value="200" name="room-length" type="text" class="form-control" data-content="Please edit this" data-original-title="Length of the room"/>
+                                                <span class="input-group-addon" >m</span>
                                             </section><br />
                                             <label for="room-width">b. Width: </label>
                                             <section class="input-group">
-                                                <input data-original-title="Widnth of the room" required min="200" value="200" name="room-width" type="text" class="form-control" />
+                                                <input data-content="Please edit this" data-original-title="Widnth of the room" required min="200" value="200" name="room-width" type="text" class="form-control" />
                                                 <span class="input-group-addon">m</span>
                                             </section><br />
                                             <label for="room-name">Room Label: </label>
-                                            <input data-original-title="Room label" type="text" name="room-name" class="form-control" />
+                                            <input data-content="Please edit this" data-original-title="Room label" type="text" name="room-name" class="form-control" />
                                         </fieldset>
                                     </div>
                                 </div>
@@ -164,7 +167,7 @@
                                     <div class="col-lg-8 col-md-8">
                                         <div class="form-group">
                                             <label for="wall">Select Which Wall to Attach: </label>
-                                            <select name="door-where" class="form-control" data-original-title="Select which wall to attached">
+                                            <select name="door-where" class="form-control" data-content="Please edit this" data-original-title="Select which wall to attached">
                                                 <option value="left">a. Left</option>
                                                 <option value="top">b. Top</option>
                                                 <option value="right">c. Right</option>
@@ -174,7 +177,7 @@
                                         <div class="form-group">
                                             <label for="wall">Available Doors: </label>
                                             <ul class="list-unstyled">
-                                                <li><label><input type="radio" checked name="door-dim" value="6.6x2.10" data-type="A" data-original-title="Available Doors"> 6'6" &times; 2'10"</label></li>
+                                                <li><label><input type="radio" checked name="door-dim" value="6.6x2.10" data-type="A" data-content="Please edit this" data-original-title="Available Doors"> 6'6" &times; 2'10"</label></li>
                                                 <li><label><input type="radio" name="door-dim" value="6.8x2.10" data-type="B"> 6'8" &times; 2'10"</label></li>
                                                 <li><label><input type="radio" name="door-dim" value="7.0x2.10" data-type="C"> 7'0" &times; 2'10"</label></li>
                                                 <li><label><input type="radio" name="door-dim" value="8.0x2.10" data-type="D"> 8'0" &times; 2'10"</label></li>
@@ -207,7 +210,7 @@
                                     <div class="col-lg-8 col-md-8">
                                         <div class="form-group">
                                             <label for="wall">Select Which Wall to Attach: </label>
-                                            <select name="window-where" class="form-control" data-original-title="Select which wall to attached">
+                                            <select name="window-where" class="form-control" data-content="Please edit this" data-original-title="Select which wall to attached">
                                                 <option value="left">a. Left</option>
                                                 <option value="top">b. Top</option>
                                                 <option value="right">c. Right</option>
@@ -217,7 +220,7 @@
                                         <div class="form-group">
                                             <label for="wall">Available Windows: </label>
                                             <ul class="list-unstyled">
-                                                <li><label><input type="radio" checked name="window-dim" value="2.5x2.5" data-original-title="Available Windows"> 2'5" &times; 2'5"</label></li>
+                                                <li><label><input type="radio" checked name="window-dim" value="2.5x2.5" data-content="Please edit this" data-original-title="Available Windows"> 2'5" &times; 2'5"</label></li>
                                                 <li><label><input type="radio" name="window-dim" value="3.5x3.5"> 3'5" &times; 3'5"</label></li>
                                                 <li><label><input type="radio" name="window-dim" value="4.5x4.5"> 4'5" &times; 4'5"</label></li>
                                             </ul>
@@ -268,17 +271,17 @@
                                     <div class="row">
                                         <div class="col-lg-8 col-md-8">
                                             <label for="num-floors">Number of Floors: </label>
-                                            <select name="num-floors" class="form-control" data-original-title="Number of floors">
+                                            <select name="num-floors" class="form-control" data-content="Please edit this" data-original-title="Number of floors">
                                                 <option value="1">1</option>
                                             </select><br />
                                             <label for="terrain">a. Ground floor Height above the terrain: </label>
                                             <section class="input-group">
-                                                <input value="30" disabled name="terrain" type="text" class="form-control" data-original-title="Terrain"/>
+                                                <input value="30" disabled name="terrain" type="text" class="form-control" data-content="Please edit this" data-original-title="Terrain"/>
                                                 <span class="input-group-addon">m</span>
                                             </section><br />
                                             <label for="height">b. Floor to Ceiling Height: </label>
                                             <section class="input-group">
-                                                <input required name="height" value="244" type="text" min="244" class="form-control" data-original-title="Floor to ceiling height"/>
+                                                <input required name="height" value="244" type="text" min="244" class="form-control" data-content="Please edit this" data-original-title="Floor to ceiling height"/>
                                                 <span class="input-group-addon">m</span>
                                             </section>
                                         </div>
@@ -318,17 +321,17 @@
                                             <legend>Building Size</legend>
                                             <label for="area">Area: </label>
                                             <section class="input-group">
-                                                <input value="6.25" name="area" type="text" class="form-control" disabled data-original-title="Building size"/>
+                                                <input value="6.25" name="area" type="text" class="form-control" disabled data-content="Please edit this" data-original-title="Building size"/>
                                                 <span class="input-group-addon">m<sup>2</sup></span>
                                             </section><br />
                                             <label for="length">a. Length: </label>
                                             <section class="input-group">
-                                                <input required name="length" min="250" value="250" type="text" class="form-control" data-original-title="Building Length"/>
+                                                <input required name="length" min="250" value="250" type="text" class="form-control" data-content="Please edit this" data-original-title="Building Length"/>
                                                 <span class="input-group-addon">m</span>
                                             </section><br />
                                             <label for="width">b. Width: </label>
                                             <section class="input-group">
-                                                <input required name="width" min="250" value="250" type="text" class="form-control" data-original-title="Building width" />
+                                                <input required name="width" min="250" value="250" type="text" class="form-control" data-content="Please edit this" data-original-title="Building width" />
                                                 <span class="input-group-addon">m</span>
                                             </section>
                                         </fieldset>
@@ -357,18 +360,18 @@
                                     <label for="roof-type">Roof</label>
                                     <div class="row">
                                         <div class="col-lg-3 col-md-3">
-                                            <select class="form-control" name="roof-type" data-original-title="Roof">
+                                            <select class="form-control" name="roof-type" data-content="Please edit this" data-original-title="Roof">
                                                 <option value="hip">Hip</option>
                                             </select>
                                         </div>
                                         <div class="col-lg-4 col-md-4">
-                                            <select class="form-control" name="roof-pitch" data-original-title="Hip type">
+                                            <select class="form-control" name="roof-pitch" data-content="Please edit this" data-original-title="Hip type">
                                                 <option value="4-12">4/12 Pitch Hip</option>
                                                 <option value="8-12">8/12 Pitch Hip</option>
                                             </select>
                                         </div>
                                         <div class="col-lg-5 col-md-5">
-                                            <select class="form-control" name="roof-element" data-original-title="Asphalt">
+                                            <select class="form-control" name="roof-element" data-content="Please edit this" data-original-title="Asphalt">
                                                 <option value="asphalt_shingles">Asphalt Shingles</option>
                                                 <option value="clay_tiles">Clay Tiles</option>
                                                 <option value="wood_shakes">Wood Shakes</option>
@@ -380,13 +383,13 @@
                                     <label for="roof-type">Walls</label>
                                     <div class="row">
                                         <div class="col-lg-4 col-md-4">
-                                            <select class="form-control" name="wall-dim" data-original-title="Walls">
+                                            <select class="form-control" name="wall-dim" data-content="Please edit this" data-original-title="Walls">
                                                 <option value="10">10 m</option>
                                                 <option value="15">15 m</option>
                                             </select>
                                         </div>
                                         <div class="col-lg-8 col-md-8">
-                                            <select class="form-control" name="wall-element" data-original-title="Wall types">
+                                            <select class="form-control" name="wall-element" data-content="Please edit this" data-original-title="Wall types">
                                                 <option value="horizontal_sliding_wall">Horizontal Sliding Wall</option>
                                                 <option value="masonry_wall">Masonry Wall</option>
                                                 <option value="stone_wall">Stone Wall</option>
@@ -399,7 +402,7 @@
                                     <label for="roof-type">Floors</label>
                                     <div class="row">
                                         <div class="col-lg-4 col-md-4">
-                                            <select class="form-control" name="floor-type" data-original-title="Floors">
+                                            <select class="form-control" name="floor-type" data-content="Please edit this" data-original-title="Floors">
                                                 <option value="ceramic_tile">Ceramic Tile</option>
                                                 <option value="wood_flooring">Wood Flooring</option>
                                             </select>
@@ -517,7 +520,7 @@
                                     </div>
                                 </div>
                                 <label for="design_name" >Name</label>
-                                <input type="text" data-original-title="House design name"placeholder="My first dream house" class="form-control" name="design_name">
+                                <input type="text" data-content="Please edit this" data-original-title="House design name"placeholder="My first dream house" class="form-control" name="design_name">
                             </div>
                             <div class="modal-footer">
                                  <button class="btn btn-flat btn-success" id="saveHouse">Save</button>
