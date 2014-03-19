@@ -121,7 +121,7 @@
                                             <legend>Room Size</legend>
                                             <label for="room-area">Area: </label>
                                             <section class="input-group">
-                                                <input value="4" name="room-area" type="text" class="form-control" disabled data-original-title="Room are here"/>
+                                                <input value="4" name="room-area" type="text" class="form-control" disabled data-original-title="Room area here"/>
                                                 <span class="input-group-addon">m<sup>2</sup></span>
                                             </section><br />
                                             <label for="room-length">a. Length: </label>
@@ -567,6 +567,11 @@
     <script src="{{URL::to('js/2d.dreambuilder.js')}}" type="text/javascript"></script>
     <script src="{{URL::to('js/sketcher.js')}}" type="text/javascript"></script>
     <script type="text/javascript">
+        $('input, select, textarea').popover({
+            html: true,
+            trigger: 'focus'
+        });
+
         if (typeof DreamBuilder != 'undefined' && (DreamBuilder.ID == 0 || DreamBuilder.ID == '')) {
             $('[action-tools]').prop('disabled', true).attr('disabled', 'disabled');
             $('[action-view]').prop('disabled', true).attr('disabled', 'disabled');
