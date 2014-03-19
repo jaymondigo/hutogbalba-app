@@ -121,21 +121,21 @@
                                             <legend>Room Size</legend>
                                             <label for="room-area">Area: </label>
                                             <section class="input-group">
-                                                <input value="4" name="room-area" type="text" class="form-control" disabled />
+                                                <input value="4" name="room-area" type="text" class="form-control" disabled data-original-title="Room are here"/>
                                                 <span class="input-group-addon">m<sup>2</sup></span>
                                             </section><br />
                                             <label for="room-length">a. Length: </label>
                                             <section class="input-group">
                                                 <input required min="200" value="200" name="room-length" type="text" class="form-control" />
-                                                <span class="input-group-addon">m</span>
+                                                <span class="input-group-addon" data-original-title="Length of the room">m</span>
                                             </section><br />
                                             <label for="room-width">b. Width: </label>
                                             <section class="input-group">
-                                                <input required min="200" value="200" name="room-width" type="text" class="form-control" />
+                                                <input data-original-title="Widnth of the room" required min="200" value="200" name="room-width" type="text" class="form-control" />
                                                 <span class="input-group-addon">m</span>
                                             </section><br />
                                             <label for="room-name">Room Label: </label>
-                                            <input type="text" name="room-name" class="form-control" />
+                                            <input data-original-title="Room label" type="text" name="room-name" class="form-control" />
                                         </fieldset>
                                     </div>
                                 </div>
@@ -574,7 +574,7 @@
 
         $(window).bind('beforeunload', function(){
              
-            return 'Make sure that everything is saved before leaving this page.';
+            return 'Make sure that everything was saved before leaving or reloading this page.';
         });
     </script>
     
