@@ -28,7 +28,7 @@
          		@endforeach
          	</tbody>
          </table>
-         <div class="pull-right" style="margin-right: 68px;"><label>Total Cost:  &nbsp;&#x20B1;</label> {{0}}</div>
+         <div class="pull-right" style="margin-right: 68px;"><label>Total Cost:  &nbsp;&#x20B1;</label> <span overall-total-price>{{0}}</span></div>
  
     </div>
 </div>

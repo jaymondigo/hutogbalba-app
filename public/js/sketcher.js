@@ -40,6 +40,9 @@
         d = new DreamBuilder.TWOD();
         //draw the floor
         d.createFloor();
+
+        $('[action-tools]').prop('disabled', false).removeAttr('disabled');
+        $('[action-view]').prop('disabled', false).removeAttr('disabled');
     };
 
     $(document).on('click', '.modal .back', function(e) {

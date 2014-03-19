@@ -96,7 +96,15 @@ $(document).on('click', '[view-estimate]', function() {
             }, function(resp) {
                 $('[type="' + resp['type'] + '"]').html(resp['data']);
                 $('[p-price=' + resp['type'] + ']').html($('[name="price[' + i + ']"]').val());
-                // $('')    
+
+                qnty = $('[p-qnty="' + resp['type'] + '"]').html();
+                price = $('[p-price=' + resp['type'] + ']').html();
+
+                $('[p-tprice=' + resp['type'] + ']').html(qnty * 1 * price);
+
+                $.each($('[p-tprice]'), function(i, data) {
+                    $('[overall-total-price]').html($('[overall-total-price]') * 1 + data.html() * 1);
+                });
             }, 'json');
         });
         u
