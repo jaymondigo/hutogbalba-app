@@ -33,6 +33,15 @@
     var rmDeleteBtn = function() {
         $('#delete').remove();
     }
+
+    var enableBtns = function() {
+        $('[action-tools]').prop('disabled', false).removeAttr('disabled');
+        $('[action-view]').prop('disabled', false).removeAttr('disabled');
+    }
+    var disableBtns = function() {
+        $('[action-tools]').prop('disabled', true).addAttr('disabled');
+        $('[action-view]').prop('disabled', true).addAttr('disabled');
+    }
     var init = function() {
         DreamBuilder.divider = 1000 / DreamBuilder.house.length;
         //set the new house dimensions
@@ -41,8 +50,7 @@
         //draw the floor
         d.createFloor();
 
-        $('[action-tools]').prop('disabled', false).removeAttr('disabled');
-        $('[action-view]').prop('disabled', false).removeAttr('disabled');
+        enableBtns();
     };
 
     $(document).on('click', '.modal .back', function(e) {
@@ -106,9 +114,7 @@
         else
             $('#saveHouse').click();
 
-        $('[action-tools]').prop('disabled', false).removeAttr('disabled');
-        $('[action-view]').prop('disabled', false).removeAttr('disabled');
-
+        enableBtns();
     });
 
     $('#saveHouse').click(function() {
@@ -128,8 +134,7 @@
                     if ($('#delete').length <= 0)
                         addDeleteBtn();
 
-                    $('[action-tools]').prop('disabled', false).removeAttr('disabled');
-                    $('[action-view]').prop('disabled', false).removeAttr('disabled');
+                    enableBtns();
 
                     $('#save-dialog').modal('hide');
                     DreamBuilder.ID = data.ID;
@@ -223,8 +228,7 @@
                 });
             }
 
-            $('[action-tools]').prop('disabled', false).removeAttr('disabled');
-            $('[action-view]').prop('disabled', false).removeAttr('disabled');
+            enableBtns();
         });
     });
     $(document).on('click', '#delete', function() {
