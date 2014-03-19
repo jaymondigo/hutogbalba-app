@@ -78,7 +78,7 @@ class ProductController extends BaseController {
 		$obj = Material::join('types','types.id', '=','materials.type')
 						->where('types.name', 'LIKE', $type.'%')
 						->get(array('materials.*', 'types.name AS type')); 
-        
+         
 		return View::make('partials.product.options')
 					->with('products', $obj)
 					->with('type', $t)

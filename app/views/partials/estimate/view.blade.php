@@ -16,7 +16,7 @@
          		</tr>
          	</thead>
          	<tbody>
-         		@foreach(json_decode($dream->materials) as $i => $material)
+         		@foreach($dream->materials as $i => $material)
          		<tr>
          			<td>{{ucfirst(str_replace('_',' ',$i))}}</td>
 

@@ -1,5 +1,13 @@
 @extends('dashboard.index')
-    
+<style type="text/css">
+    a[disabled]{
+        color: #C09F9F !important;
+    }
+    a[disabled]:hover{        
+        background: none !important;        
+        cursor: not-allowed !important;
+    }
+</style>
 @section('main_content')
             <div class="wrapper row-offcanvas row-offcanvas-left">
             <!-- Left side column. contains the logo and sidebar -->
@@ -67,7 +75,7 @@
                                         </ul>
                                     </li>
                                     <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">View <b class="caret"></b></a>
+                                        <a href="#" disabled class="dropdown-toggle" data-toggle="dropdown">View <b class="caret"></b></a>
                                         <ul class="dropdown-menu">
                                             <li><a href="javascript:void(0)" id="view-3d" house-id="">3D</a></li>
                                             <li><a href="javascript:void(0)" id="view-floorplan" house-id="">Floorplan</a></li>

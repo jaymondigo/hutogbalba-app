@@ -26,6 +26,12 @@
     </style>
 </head>
 <body>
+<button onclick="window.close()" class="btn btn-warning" back>Back</button>&nbsp;&nbsp;&nbsp;&nbsp;
+<div class="btn-group">
+	<button class="btn btn-default" print>Print</button>
+	<a class="btn btn-success" download draggable="true">Download</a>
+</div>
+<br/><br/>
 <div id="floorplan-svg"></div>
 <canvas id="floorplan-canvas"></canvas>
 <div id="floorplan"></div>
@@ -87,7 +93,32 @@
 		}		  
 		
 		convertToImage();
-	})
+
+		$(document).on('click','[print]', function(){
+			console.log('printing floorplan');
+			img = $('img').attr('src');
+			printAble = '<html><head>'
+						+'<title>'+{{'"'.str_replace("'","\\'",$house->name).'"'}}+' - Floor Plan View</title>'
+						+'</head>'
+						+'<body onload="printa();">'
+						+'<center><img src="'+img+'" /></center>'
+						+'<script type="text/javascript">\n'
+						+'function printa(){window.print();}\n'
+						+'</scr'+'ipt>'
+						+'</body>'+
+						'<html>';
+			link = 'about:blank';
+			print = window.open(link, '_new');
+			print.document.open();
+			print.document.write(printAble);
+			print.document.close();
+		});
+ 		
+ 		img = $('img');
+		$('[download]').attr('download','floorplan-'+{{'"'.$house->id.'-'.date('y-m-d').'.png"'}});
+		url = img.attr('src').replace('image/png','image/octet-stream');
+		$('[download]').attr('href',url); 
+	});
 </script>
 </body>
 </html>

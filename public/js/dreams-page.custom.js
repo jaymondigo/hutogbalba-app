@@ -48,9 +48,9 @@ $(document).on('click', '#view-3d', function() {
 });
 
 $(document).on('click', '#view-floorplan', function() {
-    houseId = $(this).attr('house-id');
+    houseId = parseInt(DreamBuilder.ID);
 
-    if (houseId == '') {
+    if (typeof houseId != 'number' || houseId == NaN) {
         $DBSAlert({
             type: 'warning',
             message: 'Please save your house design first!'
@@ -78,9 +78,9 @@ $(document).on('click', '[view-dream]', function() {
 });
 
 $(document).on('click', '[view-estimate]', function() {
-    houseId = $('#view-3d').attr('house-id');
+    houseId = parseInt(DreamBuilder.ID);
 
-    if (houseId == '') {
+    if (typeof houseId != 'number' || houseId == NaN) {
         $DBSAlert({
             type: 'warning',
             message: 'Please save your house design first!'
@@ -107,4 +107,9 @@ $(document).on('click', '[view-options]', function() {
     $.get(baseUrl + '/dreamer/options', function(resp) {
         $('[options-content]').html(resp);
     });
+});
+
+$(document).on('click', 'a[disabled]', function(e) {
+    e.stopPropagation();
+    return false;
 });
