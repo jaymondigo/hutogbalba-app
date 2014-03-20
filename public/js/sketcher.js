@@ -5,7 +5,7 @@
     var pi = function(s) {
         return parseInt($(s).val());
     };
-    var pf = function (s) {
+    var pf = function(s) {
         return parseFloat($(s).val());
     };
 
@@ -173,8 +173,10 @@
         $id = $(this).attr('open-design');
         addDeleteBtn();
         clearSketchpad();
-
         $.get(baseUrl + '/dreamer/dream-house/' + $id, function(resp) {
+            enableBtns();
+            hasInit = true;
+
             DreamBuilder.ID = resp.id;
             DreamBuilder.NAME = resp.name;
             $('[name="design_name"]').val(resp.name);
@@ -243,9 +245,6 @@
                     });
                 });
             }
-
-            enableBtns();
-            hasInit = true;
         });
     });
     $(document).on('click', '#delete', function() {

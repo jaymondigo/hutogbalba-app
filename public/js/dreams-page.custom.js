@@ -98,8 +98,8 @@ $(document).on('click', '[view-estimate]', function() {
 
                 price = $('[name="price[' + i + ']"]').val();
 
-                price = price == null || typeof price == 'undefined' ? 0 : price;
-                $('[p-price=' + resp['type'] + ']').html(price);
+                price = price == null || typeof price == 'undefined' ? 0 : price * 1;
+                $('[p-price=' + resp['type'] + ']').html(price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
 
                 calculatePrices();
 
@@ -130,9 +130,11 @@ window.calculatePrices = function() {
         qnty = $(data).text();
         price = $('[name="price[' + i + ']"]').val();
 
-        $('[p-tprice="' + type + '"]').text(qnty * price);
-        total += qnty * price;
+        price_cost = qnty * price;
+
+        $('[p-tprice="' + type + '"]').text(price_cost.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        total += price_cost;
     });
 
-    $('[overall-total-price]').html(total);
+    $('[overall-total-price]').html(total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
 }

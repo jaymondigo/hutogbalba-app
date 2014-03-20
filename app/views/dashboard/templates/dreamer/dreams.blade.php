@@ -127,12 +127,12 @@
                                                 <input value="4" name="room-area" type="text" class="form-control" disabled data-content="Please edit this" data-original-title="Room area here"/>
                                                 <span class="input-group-addon">m<sup>2</sup></span>
                                             </section><br />
-                                            <label for="room-length">a. Length: </label>
+                                            <label for="room-length">a. Room Length: </label>
                                             <section class="input-group">
                                                 <input required min="2" value="2" name="room-length" type="text" class="form-control" data-content="Please edit this" data-original-title="Length of the room"/>
                                                 <span class="input-group-addon" >m</span>
                                             </section><br />
-                                            <label for="room-width">b. Width: </label>
+                                            <label for="room-width">b. Room Width: </label>
                                             <section class="input-group">
                                                 <input data-content="Please edit this" data-original-title="Width of the room" required min="2" value="2" name="room-width" type="text" class="form-control" />
                                                 <span class="input-group-addon">m</span>
