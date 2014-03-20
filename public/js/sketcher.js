@@ -1,8 +1,12 @@
 (function() {
 
     var current = 4;
+    var maxWidth = 1000;
     var pi = function(s) {
         return parseInt($(s).val());
+    };
+    var pf = function (s) {
+        return parseFloat($(s).val());
     };
 
     var d, $designs = $('#designs'),
@@ -43,7 +47,7 @@
         $('[action-view]').prop('disabled', true).addAttr('disabled');
     }
     var init = function() {
-        DreamBuilder.divider = 1000 / DreamBuilder.house.length;
+        DreamBuilder.divider = maxWidth / DreamBuilder.house.length;
         //set the new house dimensions
         DreamBuilder.setLength(DreamBuilder.house.length).setWidth(DreamBuilder.house.width).setHeight(DreamBuilder.house.height);
         d = new DreamBuilder.TWOD();
@@ -240,8 +244,8 @@
     });
     $('#step2-form').submit(function(e) {
         DreamBuilder.house.numFloors = pi('select[name=num-floors]');
-        DreamBuilder.house.terrain = pi('input[name=terrain]');
-        DreamBuilder.house.height = pi('input[name=height]');
+        DreamBuilder.house.terrain = pf('input[name=terrain]') * 100;
+        DreamBuilder.house.height = pf('input[name=height]') * 100;
         $('#step2').modal('hide');
         current = 3;
         showDialog();
@@ -249,8 +253,8 @@
     });
 
     $('#step3-form').submit(function(e) {
-        DreamBuilder.house.length = pi('input[name=length]');
-        DreamBuilder.house.width = pi('input[name=width]');
+        DreamBuilder.house.length = pf('input[name=length]') * 100;
+        DreamBuilder.house.width = pf('input[name=width]') * 100;
         $('#step3').modal('hide');
         current = 4;
         showDialog();
@@ -289,8 +293,8 @@
         d.createRoom({
             px: 0,
             py: 0,
-            width: pi('input[name=room-length]'),
-            length: pi('input[name=room-width]'),
+            width: pf('input[name=room-length]') * 100,
+            length: pf('input[name=room-width]') * 100,
             name: $('input[name=room-name]').val()
         });
         $('#new-room-dialog').modal('hide');
@@ -340,7 +344,7 @@
 
     var area = function(e) {
         //calculate are of house
-        $area.val(parseInt($length.val()) * parseInt($width.val()) / 10000);
+        $area.val(parseFloat($length.val()) * parseFloat($width.val()));
     };
 
     $length.bind('change paste keyup', area);
@@ -349,7 +353,7 @@
 
     var roomArea = function(e) {
         //calculate area of the room
-        $('input[name=room-area]').val(pi('input[name=room-length]') * pi('input[name=room-width]') / 10000);
+        $('input[name=room-area]').val(pf('input[name=room-length]') * pf('input[name=room-width]'));
     };
 
     $('input[name=room-length]').bind('change paste keyup', roomArea);

@@ -129,12 +129,12 @@
                                             </section><br />
                                             <label for="room-length">a. Length: </label>
                                             <section class="input-group">
-                                                <input required min="200" value="200" name="room-length" type="text" class="form-control" data-content="Please edit this" data-original-title="Length of the room"/>
+                                                <input required min="2" value="2" name="room-length" type="text" class="form-control" data-content="Please edit this" data-original-title="Length of the room"/>
                                                 <span class="input-group-addon" >m</span>
                                             </section><br />
                                             <label for="room-width">b. Width: </label>
                                             <section class="input-group">
-                                                <input data-content="Please edit this" data-original-title="Widnth of the room" required min="200" value="200" name="room-width" type="text" class="form-control" />
+                                                <input data-content="Please edit this" data-original-title="Width of the room" required min="2" value="2" name="room-width" type="text" class="form-control" />
                                                 <span class="input-group-addon">m</span>
                                             </section><br />
                                             <label for="room-name">Room Label: </label>
@@ -283,12 +283,12 @@
                                             </select><br />
                                             <label for="terrain">a. Ground floor Height above the terrain: </label>
                                             <section class="input-group">
-                                                <input value="30" disabled name="terrain" type="text" class="form-control" data-content="Please edit this" data-original-title="Terrain"/>
+                                                <input value="0.2" disabled name="terrain" type="text" class="form-control" data-content="Please edit this" data-original-title="Terrain"/>
                                                 <span class="input-group-addon">m</span>
                                             </section><br />
                                             <label for="height">b. Floor to Ceiling Height: </label>
                                             <section class="input-group">
-                                                <input required name="height" value="244" type="text" min="244" class="form-control" data-content="Please edit this" data-original-title="Floor to ceiling height"/>
+                                                <input required name="height" value="2.75" type="text" min="2.75" class="form-control" data-content="Please edit this" data-original-title="Floor to ceiling height"/>
                                                 <span class="input-group-addon">m</span>
                                             </section>
                                         </div>
@@ -333,12 +333,12 @@
                                             </section><br />
                                             <label for="length">a. Length: </label>
                                             <section class="input-group">
-                                                <input required name="length" min="250" value="250" type="text" class="form-control" data-content="Please edit this" data-original-title="Building Length"/>
+                                                <input required name="length" min="2.5" value="2.5" type="text" class="form-control" data-content="Please edit this" data-original-title="Building Length"/>
                                                 <span class="input-group-addon">m</span>
                                             </section><br />
                                             <label for="width">b. Width: </label>
                                             <section class="input-group">
-                                                <input required name="width" min="250" value="250" type="text" class="form-control" data-content="Please edit this" data-original-title="Building width" />
+                                                <input required name="width" min="2.5" value="2.5" type="text" class="form-control" data-content="Please edit this" data-original-title="Building width" />
                                                 <span class="input-group-addon">m</span>
                                             </section>
                                         </fieldset>
