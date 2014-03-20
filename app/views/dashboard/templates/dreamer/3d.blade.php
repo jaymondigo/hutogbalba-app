@@ -28,7 +28,7 @@
         <div class="row" style="background: transparent;position: absolute;width: 407px;">
             <div class="col-md-10">
                 <h3>{{$houseDesign->name}}</h3>
-                <button onclick="window.close()" id="screenshot" class="btn btn-warning">Back</button>&nbsp;&nbsp;&nbsp;
+                <button onclick="window.close()" class="btn btn-warning">Back</button>&nbsp;&nbsp;&nbsp;
                 <button id="screenshot" class="btn btn-success">Screenshot</button>
                 <button id="toggleRoof" data-show="1" class="btn btn-default">Hide Roof</button>
             </div>

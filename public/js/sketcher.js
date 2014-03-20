@@ -1,5 +1,5 @@
 (function() {
-
+    hasInit = false;
     var current = 4;
     var maxWidth = 1000;
     var pi = function(s) {
@@ -27,6 +27,7 @@
         DreamBuilder.house.windows = [];
         DreamBuilder.house.doors = [];
         $('#sketchpad').empty(); //clear the sketchpad
+        hasInit = false;
 
     };
 
@@ -55,6 +56,8 @@
         d.createFloor();
 
         enableBtns();
+
+        hasInit = true;
     };
 
     $(document).on('click', '.modal .back', function(e) {
@@ -76,6 +79,15 @@
     });
 
     $('#open').click(function(e) {
+        dId = DreamBuilder.ID;
+        var confrm = true;
+
+        if (dId != 0)
+            confrm = confirm('Any unsave data will be lost. Please make sure that everything was saved.');
+
+        if (!confrm)
+            return false;
+
         $('#open-dialog').modal();
         //get available designs
         $.ajax({
@@ -105,7 +117,7 @@
 
     $('#save').click(function(e) {
 
-        if (typeof DreamBuilder.house.length == 'undefined' || DreamBuilder.house.length <= 0) {
+        if (!hasInit) {
             $DBSAlert({
                 message: 'Nothing to save. Please create a new house design.',
                 type: 'warning'
@@ -233,13 +245,22 @@
             }
 
             enableBtns();
+            hasInit = true;
         });
     });
     $(document).on('click', '#delete', function() {
+        var confrm = confirm('Please confirm your action "Delete ' + DreamBuilder.NAME + '"!');
+
+        if (!confrm)
+            return false;
         $.post(baseUrl + '/dreamer/delete-dream', {
             id: DreamBuilder.ID
         }, function(resp) {
-            document.location.reload();
+            clearSketchpad();
+            $DBSAlert({
+                message: 'Your dream house was deleted successfully!',
+                type: 'success'
+            });
         });
     });
     $('#step2-form').submit(function(e) {
@@ -290,6 +311,15 @@
     });
 
     $('#new-room-form').submit(function(e) {
+        if (!hasInit) {
+            $('.modal').modal('hide');
+            $DBSAlert({
+                message: 'Create a house first before adding room.',
+                type: 'warning'
+            });
+
+            return false;
+        }
         d.createRoom({
             px: 0,
             py: 0,
@@ -302,6 +332,14 @@
     });
 
     $('#new-door-form').submit(function(e) {
+        if (!hasInit) {
+            $('.modal').modal('hide');
+            $DBSAlert({
+                message: 'Create a house first before adding door.',
+                type: 'warning'
+            });
+            return false;
+        }
         var where = $('select[name=door-where]').val();
         var dim = $('input[name=door-dim]').val();
         dim = dim.split('x');
@@ -309,14 +347,12 @@
         var w = dim[1].split('.');
         var width = (parseInt(w[0]) * 12 + parseInt(w[1])) * 2.54;
         var length = (parseInt(l[0]) * 12 + parseInt(l[1])) * 2.54;
-        var num = parseInt($('select[name=door-num]').val());
         d.createDoor({
             x: 0,
             y: 0,
             width: width,
             length: length,
             where: where,
-            num: num,
             type: $('input[name=door-dim]').data('type')
         });
         $('#new-door-dialog').modal('hide');
@@ -324,6 +360,14 @@
     });
 
     $('#new-window-form').submit(function(e) {
+        if (!hasInit) {
+            $('.modal').modal('hide');
+            $DBSAlert({
+                message: 'Create a house first before adding window.',
+                type: 'warning'
+            });
+            return false;
+        }
         var where = $('select[name=window-where]').val();
         var dim = $('input[name=window-dim]').val();
         dim = dim.split('x');

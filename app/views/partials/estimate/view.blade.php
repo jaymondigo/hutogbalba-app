@@ -1,18 +1,18 @@
  <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h4 class="modal-title">{{$dream->name}} - Estimate </h4>
+    <h4 class="modal-title">Cost Calculator</h4>
 </div>
 <div class="modal-body"> 
     <div class="row"> 
          <table class="table table-hover">
-         	<caption><b>Estimate Cost Of All The Materials Used</b></caption>
+         	<caption><b>{{$dream->name}} - Estimate</b></caption>
          	<thead>
          		<tr>
          			<th>Material</th>
          			<th>Number/Quantity</th>
          			<th>Product Use</th>
          			<th>Price</th>
-         			<th>Total Cost</th>
+         			<th>Cost</th>
          		</tr>
          	</thead>
          	<tbody>
@@ -20,7 +20,7 @@
          		<tr>
          			<td>{{ucfirst(str_replace('_',' ',$i))}}</td>
 
-         			<td p-qnty="{{$i}}">{{ceil($material)}} {{ucfirst(DbsHelper::unit($i ))}}</td>
+         			<td><span p-qnty="{{$i}}">{{ceil($material)}}</span> {{ucfirst(DbsHelper::unit($i ))}}</td>
          			<td type="{{$i}}" class="product-type"></td>
          			<td>&#x20B1;<span p-price='{{$i}}'></span></td>
          			<td>&#x20B1;<span p-tprice='{{$i}}'></span></td>
@@ -28,7 +28,7 @@
          		@endforeach
          	</tbody>
          </table>
-         <div class="pull-right" style="margin-right: 68px;"><label>Total Cost:  &nbsp;&#x20B1;</label> <span overall-total-price>{{0}}</span></div>
+         <div class="pull-right" style="margin-right: 68px;"><label> Overall Total Cost:  &nbsp;&#x20B1;</label> <span overall-total-price>{{0}}</span></div>
  
     </div>
 </div>
