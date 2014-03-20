@@ -1,5 +1,5 @@
 (function() {
-
+    hasInit = false;
     var current = 4;
     var pi = function(s) {
         return parseInt($(s).val());
@@ -23,6 +23,7 @@
         DreamBuilder.house.windows = [];
         DreamBuilder.house.doors = [];
         $('#sketchpad').empty(); //clear the sketchpad
+        hasInit = false;
 
     };
 
@@ -51,6 +52,8 @@
         d.createFloor();
 
         enableBtns();
+
+        hasInit = true;
     };
 
     $(document).on('click', '.modal .back', function(e) {
@@ -110,7 +113,7 @@
 
     $('#save').click(function(e) {
 
-        if (typeof DreamBuilder.house.length == 'undefined' || DreamBuilder.house.length <= 0) {
+        if (!hasInit) {
             $DBSAlert({
                 message: 'Nothing to save. Please create a new house design.',
                 type: 'warning'
@@ -238,6 +241,7 @@
             }
 
             enableBtns();
+            hasInit = true;
         });
     });
     $(document).on('click', '#delete', function() {
@@ -303,6 +307,15 @@
     });
 
     $('#new-room-form').submit(function(e) {
+        if (!hasInit) {
+            $('.modal').modal('hide');
+            $DBSAlert({
+                message: 'Create a house first before adding room.',
+                type: 'warning'
+            });
+
+            return false;
+        }
         d.createRoom({
             px: 0,
             py: 0,
@@ -315,6 +328,14 @@
     });
 
     $('#new-door-form').submit(function(e) {
+        if (!hasInit) {
+            $('.modal').modal('hide');
+            $DBSAlert({
+                message: 'Create a house first before adding door.',
+                type: 'warning'
+            });
+            return false;
+        }
         var where = $('select[name=door-where]').val();
         var dim = $('input[name=door-dim]').val();
         dim = dim.split('x');
@@ -322,14 +343,12 @@
         var w = dim[1].split('.');
         var width = (parseInt(w[0]) * 12 + parseInt(w[1])) * 2.54;
         var length = (parseInt(l[0]) * 12 + parseInt(l[1])) * 2.54;
-        var num = parseInt($('select[name=door-num]').val());
         d.createDoor({
             x: 0,
             y: 0,
             width: width,
             length: length,
             where: where,
-            num: num,
             type: $('input[name=door-dim]').data('type')
         });
         $('#new-door-dialog').modal('hide');
@@ -337,6 +356,14 @@
     });
 
     $('#new-window-form').submit(function(e) {
+        if (!hasInit) {
+            $('.modal').modal('hide');
+            $DBSAlert({
+                message: 'Create a house first before adding window.',
+                type: 'warning'
+            });
+            return false;
+        }
         var where = $('select[name=window-where]').val();
         var dim = $('input[name=window-dim]').val();
         dim = dim.split('x');
