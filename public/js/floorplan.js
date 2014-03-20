@@ -233,7 +233,7 @@
                     l = x + obj.width / 2 - 10;
                     dx = 1;
                     dy = 1;
-                    doorFunc = verticalDoubleDoors;
+                    doorFunc = obj.num == 1 ? verticalDoor : verticalDoubleDoors;
                     break;
                 case 'right':
                     x = this.length + offsetX;
@@ -241,7 +241,7 @@
                     l = x - obj.width / 2 + 5;
                     dx = -1;
                     dy = 1;
-                    doorFunc = verticalDoubleDoors;
+                    doorFunc = obj.num == 1 ? verticalDoor : verticalDoubleDoors;
                     break;
                 case 'top':
                     y = offsetY;
@@ -249,7 +249,7 @@
                     l = y + obj.width / 3 - 5;
                     dx = -1;
                     dy = 1;
-                    doorFunc = horizontalDoubleDoors;
+                    doorFunc = obj.num == 1 ? horizontalDoor : horizontalDoubleDoors;
                     break;
                 case 'bottom':
                     y = this.width + offsetY;
@@ -257,10 +257,10 @@
                     l = y - obj.width / 3 + 5;
                     dx = -1;
                     dy = -1;
-                    doorFunc = horizontalDoubleDoors;
+                    doorFunc = obj.num == 1 ? horizontalDoor : horizontalDoubleDoors;
                     break;
             }
-            doorFunc(x, y, obj.width * 2, l, dx, dy);
+            doorFunc(x, y, obj.width * obj.num, l, dx, dy);
         };
         Floorplan.prototype.createWindow = function(obj) {
             var x, y;
@@ -291,6 +291,23 @@
                     windowFunc = horizontalWindow;
             }
             windowFunc(x, y, obj.width, l);
+        };
+        Floorplan.prototype.createWall = function (obj) {
+            var w = 0, l = 0;
+            switch(obj.orientation) {
+                case 'vertical':
+                    w = obj.thickness;
+                    l = obj.width;
+                    break;
+                case 'horizontal':
+                    w = obj.width;
+                    l = obj.thickness;
+                    break;
+            }
+            var wall = paper.rect(obj.x + offsetX, obj.y + offsetY, w, l);
+            wall.attr({
+                fill: 'black'
+            });
         };
         return Floorplan;
     })();

@@ -22,10 +22,12 @@
         DreamBuilder.rooms = 0;
         DreamBuilder.doors = 0;
         DreamBuilder.windows = 0;
+        DreamBuilder.walls = 0;
         DreamBuilder.ID = 0;
         DreamBuilder.house.rooms = [];
         DreamBuilder.house.windows = [];
         DreamBuilder.house.doors = [];
+        DreamBuilder.house.walls = [];
         $('#sketchpad').empty(); //clear the sketchpad
         hasInit = false;
 
@@ -48,7 +50,7 @@
         $('[action-view]').prop('disabled', true).addAttr('disabled');
     }
     var init = function() {
-        DreamBuilder.divider = maxWidth / DreamBuilder.house.length;
+        DreamBuilder.divider = DreamBuilder.house.length > maxWidth ? maxWidth / DreamBuilder.house.length : 1;
         //set the new house dimensions
         DreamBuilder.setLength(DreamBuilder.house.length).setWidth(DreamBuilder.house.width).setHeight(DreamBuilder.house.height);
         d = new DreamBuilder.TWOD();
@@ -186,11 +188,11 @@
             data = resp.properties;
             var data = JSON.parse(data);
 
-            DreamBuilder.house.length = parseInt(data.length);
-            DreamBuilder.house.width = parseInt(data.width);
-            DreamBuilder.house.height = parseInt(data.height);
+            DreamBuilder.house.length = parseFloat(data.length);
+            DreamBuilder.house.width = parseFloat(data.width);
+            DreamBuilder.house.height = parseFloat(data.height);
 
-            DreamBuilder.divider = 1000 / DreamBuilder.house.length;
+            DreamBuilder.divider = DreamBuilder.house.length > maxWidth ? maxWidth / DreamBuilder.house.length : 1;
 
             DreamBuilder.house.wall = {
                 dimension: data.wall.thickness,
@@ -216,8 +218,8 @@
                     d.createRoom({
                         px: room.x,
                         py: room.y,
-                        width: parseInt(room.width),
-                        length: parseInt(room.length),
+                        width: parseFloat(room.width),
+                        length: parseFloat(room.length),
                         name: room.name
                     });
                 });
@@ -228,8 +230,8 @@
                         where: win.where,
                         x: win.x,
                         y: win.y,
-                        width: parseInt(win.width),
-                        length: parseInt(win.length)
+                        width: parseFloat(win.width),
+                        length: parseFloat(win.length)
                     });
                 });
             }
@@ -239,9 +241,21 @@
                         where: door.where,
                         x: door.x,
                         y: door.y,
-                        width: parseInt(door.width),
-                        length: parseInt(door.length),
-                        type: door.type
+                        width: parseFloat(door.width),
+                        length: parseFloat(door.length),
+                        type: door.type,
+                        num: parseInt(door.num)
+                    });
+                });
+            }
+            if(typeof data.walls != 'undefined') {
+                $.each(data.walls, function (i, wall) {
+                    d.createWall({
+                        orientation: wall.orientation,
+                        x: wall.x,
+                        y: wall.y,
+                        width: wall.width,
+                        thickness: wall.thickness
                     });
                 });
             }
@@ -352,7 +366,8 @@
             width: width,
             length: length,
             where: where,
-            type: $('input[name=door-dim]').data('type')
+            type: $('input[name=door-dim]').data('type'),
+            num: parseInt($('select[name=door-num]').val())
         });
         $('#new-door-dialog').modal('hide');
         return false;
@@ -382,6 +397,29 @@
             where: where
         });
         $('#new-window-dialog').modal('hide');
+        return false;
+    });
+
+    $('#new-wall-form').submit(function(e) {
+        if (!hasInit) {
+            $('.modal').modal('hide');
+            $DBSAlert({
+                message: 'Create a house first before adding window.',
+                type: 'warning'
+            });
+            return false;
+        }
+        var width = pf('input[name=wall-width]') * 100;
+        var thickness = pf('input[name=wall-thickness]');
+        var orientation = $('input[name=wall-orientation]:checked').val();
+        d.createWall({
+            x: 0,
+            y: 0,
+            width: width,
+            thickness: thickness,
+            orientation: orientation
+        });
+        $('#new-wall-dialog').modal('hide');
         return false;
     });
 

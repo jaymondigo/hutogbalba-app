@@ -308,19 +308,21 @@
 
         var x, y, xx, yy, drag;
 
+        var width = obj.width * obj.num;
+
         switch (obj.where) {
             case 'left':
                 x = offsetX / 2;
                 y = offsetY;
                 xx = offsetX / 2;
-                yy = obj.width * DreamBuilder.divider;
+                yy = width * DreamBuilder.divider;
                 xxx = obj.y;
                 drag = 'dragVertical';
                 break;
             case 'top':
                 x = offsetX;
                 y = offsetY / 2;
-                xx = obj.width * DreamBuilder.divider;
+                xx = width * DreamBuilder.divider;
                 yy = offsetY / 2;
                 xxx = obj.x;
                 drag = 'dragHorizontal';
@@ -329,32 +331,41 @@
                 x = DreamBuilder.get('length') * DreamBuilder.divider + offsetX;
                 y = offsetY;
                 xx = offsetX / 2;
-                yy = obj.width * DreamBuilder.divider;
+                yy = width * DreamBuilder.divider;
                 xxx = obj.y;
                 drag = 'dragVertical';
                 break;
             case 'bottom':
                 x = offsetX;
                 y = DreamBuilder.get('width') * DreamBuilder.divider + offsetY;
-                xx = obj.width * DreamBuilder.divider;
+                xx = width * DreamBuilder.divider;
                 yy = offsetY / 2;
                 xxx = obj.x;
                 drag = 'dragHorizontal';
                 break;
         }
+        var set = paper.set();
+        set.index = DreamBuilder.doors;
+        set.property = 'doors';
         var door = paper.rect(x, y, xx, yy);
         door.attr({
             fill: 'brown'
         });
+        set.push(door);
+        $(door.node).on('contextmenu', function (e) {
+            currentSet = set;
+            $cm.css({
+                display: 'block',
+                left: e.pageX,
+                top: e.pageY
+            });
+            return false;
+        });
         var d1 = paper.path('M' + x + ',' + y + 'L' + (x + xx) + ',' + (y + yy));
         var d2 = paper.path('M' + x + ',' + (y + yy) + 'L' + (x + xx) + ',' + y);
-        var set = paper.set();
-        set.index = DreamBuilder.doors;
-        set.property = 'doors';
-        set.push(door);
         set.push(d1);
         set.push(d2);
-        $([door.node, d1.node, d2.node]).on('contextmenu', function(e) {
+        $([d1.node, d2.node]).on('contextmenu', function(e) {
             currentSet = set;
             $cm.css({
                 display: 'block',
@@ -364,7 +375,7 @@
             return false;
         });
         set[drag]({
-            width: obj.width * DreamBuilder.divider,
+            width: width * DreamBuilder.divider,
             x: xxx * DreamBuilder.divider,
             index: DreamBuilder.doors,
             property: 'doors'
@@ -462,6 +473,53 @@
 
         DreamBuilder.windows++;
 
+    };
+
+    d.prototype.createWall = function (obj) {
+        DreamBuilder.house.walls.push({
+            x: obj.x,
+            y: obj.y,
+            thickness: obj.thickness,
+            width: obj.width,
+            orientation: obj.orientation
+        });
+        var w = 0, l = 0;
+        var set = paper.set();
+        switch(obj.orientation) {
+            case 'vertical':
+                w = obj.thickness * DreamBuilder.divider;
+                l = obj.width * DreamBuilder.divider;
+                break;
+            case 'horizontal':
+                w = obj.width * DreamBuilder.divider;
+                l = obj.thickness * DreamBuilder.divider;
+                break;
+        }
+        var wall = paper.rect(offsetX, offsetY, w, l);
+        wall.attr({
+            fill: 'black'
+        });
+        set.push(wall);
+        set.index = DreamBuilder.walls;
+        set.property = 'walls';
+        set.draggable({
+            width: w,
+            length: l,
+            x: obj.x * DreamBuilder.divider,
+            y: obj.y * DreamBuilder.divider,
+            index: DreamBuilder.walls,
+            property: 'walls'
+        });
+        DreamBuilder.walls++;
+        $(wall.node).on('contextmenu', function(e) {
+            currentSet = set;
+            $cm.css({
+                display: 'block',
+                left: e.pageX,
+                top: e.pageY
+            });
+            return false;
+        });
     };
 
     $([document, $cm]).click(function(e) {
