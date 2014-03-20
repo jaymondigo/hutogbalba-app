@@ -302,7 +302,8 @@
             y: obj.y,
             width: obj.width,
             length: obj.length,
-            type: obj.type
+            type: obj.type,
+            num: obj.num
         });
 
         var x, y, xx, yy, drag;
