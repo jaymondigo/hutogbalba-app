@@ -84,8 +84,8 @@ class DreamerController extends BaseController {
 		HouseDesign::find($id)->delete();
 		HousePicture::where('house_id', $id)->delete();
 
-		Session::flash('success',true);
-		Session::flash('message','House Design deleted successfully'); 
+		// Session::flash('success',true);
+		// Session::flash('message','House Design deleted successfully'); 
 	}
 
 	public function getPreviewDream($id){

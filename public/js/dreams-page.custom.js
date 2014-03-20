@@ -107,7 +107,7 @@ $(document).on('click', '[view-estimate]', function() {
                 });
             }, 'json');
         });
-        u
+
     });
 });
 $(document).on('click', '[view-options]', function() {

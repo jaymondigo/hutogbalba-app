@@ -72,6 +72,15 @@
     });
 
     $('#open').click(function(e) {
+        dId = DreamBuilder.ID;
+        var confrm = true;
+
+        if (dId != 0)
+            confrm = confirm('Any unsave data will be lost. Please make sure that everything was saved.');
+
+        if (!confrm)
+            return false;
+
         $('#open-dialog').modal();
         //get available designs
         $.ajax({
@@ -232,10 +241,18 @@
         });
     });
     $(document).on('click', '#delete', function() {
+        var confrm = confirm('Please confirm your action "Delete ' + DreamBuilder.NAME + '"!');
+
+        if (!confrm)
+            return false;
         $.post(baseUrl + '/dreamer/delete-dream', {
             id: DreamBuilder.ID
         }, function(resp) {
-            document.location.reload();
+            clearSketchpad();
+            $DBSAlert({
+                message: 'Your dream house was deleted successfully!',
+                type: 'success'
+            });
         });
     });
     $('#step2-form').submit(function(e) {

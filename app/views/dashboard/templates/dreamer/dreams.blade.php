@@ -580,8 +580,8 @@
             $('[action-view]').prop('disabled', true).attr('disabled', 'disabled');
         }
 
-        $(window).bind('beforeunload', function(){
-             
+        $(window).bind('beforeunload', function(e){
+            
             return 'Make sure that everything was saved before leaving or reloading this page.';
         });
     </script>
