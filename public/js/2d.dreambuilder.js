@@ -342,29 +342,33 @@
                 drag = 'dragHorizontal';
                 break;
         }
-        var door = paper.rect(x, y, xx, yy);
-        door.attr({
-            fill: 'brown'
-        });
-        var d1 = paper.path('M' + x + ',' + y + 'L' + (x + xx) + ',' + (y + yy));
-        var d2 = paper.path('M' + x + ',' + (y + yy) + 'L' + (x + xx) + ',' + y);
         var set = paper.set();
         set.index = DreamBuilder.doors;
         set.property = 'doors';
-        set.push(door);
-        set.push(d1);
-        set.push(d2);
-        $([door.node, d1.node, d2.node]).on('contextmenu', function(e) {
-            currentSet = set;
-            $cm.css({
-                display: 'block',
-                left: e.pageX,
-                top: e.pageY
+        for(var i = 1; i <= obj.num; i++) {
+            alert('door');
+            var ye = y + (y + (yy * (i - 1)));
+            var door1 = paper.rect(x, ye, xx, yy);
+            door.attr({
+                fill: 'brown'
             });
-            return false;
-        });
+            var d1 = paper.path('M' + x + ',' + ye + 'L' + (x + xx) + ',' + (ye + yy));
+            var d2 = paper.path('M' + x + ',' + (ye + yy) + 'L' + (x + xx) + ',' + ye);
+            set.push(door);
+            set.push(d1);
+            set.push(d2);
+            $([door.node, d1.node, d2.node]).on('contextmenu', function(e) {
+                currentSet = set;
+                $cm.css({
+                    display: 'block',
+                    left: e.pageX,
+                    top: e.pageY
+                });
+                return false;
+            });
+        }
         set[drag]({
-            width: obj.width * DreamBuilder.divider,
+            width: obj.width * obj.num * DreamBuilder.divider,
             x: xxx * DreamBuilder.divider,
             index: DreamBuilder.doors,
             property: 'doors'
