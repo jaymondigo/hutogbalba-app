@@ -308,19 +308,21 @@
 
         var x, y, xx, yy, drag;
 
+        var width = obj.width * obj.num;
+
         switch (obj.where) {
             case 'left':
                 x = offsetX / 2;
                 y = offsetY;
                 xx = offsetX / 2;
-                yy = obj.width * DreamBuilder.divider;
+                yy = width * DreamBuilder.divider;
                 xxx = obj.y;
                 drag = 'dragVertical';
                 break;
             case 'top':
                 x = offsetX;
                 y = offsetY / 2;
-                xx = obj.width * DreamBuilder.divider;
+                xx = width * DreamBuilder.divider;
                 yy = offsetY / 2;
                 xxx = obj.x;
                 drag = 'dragHorizontal';
@@ -329,14 +331,14 @@
                 x = DreamBuilder.get('length') * DreamBuilder.divider + offsetX;
                 y = offsetY;
                 xx = offsetX / 2;
-                yy = obj.width * DreamBuilder.divider;
+                yy = width * DreamBuilder.divider;
                 xxx = obj.y;
                 drag = 'dragVertical';
                 break;
             case 'bottom':
                 x = offsetX;
                 y = DreamBuilder.get('width') * DreamBuilder.divider + offsetY;
-                xx = obj.width * DreamBuilder.divider;
+                xx = width * DreamBuilder.divider;
                 yy = offsetY / 2;
                 xxx = obj.x;
                 drag = 'dragHorizontal';
@@ -345,30 +347,35 @@
         var set = paper.set();
         set.index = DreamBuilder.doors;
         set.property = 'doors';
-        for(var i = 1; i <= obj.num; i++) {
-            alert('door');
-            var ye = y + (y + (yy * (i - 1)));
-            var door1 = paper.rect(x, ye, xx, yy);
-            door.attr({
-                fill: 'brown'
+        var door = paper.rect(x, y, xx, yy);
+        door.attr({
+            fill: 'brown'
+        });
+        set.push(door);
+        $(door.node).on('contextmenu', function (e) {
+            currentSet = set;
+            $cm.css({
+                display: 'block',
+                left: e.pageX,
+                top: e.pageY
             });
-            var d1 = paper.path('M' + x + ',' + ye + 'L' + (x + xx) + ',' + (ye + yy));
-            var d2 = paper.path('M' + x + ',' + (ye + yy) + 'L' + (x + xx) + ',' + ye);
-            set.push(door);
-            set.push(d1);
-            set.push(d2);
-            $([door.node, d1.node, d2.node]).on('contextmenu', function(e) {
-                currentSet = set;
-                $cm.css({
-                    display: 'block',
-                    left: e.pageX,
-                    top: e.pageY
-                });
-                return false;
+            return false;
+        });
+        var d1 = paper.path('M' + x + ',' + y + 'L' + (x + xx) + ',' + (y + yy));
+        var d2 = paper.path('M' + x + ',' + (y + yy) + 'L' + (x + xx) + ',' + y);
+        set.push(d1);
+        set.push(d2);
+        $([d1.node, d2.node]).on('contextmenu', function(e) {
+            currentSet = set;
+            $cm.css({
+                display: 'block',
+                left: e.pageX,
+                top: e.pageY
             });
-        }
+            return false;
+        });
         set[drag]({
-            width: obj.width * obj.num * DreamBuilder.divider,
+            width: width * DreamBuilder.divider,
             x: xxx * DreamBuilder.divider,
             index: DreamBuilder.doors,
             property: 'doors'

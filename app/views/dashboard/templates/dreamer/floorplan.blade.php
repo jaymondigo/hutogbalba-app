@@ -78,7 +78,8 @@
 					x: parseInt(door.x),
 					y: parseInt(door.y),
 					width: parseInt(door.width),
-					length: parseInt(door.length)
+					length: parseInt(door.length),
+					num: parseInt(door.num)
 				});
 			});
 		}
