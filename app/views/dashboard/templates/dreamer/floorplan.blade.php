@@ -94,7 +94,20 @@
 					length: parseInt(win.length)
 				});
 			});
-		}		  
+		}		
+		console.log(typeof $house.walls != 'undefined'); 
+
+		if(typeof $house.walls != 'undefined') {
+			$.each($house.walls, function (i, wall) {
+				f.createWall({
+					orientation: wall.orientation,
+					x: parseFloat(wall.x),
+					y: parseFloat(wall.y),
+					width: parseFloat(wall.width),
+					thickness: parseFloat(wall.thickness)
+				});
+			});
+		} 
 		
 		convertToImage();
 

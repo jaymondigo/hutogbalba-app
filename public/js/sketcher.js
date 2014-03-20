@@ -22,10 +22,12 @@
         DreamBuilder.rooms = 0;
         DreamBuilder.doors = 0;
         DreamBuilder.windows = 0;
+        DreamBuilder.walls = 0;
         DreamBuilder.ID = 0;
         DreamBuilder.house.rooms = [];
         DreamBuilder.house.windows = [];
         DreamBuilder.house.doors = [];
+        DreamBuilder.house.walls = [];
         $('#sketchpad').empty(); //clear the sketchpad
         hasInit = false;
 
@@ -244,6 +246,17 @@
                     });
                 });
             }
+            if(typeof data.walls != 'undefined') {
+                $.each(data.walls, function (i, wall) {
+                    d.createWall({
+                        orientation: wall.orientation,
+                        x: wall.x,
+                        y: wall.y,
+                        width: wall.width,
+                        thickness: wall.thickness
+                    });
+                });
+            }
 
             enableBtns();
             hasInit = true;
@@ -385,6 +398,29 @@
             where: where
         });
         $('#new-window-dialog').modal('hide');
+        return false;
+    });
+
+    $('#new-wall-form').submit(function(e) {
+        if (!hasInit) {
+            $('.modal').modal('hide');
+            $DBSAlert({
+                message: 'Create a house first before adding window.',
+                type: 'warning'
+            });
+            return false;
+        }
+        var width = pf('input[name=wall-width]') * 100;
+        var thickness = pf('input[name=wall-thickness]');
+        var orientation = $('input[name=wall-orientation]:checked').val();
+        d.createWall({
+            x: 0,
+            y: 0,
+            width: width,
+            thickness: thickness,
+            orientation: orientation
+        });
+        $('#new-wall-dialog').modal('hide');
         return false;
     });
 

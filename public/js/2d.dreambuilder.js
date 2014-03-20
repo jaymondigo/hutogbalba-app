@@ -475,6 +475,53 @@
 
     };
 
+    d.prototype.createWall = function (obj) {
+        DreamBuilder.house.walls.push({
+            x: obj.x,
+            y: obj.y,
+            thickness: obj.thickness,
+            width: obj.width,
+            orientation: obj.orientation
+        });
+        var w = 0, l = 0;
+        var set = paper.set();
+        switch(obj.orientation) {
+            case 'vertical':
+                w = obj.thickness * DreamBuilder.divider;
+                l = obj.width * DreamBuilder.divider;
+                break;
+            case 'horizontal':
+                w = obj.width * DreamBuilder.divider;
+                l = obj.thickness * DreamBuilder.divider;
+                break;
+        }
+        var wall = paper.rect(offsetX, offsetY, w, l);
+        wall.attr({
+            fill: 'black'
+        });
+        set.push(wall);
+        set.index = DreamBuilder.walls;
+        set.property = 'walls';
+        set.draggable({
+            width: w,
+            length: l,
+            x: obj.x * DreamBuilder.divider,
+            y: obj.y * DreamBuilder.divider,
+            index: DreamBuilder.walls,
+            property: 'walls'
+        });
+        DreamBuilder.walls++;
+        $(wall.node).on('contextmenu', function(e) {
+            currentSet = set;
+            $cm.css({
+                display: 'block',
+                left: e.pageX,
+                top: e.pageY
+            });
+            return false;
+        });
+    };
+
     $([document, $cm]).click(function(e) {
         $cm.hide();
     });

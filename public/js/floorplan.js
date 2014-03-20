@@ -292,6 +292,23 @@
             }
             windowFunc(x, y, obj.width, l);
         };
+        Floorplan.prototype.createWall = function (obj) {
+            var w = 0, l = 0;
+            switch(obj.orientation) {
+                case 'vertical':
+                    w = obj.thickness;
+                    l = obj.width;
+                    break;
+                case 'horizontal':
+                    w = obj.width;
+                    l = obj.thickness;
+                    break;
+            }
+            var wall = paper.rect(obj.x + offsetX, obj.y + offsetY, w, l);
+            wall.attr({
+                fill: 'black'
+            });
+        };
         return Floorplan;
     })();
     window.convertToImage = function() {
