@@ -94,21 +94,22 @@ $(document).on('click', '[view-estimate]', function() {
             $.get(baseUrl + '/product/select/' + type, {
                 i: i
             }, function(resp) {
-                $('[type="' + resp['type'] + '"]').html(resp['data']);
-                $('[p-price=' + resp['type'] + ']').html($('[name="price[' + i + ']"]').val());
+                $('[type="' + resp['type'] + '"]').html(resp['html']);
 
-                qnty = $('[p-qnty="' + resp['type'] + '"]').html();
-                price = $('[p-price=' + resp['type'] + ']').html();
+                price = $('[name="price[' + i + ']"]').val();
 
-                $('[p-tprice=' + resp['type'] + ']').html(qnty * 1 * price);
+                price = price == null || typeof price == 'undefined' ? 0 : price;
+                $('[p-price=' + resp['type'] + ']').html(price);
 
-                $.each($('[p-tprice]'), function(i, data) {
-                    $('[overall-total-price]').html($('[overall-total-price]') * 1 + data.html() * 1);
-                });
+                calculatePrices();
+
             }, 'json');
         });
 
+
     });
+
+    $('#estimate-dialog').modal('show');
 });
 $(document).on('click', '[view-options]', function() {
     id = $(this).data('id');
@@ -116,3 +117,22 @@ $(document).on('click', '[view-options]', function() {
         $('[options-content]').html(resp);
     });
 });
+
+$(document).on('change', '[price-options]', function() {
+    calculatePrices();
+});
+
+window.calculatePrices = function() {
+    total = 0;
+    $.each($('[p-qnty]'), function(i, data) {
+        type = $(data).attr('p-qnty');
+
+        qnty = $(data).text();
+        price = $('[name="price[' + i + ']"]').val();
+
+        $('[p-tprice="' + type + '"]').text(qnty * price);
+        total += qnty * price;
+    });
+
+    $('[overall-total-price]').html(total);
+}

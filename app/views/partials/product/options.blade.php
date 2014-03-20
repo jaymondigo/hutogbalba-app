@@ -1,10 +1,11 @@
 <?php
 	$html = '
-		<select name="price['.$i.']" class="form-control">
+		<select name="price['.$i.']" class="form-control" price-options>
 			';
 		 
-		foreach($products as $p){
-			$html .= '<option value="'.$p->price.'">'.$p->name.'</option>';
+		foreach($products as $index => $p){
+			$selected = $index==0? 'selected="selected"': '';
+			$html .= '<option '.$selected.'value="'.$p->price.'">'.$p->name.'</option>';
 		} 
 
 	$html .='
@@ -12,7 +13,7 @@
 	';
 	$data = array(
 			'type'=>$type,
-			'data'=>$html
+			'html'=>$html
 		);
 	echo json_encode($data);
 ?>
