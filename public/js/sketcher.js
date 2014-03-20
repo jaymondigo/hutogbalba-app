@@ -305,12 +305,14 @@
         var w = dim[1].split('.');
         var width = (parseInt(w[0]) * 12 + parseInt(w[1])) * 2.54;
         var length = (parseInt(l[0]) * 12 + parseInt(l[1])) * 2.54;
+        var num = parseInt($('select[name=door-num]').val());
         d.createDoor({
             x: 0,
             y: 0,
             width: width,
             length: length,
             where: where,
+            num: num,
             type: $('input[name=door-dim]').data('type')
         });
         $('#new-door-dialog').modal('hide');

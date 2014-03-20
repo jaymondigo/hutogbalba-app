@@ -183,6 +183,13 @@
                                                 <li><label><input type="radio" name="door-dim" value="8.0x2.10" data-type="D"> 8'0" &times; 2'10"</label></li>
                                             </ul>
                                         </div>
+                                        <div class="form-group">
+                                            <label for="wall">Chuvaness: </label>
+                                            <select name="door-num" class="form-control">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
