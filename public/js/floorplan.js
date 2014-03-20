@@ -76,8 +76,12 @@
             var a = rightPythagorean(w);
             var door1 = paper.rect(x - t / 2, y, t, w);
             var door2 = paper.rect(x - t / 2, y + w * 2, t, w);
-            var door5 = paper.rect(x - t / 2, y + w, t, w);
-            var door3 = paper.path('M' + (x) + ',' + (y + w) + 'L' + ((x) + a * dx) + ',' + ((y + w) + a * dy));
+            // door3 = paper.path('M' + (x) + ',' + (y + w) + 'L' + ((x) + a * dx) + ',' + ((y + w) + a * dy));
+            var door3 = paper.path('M' + (x + ((t / 2) * dx)) + ',' + (y + w - 2) + 'L' + (x + (w * dx)) + ',' + (w + y - 2) +
+                'C' + (x + (w * dx)) + ',' + (w + y - 2) + ' ' + (x + (w * dx)) + ',' + (w * 2 + y + 2) + ' ' + (x + ((t / 2) * dx)) + ',' + (w * 2 + y + 2) + 'z');
+            var door4 = paper.path('M' + (x + ((t / 2) * dx)) + ',' + (y + w - 2) + 'L' + (x + (w * dx)) + ',' + (w + y - 2));
+            var door5 = paper.rect(x - 1 - t / 2, y + w, t * 1.5, w);
+            //var door4 = paper.path('C' + (x + (w * dx)) + ',' + (w + y - 2) + ' ' + (x + (w * dx)) + ',' + (w * 2 + y - 2) + ' ' + (x + ((t / 2) * dx)) + ',' + (w * 2 + y - 2) + 'z');
             door1.attr({
                 'fill': 'black'
             });
@@ -85,6 +89,10 @@
                 'fill': 'black'
             });
             door3.attr({
+                'stroke-width': '2',
+                'stroke': 'gray'
+            });
+            door4.attr({
                 'stroke-width': '2',
                 'stroke': 'black'
             });
@@ -101,8 +109,11 @@
             var a = rightPythagorean(w);
             var door1 = paper.rect(x, y - t / 2, w, t);
             var door2 = paper.rect(x + w * 2, y - t / 2, w, t);
-            var door5 = paper.rect(x + w, y - t / 2, w, t);
-            var door3 = paper.path('M' + (x + w * 2) + ',' + (y) + 'L' + ((x + w * 2) + a * dx) + ',' + ((y) + a * dy));
+            //var door3 = paper.path('M' + (x + w * 2) + ',' + (y) + 'L' + ((x + w * 2) + a * dx) + ',' + ((y) + a * dy));
+            var door3 = paper.path('M' + (x + w - 2) + ',' + (y + ((t / 2) * dy)) + 'L' + (x + w - 2) +  ',' + (y + (w * dy)) +
+                'C' + (x + w - 2) +  ',' + (y + (w * dy)) + ' ' + (w * 2 + x - 2) + ',' + (y + (w * dy)) + ' ' + (w * 2 + x + 2) + ',' + (y + ((t / 2) * dy)));
+            var door4 = paper.path('M' + (x + w - 2) + ',' + (y + ((t / 2) * dy)) + 'L' + (x + w - 2) +  ',' + (y + (w * dy)));
+            var door5 = paper.rect(x + w, y - 1 - t / 2, w, t * 1.5);
             door1.attr({
                 'fill': 'black'
             });
@@ -114,10 +125,64 @@
                 'stroke': bgColor
             });
             door3.attr({
-                'stroke-width': '2'
+                'stroke-width': '2',
+                'stroke': 'gray'
+            });
+            door4.attr({
+                'stroke-width': '2',
+                'stroke': 'black'
             });
             var label = paper.text(x + offsetX / 2, l, (width / 100).toFixed(2) + ' m');
         }
+
+        function verticalDoubleDoors(x, y, width, l, dx, dy) {
+            var t = 10;
+            var w = width / 4;
+            var a = rightPythagorean(w);
+            var door1 = paper.rect(x - t / 2, y, t, w);
+            var door2 = paper.rect(x - t / 2, y + w * 3, t, w);
+            var door3 = paper.path('M' + (x + ((t / 2) * dx)) + ',' + (y + w - 2) + 'L' + ((x + ((t / 2) * dx)) + w * dx) + ',' + (y + w - 2) +
+                ' C' + ((x + ((t / 2) * dx)) + w * dx) + ',' + (y + w - 2) + ' ' + ((x + ((t / 2) * dx)) + w * dx) + ',' + (y + w - 2 + w) +
+                ' ' + (x + ((t / 2) * dx)) + ',' + (y + w - 2 + w) + ' ' + (x + ((t / 2) * dx)) + ',' + (y + w - 2 + w) +
+                ' ' + ((x + ((t / 2) * dx)) + w * dx) + ',' + (y + w - 2 + w) + ' ' + ((x + ((t / 2) * dx)) + w * dx) + ',' + (y + w * 3 + 2) +
+                ' M' + ((x + ((t / 2) * dx)) + w * dx) + ',' + (y + w * 3 + 2) + 'L' + (x + ((t / 2) * dx)) + ',' + (y + w * 3 + 2));
+            var door5 = paper.rect(x - t / 2, y + w, t, w * 2);
+            door1.attr({
+                'fill': 'black'
+            });
+            door2.attr({
+                'fill': 'black'
+            });
+            door5.attr({
+                'fill': bgColor,
+                'stroke': bgColor
+            });
+        }
+
+        function horizontalDoubleDoors(x, y, width, l, dx, dy) {
+            var t = 10;
+            var w = width / 4;
+            var a = rightPythagorean(w);
+            var door1 = paper.rect(x, y - t / 2, w, t);
+            var door2 = paper.rect(x + w * 3, y - t / 2, w, t);
+            var door3 = paper.path('M' + (x + w - 2) + ',' + (y + ((t / 2) * dy)) + 'L' + (x + w - 2) +  ',' + (y + (w * dy)) +
+                ' C' + (x + w - 2) +  ',' + (y + (w * dy)) + ' ' + (x + w - 2 + w) + ',' + (y + (w * dy)) +
+                ' ' + (x + w - 2 + w) + ',' + (y + ((t / 2) * dy)) + ' ' + (x + w - 2 + w) + ',' + (y + ((t / 2) * dy)) +
+                ' ' + (x + w - 2 + w) + ',' + (y + ((t / 2) * dy) + w * dy) + ' ' + (x + w * 3 + 2) + ',' + (y + ((t / 2) * dy) + w * dy) +
+                ' M' + (x + w * 3 + 2) + ',' + (y + ((t / 2) * dy) + w * dy) + 'L' + (x + w * 3 + 2) + ',' + (y + ((t / 2) * dy)));
+            var door5 = paper.rect(x + w, y - t / 2, w * 2, t);
+            door1.attr({
+                'fill': 'black'
+            });
+            door2.attr({
+                'fill': 'black'
+            });
+            door5.attr({
+                'fill': bgColor,
+                'stroke': bgColor
+            });
+        }
+
         Floorplan.prototype.createFloor = function() {
             var floor = paper.rect(offsetX, offsetY, this.length, this.width);
             floor.attr({
@@ -168,7 +233,7 @@
                     l = x + obj.width / 2 - 10;
                     dx = 1;
                     dy = 1;
-                    doorFunc = verticalDoor;
+                    doorFunc = verticalDoubleDoors;
                     break;
                 case 'right':
                     x = this.length + offsetX;
@@ -176,7 +241,7 @@
                     l = x - obj.width / 2 + 5;
                     dx = -1;
                     dy = 1;
-                    doorFunc = verticalDoor;
+                    doorFunc = verticalDoubleDoors;
                     break;
                 case 'top':
                     y = offsetY;
@@ -184,7 +249,7 @@
                     l = y + obj.width / 3 - 5;
                     dx = -1;
                     dy = 1;
-                    doorFunc = horizontalDoor;
+                    doorFunc = horizontalDoubleDoors;
                     break;
                 case 'bottom':
                     y = this.width + offsetY;
@@ -192,10 +257,10 @@
                     l = y - obj.width / 3 + 5;
                     dx = -1;
                     dy = -1;
-                    doorFunc = horizontalDoor;
+                    doorFunc = horizontalDoubleDoors;
                     break;
             }
-            doorFunc(x, y, obj.width, l, dx, dy);
+            doorFunc(x, y, obj.width * 2, l, dx, dy);
         };
         Floorplan.prototype.createWindow = function(obj) {
             var x, y;
