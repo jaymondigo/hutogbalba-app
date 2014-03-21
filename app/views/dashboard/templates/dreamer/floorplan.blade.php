@@ -124,10 +124,7 @@
 						+'$("img").css({'
 								+"'max-width': '1200px'"
 							+'});'
-							+'setTimeout(function() {'
-						       +'window.print();'
-						    +'}, 4000);'
-							+'}\n'
+							+'window.print();}\n'
 						+'</scr'+'ipt>'
 						+'</body>'+
 						'<html>';

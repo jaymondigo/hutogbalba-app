@@ -111,5 +111,6 @@
 @stop
 
 @section('other_scripts')
+    <script src="{{URL::to('js/jquery.validate.min.js')}}" type="text/javascript"></script> 
     <script src="{{URL::to('js/vendor.js')}}" type="text/javascript"></script> 
 @stop

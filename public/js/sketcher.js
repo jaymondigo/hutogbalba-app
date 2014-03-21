@@ -117,7 +117,7 @@
         });
     });
 
-    $('#save').click(function(e) {
+    $('#save, #save-as').click(function(e) {
 
         if (!hasInit) {
             $DBSAlert({
@@ -129,8 +129,13 @@
 
         if (DreamBuilder.ID == 0)
             $('#save-dialog').modal('show');
-        else
-            $('#saveHouse').click();
+        else {
+            if ($(this).hasClass('save-as')) {
+                DreamBuilder.ID = 0;
+                $('#save-dialog').modal('show');
+            } else
+                $('#saveHouse').click();
+        }
 
         enableBtns();
     });
@@ -219,7 +224,7 @@
             console.log('walls', data.walls);
             if (typeof data.rooms != 'undefined') {
                 $.each(data.rooms, function(i, room) {
-                    if(typeof room == 'object') {
+                    if (typeof room == 'object') {
                         d.createRoom({
                             px: room.x,
                             py: room.y,
@@ -232,7 +237,7 @@
             }
             if (typeof data.windows != 'undefined') {
                 $.each(data.windows, function(i, win) {
-                    if(typeof win == 'object') {
+                    if (typeof win == 'object') {
                         d.createWindow({
                             where: win.where,
                             x: win.x,
@@ -245,7 +250,7 @@
             }
             if (typeof data.doors != 'undefined') {
                 $.each(data.doors, function(i, door) {
-                    if(typeof door == 'object') {
+                    if (typeof door == 'object') {
                         d.createDoor({
                             where: door.where,
                             x: door.x,
@@ -254,13 +259,13 @@
                             length: parseFloat(door.length),
                             type: door.type,
                             num: parseInt(door.num)
-                        }); 
+                        });
                     }
                 });
             }
-            if(typeof data.walls != 'undefined') {
-                $.each(data.walls, function (i, wall) {
-                    if(typeof wall == 'object') {
+            if (typeof data.walls != 'undefined') {
+                $.each(data.walls, function(i, wall) {
+                    if (typeof wall == 'object') {
                         d.createWall({
                             orientation: wall.orientation,
                             x: wall.x,
