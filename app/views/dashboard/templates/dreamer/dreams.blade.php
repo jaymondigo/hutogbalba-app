@@ -354,17 +354,17 @@
                                     <div class="row">
                                         <div class="col-lg-8 col-md-8">
                                             <label for="num-floors">Number of Floors: </label>
-                                            <select name="num-floors" class="form-control" data-content="Please edit this" data-original-title="Number of floors">
+                                            <select name="num-floors" class="form-control" data-content="Number of floors available" data-original-title="Number of floors">
                                                 <option value="1">1</option>
                                             </select><br />
                                             <label for="terrain">a. Ground floor Height above the terrain: </label>
                                             <section class="input-group">
-                                                <input value="0.2" disabled name="terrain" type="text" class="form-control" data-content="Please edit this" data-original-title="Terrain"/>
+                                                <input value="0.2" disabled name="terrain" type="text" class="form-control" data-content="Ground floor Height above the terrain" data-original-title="Floor height above the terrain"/>
                                                 <span class="input-group-addon">m</span>
                                             </section><br />
                                             <label for="height">b. Floor to Ceiling Height: </label>
                                             <section class="input-group">
-                                                <input required name="height" value="2.75" type="text" min="2.75" class="form-control" data-content="Please edit this" data-original-title="Floor to ceiling height"/>
+                                                <input required name="height" value="2.75" type="text" min="2.75" class="form-control" data-content="Measurement/ Height of the wall from the ground up to the ceiling" data-original-title="Floor to ceiling height"/>
                                                 <span class="input-group-addon">m</span>
                                             </section>
                                         </div>
@@ -409,12 +409,12 @@
                                             </section><br />
                                             <label for="length">a. Length: </label>
                                             <section class="input-group">
-                                                <input required name="length" min="2.5" value="2.5" type="text" class="form-control" data-content="Please edit this" data-original-title="Building Length"/>
+                                                <input required name="length" min="2.5" value="2.5" type="text" class="form-control" data-content="Length of the house on the side labeled <b>a</b> <i>Please refer to the imaeg at the left</i>" data-original-title="Building Length"/>
                                                 <span class="input-group-addon">m</span>
                                             </section><br />
                                             <label for="width">b. Width: </label>
                                             <section class="input-group">
-                                                <input required name="width" min="2.5" value="2.5" type="text" class="form-control" data-content="Please edit this" data-original-title="Building width" />
+                                                <input required name="width" min="2.5" value="2.5" type="text" class="form-control" data-content="Whideness of the house on the side labeled <b>b</b> <i>Please refer to the image at the left</i>" data-original-title="Building width" />
                                                 <span class="input-group-addon">m</span>
                                             </section>
                                         </fieldset>
@@ -431,7 +431,7 @@
                     </div>
                 </div>
                 <div class="modal fade" id="step4" tabindex="-1" role="dialog" aria-labelledby="form-label" aria-hidden="true">
-                <div class="" style="top: 76px; right: 0px; width: 356px;position: absolute;z-index: 100000000000;background: white;min-height: 217px;"><div class="arrow"></div><h3 class="popover-title">Asphalt</h3><div class="popover-content">Please edit this</div></div>
+                <div class="" style="top: 76px; right: 0px; width: 356px;position: absolute;background: white;min-height: 217px;"><div class="arrow"></div><h3 class="popover-title">Asphalt</h3><div class="popover-content">Please edit this</div></div>
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <form id="step4-form">
@@ -444,12 +444,12 @@
                                     <label for="roof-type">Roof</label>
                                     <div class="row">
                                         <div class="col-lg-3 col-md-3">
-                                            <select class="form-control" name="roof-type" data-content="Please edit this" data-original-title="Roof">
+                                            <select class="form-control" name="roof-type" data-content="Hip is a pyramid-shaped roof" data-original-title="Type of the roof">
                                                 <option value="hip">Hip</option>
                                             </select>
                                         </div>
                                         <div class="col-lg-4 col-md-4">
-                                            <select class="form-control" name="roof-pitch" data-content="Please edit this" data-original-title="Hip type">
+                                            <select class="form-control" name="roof-pitch" data-content="slope measurement of the roof" data-original-title="Hip type">
                                                 <option value="4-12">4/12 Pitch Hip</option>
                                                 <option value="8-12">8/12 Pitch Hip</option>
                                             </select>
