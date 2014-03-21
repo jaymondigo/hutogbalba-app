@@ -48,7 +48,9 @@
 
             windows: [],
 
-            doors: []
+            doors: [],
+
+            walls: []
 
         }
 

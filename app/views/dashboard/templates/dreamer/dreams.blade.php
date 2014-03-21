@@ -75,6 +75,7 @@
                                             <li><a href="#new-room-dialog" data-toggle="modal" id="new-room">New Room</a></li>
                                             <li><a href="#new-door-dialog" data-toggle="modal" id="new-door">New Door</a></li>
                                             <li><a href="#new-window-dialog" data-toggle="modal" id="new-window">New Window</a></li>
+                                            <li><a href="#new-wall-dialog" data-toggle="modal" id="new-wall">New Wall</a></li>
                                         </ul>
                                     </li>
                                     <li class="dropdown">
@@ -231,6 +232,52 @@
                                                 <li><label><input type="radio" name="window-dim" value="3.5x3.5"> 3'5" &times; 3'5"</label></li>
                                                 <li><label><input type="radio" name="window-dim" value="4.5x4.5"> 4'5" &times; 4'5"</label></li>
                                             </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <input type="submit" class="btn btn-flat btn-info" value="Add" />
+                                <a href="#" class="btn btn-flat btn-danger cancel" data-dismiss="modal">Cancel</a>
+                            </div>
+                            </form>
+                      </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="new-wall-dialog" tabindex="-1" role="dialog" aria-labelledby="form-label" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form action="" id="new-wall-form">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title">Add Wall</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4">
+                                        <img src="{{URL::to('img/walls.png')}}" />
+                                    </div>
+                                    <div class="col-lg-8 col-md-8">
+                                        <div class="form-group">
+                                            <label for="wall">Orientation: </label>
+                                            <ul class="list-unstyled">
+                                                <li><label><input type="radio" checked name="wall-orientation" value="vertical" data-content="Please edit this" data-original-title="Available Doors">Vertical</label></li>
+                                                <li><label><input type="radio" name="wall-orientation" value="horizontal">Horizontal</label></li>
+                                            </ul>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="wall">Thickness: </label>
+                                            <section class="input-group">
+                                                <input required min="10" value="10" name="wall-thickness" type="text" class="form-control" />
+                                                <span class="input-group-addon">cm</span>
+                                            </section>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="wall">Width: </label>
+                                            <section class="input-group">
+                                                <input required min="1" value="1" name="wall-width" type="text" class="form-control" />
+                                                <span class="input-group-addon">m</span>
+                                            </section>
                                         </div>
                                     </div>
                                 </div>
