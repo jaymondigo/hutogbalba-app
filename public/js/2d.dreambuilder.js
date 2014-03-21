@@ -4,6 +4,8 @@
 
     var $cm = $('#contextMenu'); //house elements contextmenu
 
+    var doorEdge = 20;
+
     var contextCallback = function(e) {
         currentSet = set;
         //show the contextmenu
@@ -140,6 +142,7 @@
     var init = function() {
         //initialize new Raphael object
         paper = new Raphael('sketchpad', DreamBuilder.get('length') * DreamBuilder.divider + offsetY * 2, DreamBuilder.get('width') * DreamBuilder.divider + offsetX * 2);
+        paper.setViewBox(0, 0, DreamBuilder.get('length') * DreamBuilder.divider + offsetY * 2, DreamBuilder.get('width') * DreamBuilder.divider + offsetX * 2);
     };
 
     var d = DreamBuilder.TWOD = function() {
@@ -207,7 +210,8 @@
             y: obj.py,
             width: obj.width,
             length: obj.length,
-            name: obj.name
+            name: obj.name,
+            door: obj.door
         });
         //set the initial position to the edge
         var x = offsetX;
@@ -256,6 +260,47 @@
             lat: -1,
             set: set
         });
+
+        if(typeof obj.door == 'object') {
+            var w = 0, l = 0;
+            
+            switch(obj.door.where) {
+                case 'left':
+                    x = offsetX;
+                    y = offsetY + doorEdge * DreamBuilder.divider;
+                    w = doorEdge * DreamBuilder.divider;
+                    l = obj.door.width * DreamBuilder.divider;
+                    break;
+                case 'right':
+                    x = offsetX + (obj.length - doorEdge) * DreamBuilder.divider;
+                    y = offsetY + doorEdge * DreamBuilder.divider;
+                    w = doorEdge * DreamBuilder.divider;
+                    l = obj.door.width * DreamBuilder.divider;
+                    break;
+                case 'top':
+                    x = offsetX + doorEdge * DreamBuilder.divider;
+                    y = offsetY;
+                    w = obj.door.width * DreamBuilder.divider;
+                    l = doorEdge * DreamBuilder.divider;
+                    break;
+                case 'bottom':
+                    x = offsetX + doorEdge * DreamBuilder.divider;
+                    y = offsetY + (obj.width - doorEdge) * DreamBuilder.divider;
+                    w = obj.door.width * DreamBuilder.divider;
+                    l = doorEdge * DreamBuilder.divider;
+                    break;
+            }
+            var door = paper.rect(x, y, w, l);
+            door.attr({
+                fill: 'brown'
+            });
+            var dl = paper.path('M' + x + ',' + y + 'L' + (x + w) + ',' + (y + l) +
+                'M' + x + ',' + (y + l) + 'L' + (x + w) + ',' + y);
+
+            set.push(door);
+            set.push(dl);
+
+        }
 
         DreamBuilder.rooms++;
 

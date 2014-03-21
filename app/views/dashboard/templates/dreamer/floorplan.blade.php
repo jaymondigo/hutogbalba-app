@@ -67,7 +67,8 @@
 					y: parseInt(room.y),
 					width: parseInt(room.width),
 					length: parseInt(room.length),
-					name: room.name
+					name: room.name,
+					door: room.door
 				});
 			});	
 		}
