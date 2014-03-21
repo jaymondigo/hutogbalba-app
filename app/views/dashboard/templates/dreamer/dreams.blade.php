@@ -66,7 +66,7 @@
                                         <ul class="dropdown-menu" file-menu>
                                             <li><a href="#" id="new">New</a></li>
                                             <li><a href="#" id="save">Save</a></li>
-                                            <li><a href="#" id="save-as" class="save-as">Save As</a></li>
+                                            <li><a href="#" id="save-as" class="save-as">Save As New</a></li>
                                             <li><a href="#" id="open">Open</a></li>
                                         </ul>
                                     </li>

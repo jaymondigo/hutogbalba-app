@@ -4,7 +4,29 @@ $(document).on('click', '[action-add-vendor]', function() {
     $.get(baseUrl + '/vendor/create', function(data) {
         $('[add-vendor]').html(data);
 
-        $('[vendor-form]').validate();
+        $('[vendor-form]').validate({
+            rules: {
+                name: {
+                    required: true,
+                    minlength: 2
+                },
+                'address1': 'required',
+                'address2': 'required',
+                'address3': 'required',
+                email: {
+                    required: true,
+                    email: true
+                },
+                contact: {
+                    required: true,
+                    number: true
+                }
+
+            },
+            submitHandler: function(form) {
+                form.submit();
+            }
+        });
     });
 });
 
@@ -31,11 +53,12 @@ $(document).on('click', '[action-view-vendor]', function() {
 });
 
 $(document).on('submit', '[vendor-form]', function(e) {
-    // e.preventDefault();
+    e.preventDefault();
 
     $(this).validate({
         submitHandler: function() {
             $('[vendor-form]').submit();
         }
-    })
+    });
+    return false;
 });
