@@ -9,6 +9,5 @@
 	 </button>
 	</form>
    
-    <button class="btn btn-flat btn-info cancel" data-dismiss="modal">No</button>
-    <button class="btn btn-flat btn-warning cancel" data-dismiss="modal">Cancel</button>
+    <button class="btn btn-flat btn-info cancel" data-dismiss="modal">No</button>  
 </div>

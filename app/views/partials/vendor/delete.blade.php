@@ -10,6 +10,5 @@
 	<input type="hidden" name="id" value="{{$vendor->id}}" />
     <button type="submit" class="btn btn-flat btn-danger cancel">Yes</button>
     </form>
-    <button class="btn btn-flat btn-info cancel" data-dismiss="modal">No</button>
-    <button class="btn btn-flat btn-warning cancel" data-dismiss="modal">Cancel</button>
+    <button class="btn btn-flat btn-info cancel" data-dismiss="modal">No</button> 
 </div>
