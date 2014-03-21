@@ -36,6 +36,7 @@ class UserController extends BaseController {
         $username = preg_replace( "/[^0-9a-zA-Z-]/", '', $username);  
         $user->username = $username;
         $user->password = Input::get( 'password' );
+        $user->gender = Input::get( 'gender' );
         $user->type = Input::has( 'type' ) ? Input::get( 'type' ) :  'dreamer' ;
 
         // The password confirmation will be removed from model

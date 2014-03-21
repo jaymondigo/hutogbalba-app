@@ -1,4 +1,4 @@
-<form action="{{URL::to('vendor')}}" method="POST">
+<form action="{{URL::to('vendor')}}" method="POST" vendor-form>
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     <h4 class="modal-title">{{ucfirst($vendor->name)}} - Edit</h4>

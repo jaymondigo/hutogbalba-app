@@ -3,6 +3,8 @@ baseUrl = $('[base-url]').attr('base-url');
 $(document).on('click', '[action-add-vendor]', function() {
     $.get(baseUrl + '/vendor/create', function(data) {
         $('[add-vendor]').html(data);
+
+        $('[vendor-form]').validate();
     });
 });
 
@@ -26,4 +28,14 @@ $(document).on('click', '[action-view-vendor]', function() {
     $.get(baseUrl + '/vendor/' + id, function(data) {
         $('[view-vendor]').html(data);
     });
+});
+
+$(document).on('submit', '[vendor-form]', function(e) {
+    // e.preventDefault();
+
+    $(this).validate({
+        submitHandler: function() {
+            $('[vendor-form]').submit();
+        }
+    })
 });

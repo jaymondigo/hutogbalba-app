@@ -38,6 +38,13 @@
                         <input type="text" name="lastname" class="form-control" placeholder="Lastname"/>
                     </div>
                     <div class="form-group">
+                        <label>Gender</label>
+                        <select name="gender" class="form-control">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <input class="form-control" placeholder="{{{ Lang::get('confide::confide.e_mail') }}}" type="text" name="email" id="email" value="{{{ Input::old('email') }}}">
                     </div>
                     <div class="form-group">
