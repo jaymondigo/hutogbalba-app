@@ -294,6 +294,7 @@
     };
 
     d.prototype.createDoor = function(obj) {
+        if(typeof obj.where == 'undefined') return;
         var xxx;
         //cache the door to the house object
         DreamBuilder.house.doors.push({
@@ -361,6 +362,10 @@
             });
             return false;
         });
+        console.log('d1', 'M' + x + ',' + y + 'L' + (x + xx) + ',' + (y + yy));
+        console.log('d2', 'M' + x + ',' + (y + yy) + 'L' + (x + xx) + ',' + y);
+        console.log('x', x, 'y', y, 'yy', yy, 'xx', xx);
+        console.log('obj', obj);
         var d1 = paper.path('M' + x + ',' + y + 'L' + (x + xx) + ',' + (y + yy));
         var d2 = paper.path('M' + x + ',' + (y + yy) + 'L' + (x + xx) + ',' + y);
         set.push(d1);

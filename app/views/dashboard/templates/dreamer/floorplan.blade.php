@@ -95,7 +95,6 @@
 				});
 			});
 		}		
-		console.log(typeof $house.walls != 'undefined'); 
 
 		if(typeof $house.walls != 'undefined') {
 			$.each($house.walls, function (i, wall) {
