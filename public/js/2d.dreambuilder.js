@@ -7,7 +7,7 @@
     var doorEdge = 20;
 
     var contextCallback = function(e) {
-        currentSet = set;
+        DreamBuilder.currentSet = currentSet = set;
         //show the contextmenu
         $cm.css({
             display: 'block',
@@ -327,7 +327,7 @@
         //set each node for contextmenu event
         $.each(set, function(i, node) {
             $(node.node).on('contextmenu', function(e) {
-                currentSet = set;
+                DreamBuilder.currentSet = currentSet = set;
                 $cm.css({
                     display: 'block',
                     left: e.pageX,
@@ -399,7 +399,7 @@
         });
         set.push(door);
         $(door.node).on('contextmenu', function (e) {
-            currentSet = set;
+            DreamBuilder.currentSet = currentSet = set;
             $cm.css({
                 display: 'block',
                 left: e.pageX,
@@ -416,7 +416,7 @@
         set.push(d1);
         set.push(d2);
         $([d1.node, d2.node]).on('contextmenu', function(e) {
-            currentSet = set;
+            DreamBuilder.currentSet = currentSet = set;
             $cm.css({
                 display: 'block',
                 left: e.pageX,
@@ -505,7 +505,7 @@
         set.push(d2);
 
         $([door.node, d1.node, d2.node]).on('contextmenu', function(e) {
-            currentSet = set;
+            DreamBuilder.currentSet = currentSet = set;
             $cm.css({
                 display: 'block',
                 left: e.pageX,
@@ -562,7 +562,7 @@
         });
         DreamBuilder.walls++;
         $(wall.node).on('contextmenu', function(e) {
-            currentSet = set;
+            DreamBuilder.currentSet = currentSet = set;
             $cm.css({
                 display: 'block',
                 left: e.pageX,
@@ -577,13 +577,10 @@
     });
 
     $('#delete-set').click(function(e) {
-        console.log(currentSet.property, currentSet.index);
         DreamBuilder.house[currentSet.property][currentSet.index] = null;
         currentSet.remove();
         $cm.hide();
         return false;
     });
-
-    window.currentSet = currentSet;
 
 })();

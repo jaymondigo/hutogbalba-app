@@ -673,6 +673,7 @@
                 <div id="contextMenu" style="position: absolute; display: none;" class="dropdown clearfix">
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" style="display:block;position:static;margin-bottom:5px;">
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="#" id="delete-set">Delete</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#" id="duplicate-set">Duplicate</a></li>
                     </ul>
                 </div>
 

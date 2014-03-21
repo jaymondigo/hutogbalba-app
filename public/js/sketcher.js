@@ -475,6 +475,14 @@
 
     $('input[name=room-width]').bind('change paste keyup', roomArea);
 
+    $('#duplicate-set').click(function (e) {
+        var p = DreamBuilder.currentSet.property;
+        var method = 'create' + p.charAt(0).toUpperCase() + p.substr(1, p.length -2);
+        d[method](DreamBuilder.house[p][DreamBuilder.currentSet.index]);
+        $('#contextMenu').hide();
+        return false;
+    });
+
     window.d = d;
 
 })();
