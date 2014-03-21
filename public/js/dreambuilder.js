@@ -52,7 +52,9 @@
 
             walls: []
 
-        }
+        },
+
+        currentSet: null
 
     };
 
