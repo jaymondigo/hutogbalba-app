@@ -3,6 +3,7 @@
         offsetY = 100,
         bgColor = 'white',
         ra = 50;
+    var doorEdge = 20;
     var $svg = $('#floorplan-svg'),
         $canvas = $('#floorplan-canvas');
     var Floorplan = (function() {
@@ -18,12 +19,12 @@
                 'fill': bgColor,
                 'stroke': bgColor
             });
-            var name = paper.text(offsetX / 2, offsetY / 3, obj.name);
-            name.attr({
-                'font-style': 'italic',
-                'font-size': '10px'
-            });
-            rightAngle.call(this);
+            //var name = paper.text(offsetX / 2, offsetY / 3, obj.name);
+            // name.attr({
+            //     'font-style': 'italic',
+            //     'font-size': '10px'
+            // });
+            //rightAngle.call(this);
         }
 
         function rightAngle() {
@@ -70,7 +71,7 @@
             win2.attr({
                 'fill': 'black'
             });
-            var label = paper.text(l, y + width / 2, (width / 100).toFixed(2) + ' m');
+            //var label = paper.text(l, y + width / 2, (width / 100).toFixed(2) + ' m');
         }
 
         function horizontalWindow(x, y, width, l) {
@@ -86,7 +87,7 @@
             win2.attr({
                 'fill': 'black'
             });
-            var label = paper.text(x + width / 2, l, (width / 100).toFixed(2) + ' m');
+            //var label = paper.text(x + width / 2, l, (width / 100).toFixed(2) + ' m');
         }
 
         function verticalDoor(x, y, width, l, dx, dy) {
@@ -119,7 +120,7 @@
                 'fill': bgColor,
                 'stroke': bgColor
             });
-            var label = paper.text(l, y + width / 2, (width / 100).toFixed(2) + ' m');
+            //var label = paper.text(l, y + width / 2, (width / 100).toFixed(2) + ' m');
         }
 
         function horizontalDoor(x, y, width, l, dx, dy) {
@@ -151,7 +152,7 @@
                 'stroke-width': '2',
                 'stroke': 'black'
             });
-            var label = paper.text(x + offsetX / 2, l, (width / 100).toFixed(2) + ' m');
+            //var label = paper.text(x + offsetX / 2, l, (width / 100).toFixed(2) + ' m');
         }
 
         function verticalDoubleDoors(x, y, width, l, dx, dy) {
@@ -232,7 +233,7 @@
         Floorplan.prototype.createRoom = function(obj) {
             var room = paper.rect(obj.x + offsetX, obj.y + offsetY, obj.width, obj.length);
             room.attr({
-                'stroke': 'gray',
+                'stroke': 'black',
                 'stroke-width': '4'
             });
             var label = paper.text(obj.x + offsetX + obj.width / 2, obj.y + offsetY + obj.length / 2, obj.name);
@@ -240,8 +241,45 @@
                 'font-size': '15px',
                 'font-weight': 'bold'
             });
-            var m1 = paper.text(obj.x + offsetX + obj.width / 2, obj.y + offsetY + obj.length / 2 + 25, (obj.length / 100).toFixed(2) + ' m');
-            var m2 = paper.text(obj.x + offsetX + obj.width / 2 + 50, obj.y + offsetY + obj.length / 2, (obj.width / 100).toFixed(2) + ' m');
+            if(typeof obj.door != 'object') return;
+            var doorFunc;
+            switch(obj.door.where) {
+                case 'left':
+                    x = offsetX + obj.x;
+                    y = offsetY + obj.y + doorEdge;
+                    l = x + obj.door.width / 2 - 10;
+                    dx = 1;
+                    dy = 1;
+                    doorFunc = verticalDoor;
+                    break;
+                case 'right':
+                    x = offsetX + obj.x + obj.width;
+                    y = offsetY + obj.y + doorEdge;
+                    l = x + obj.door.width / 2 + 5;
+                    dx = -1;
+                    dy = 1;
+                    doorFunc = verticalDoor;
+                    break;
+                case 'top':
+                    y = offsetY + obj.y;
+                    x = offsetX + obj.x + doorEdge;
+                    l = y + obj.door.width / 3 - 5;
+                    dx = -1;
+                    dy = 1;
+                    doorFunc = horizontalDoor;
+                    break;
+                case 'bottom':
+                    y = offsetY + obj.y + obj.length;
+                    x = offsetX + obj.x + doorEdge;
+                    l = y - obj.door.width / 3 + 5;
+                    dx = -1;
+                    dy = -1;
+                    doorFunc = horizontalDoor;
+                    break;
+            }
+            doorFunc(x, y, obj.door.width, l, dx, dy);
+            //var m1 = paper.text(obj.x + offsetX + obj.width / 2, obj.y + offsetY + obj.length / 2 + 25, (obj.length / 100).toFixed(2) + ' m');
+            //var m2 = paper.text(obj.x + offsetX + obj.width / 2 + 50, obj.y + offsetY + obj.length / 2, (obj.width / 100).toFixed(2) + ' m');
         };
         Floorplan.prototype.createDoor = function(obj) {
             if(typeof obj.where == 'undefined') return;
