@@ -133,26 +133,26 @@
                                             <div class="form-group">
                                                 <label for="room-length">a. Room Length: </label>
                                                 <section class="input-group">
-                                                    <input required min="2" value="2" name="room-length" type="text" class="form-control" data-content="Please edit this" data-original-title="Length of the room"/>
+                                                    <input required min="2" value="2" name="room-length" type="text" class="form-control" data-content="The length of the room on the side labeled <b>a</b><br/><i>Please refer to the image at the left</i>" data-original-title="Length of the room"/>
                                                     <span class="input-group-addon" >m</span>
                                                 </section>
                                             </div>
                                             <div class="form-group">
                                                 <label for="room-width">b. Room Width: </label>
                                                 <section class="input-group">
-                                                    <input data-content="Please edit this" data-original-title="Width of the room" required min="2" value="2" name="room-width" type="text" class="form-control" />
+                                                    <input data-content="The wideness of the room on the side labeled <b>a</b><br/><i>Please refer to the image at the left</i>" data-original-title="Width of the room" required min="2" value="2" name="room-width" type="text" class="form-control" />
                                                     <span class="input-group-addon">m</span>
                                                 </section>
                                             </div>
                                             <div class="form-group">
                                                 <label for="room-name">Room Label: </label>
-                                                <input data-content="Please edit this" data-original-title="Room label" type="text" name="room-name" class="form-control" />
+                                                <input data-content="Descriptive label of the room" data-original-title="Room label" type="text" name="room-name" class="form-control" />
                                             </div>
                                             <fieldset>
                                                 <legend>Door</legend>
                                                 <div class="form-group">
-                                                    <label for="wall">Select Which Wall to Attach: </label>
-                                                    <select name="room-door-where" class="form-control" data-content="Please edit this" data-original-title="Select which wall to attached">
+                                                    <label for="wall">Where: </label>
+                                                    <select name="room-door-where" class="form-control" data-content="Select where to put the door" data-original-title="Door Placement">
                                                         <option value="left">a. Left</option>
                                                         <option value="top">b. Top</option>
                                                         <option value="right">c. Right</option>
@@ -196,8 +196,8 @@
                                     </div>
                                     <div class="col-lg-8 col-md-8">
                                         <div class="form-group">
-                                            <label for="wall">Select Which Wall to Attach: </label>
-                                            <select name="door-where" class="form-control" data-content="Please edit this" data-original-title="Select which wall to attached">
+                                            <label for="wall">Where: </label>
+                                            <select name="door-where" class="form-control" data-content="Select where do you want to put the door<br/><i>Refer to the image at the left</i>" data-original-title="Door position">
                                                 <option value="left">a. Left</option>
                                                 <option value="top">b. Top</option>
                                                 <option value="right">c. Right</option>
@@ -214,10 +214,10 @@
                                             </ul>
                                         </div>
                                         <div class="form-group">
-                                            <label for="wall">Chuvaness: </label>
+                                            <label for="wall" data-content="Select what type of the door to be added" data-original-title="Door type">Door Type: </label>
                                             <select name="door-num" class="form-control">
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
+                                                <option value="1">Single</option>
+                                                <option value="2">Double</option>
                                             </select>
                                         </div>
                                     </div>
@@ -246,8 +246,8 @@
                                     </div>
                                     <div class="col-lg-8 col-md-8">
                                         <div class="form-group">
-                                            <label for="wall">Select Which Wall to Attach: </label>
-                                            <select name="window-where" class="form-control" data-content="Please edit this" data-original-title="Select which wall to attached">
+                                            <label for="window">Where: </label>
+                                            <select name="window-where" class="form-control" data-content="The side you want the window to be put<br/><i>Please refer to the image at the left</i>" data-original-title="Window placement">
                                                 <option value="left">a. Left</option>
                                                 <option value="top">b. Top</option>
                                                 <option value="right">c. Right</option>
@@ -409,12 +409,12 @@
                                             </section><br />
                                             <label for="length">a. Length: </label>
                                             <section class="input-group">
-                                                <input required name="length" min="2.5" value="2.5" type="text" class="form-control" data-content="Length of the house on the side labeled <b>a</b> <i>Please refer to the imaeg at the left</i>" data-original-title="Building Length"/>
+                                                <input required name="length" min="2.5" value="2.5" type="text" class="form-control" data-content="Length of the house on the side labeled <b>a</b> <i>Please refer to the image at the left</i>" data-original-title="Building Length"/>
                                                 <span class="input-group-addon">m</span>
                                             </section><br />
                                             <label for="width">b. Width: </label>
                                             <section class="input-group">
-                                                <input required name="width" min="2.5" value="2.5" type="text" class="form-control" data-content="Whideness of the house on the side labeled <b>b</b> <i>Please refer to the image at the left</i>" data-original-title="Building width" />
+                                                <input required name="width" min="2.5" value="2.5" type="text" class="form-control" data-content="Wideness of the house on the side labeled <b>b</b> <i>Please refer to the image at the left</i>" data-original-title="Building width" />
                                                 <span class="input-group-addon">m</span>
                                             </section>
                                         </fieldset>
@@ -431,7 +431,7 @@
                     </div>
                 </div>
                 <div class="modal fade" id="step4" tabindex="-1" role="dialog" aria-labelledby="form-label" aria-hidden="true">
-                <div class="" style="top: 76px; right: 0px; width: 356px;position: absolute;background: white;min-height: 217px;"><div class="arrow"></div><h3 class="popover-title">Asphalt</h3><div class="popover-content">Please edit this</div></div>
+                 
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <form id="step4-form">
@@ -455,7 +455,22 @@
                                             </select>
                                         </div>
                                         <div class="col-lg-5 col-md-5">
-                                            <select class="form-control" name="roof-element" data-content="Please edit this" data-original-title="Asphalt">
+                                            <select class="form-control" name="roof-element" data-content=" 
+                                            <figure style='float:left'>
+                                              <img src='{{URL::to('img/roof/asphalt_shingles.png')}}' alt='Asphalt shingles' width='80'>
+                                              <figcaption>Asphalt Shingle</figcaption>
+                                            </figure>
+
+                                            <figure style='float:right'>
+                                              <img src='{{URL::to('img/roof/clay_tiles.png')}}' alt='Clay Tiles' width='80'>
+                                              <figcaption>Clay Tiles</figcaption>
+                                            </figure>
+
+                                            <figure style='float:left'>
+                                              <img src='{{URL::to('img/roof/wood_shakes.png')}}' alt='Wood shakes' width='80'>
+                                              <figcaption>Wood shakes</figcaption>
+                                            </figure>
+                                            " data-original-title="Roof material types">
                                                 <option value="asphalt_shingles">Asphalt Shingles</option>
                                                 <option value="clay_tiles">Clay Tiles</option>
                                                 <option value="wood_shakes">Wood Shakes</option>
@@ -467,13 +482,35 @@
                                     <label for="roof-type">Walls</label>
                                     <div class="row">
                                         <div class="col-lg-4 col-md-4">
-                                            <select class="form-control" name="wall-dim" data-content="Please edit this" data-original-title="Walls">
+                                            <select class="form-control" name="wall-dim" data-content="The thickness of the wall" data-original-title="Walls">
                                                 <option value="10">10 m</option>
                                                 <option value="15">15 m</option>
                                             </select>
                                         </div>
                                         <div class="col-lg-8 col-md-8">
-                                            <select class="form-control" name="wall-element" data-content="Please edit this" data-original-title="Wall types">
+                                            <select class="form-control" name="wall-element" data-content=
+                                            " 
+                                            <figure style='float:left'>
+                                              <img src='{{URL::to('img/wall/horizontal_sliding_wall.png')}}' alt='Horizontal Sliding wall' width='80'>
+                                              <figcaption>Horizontal Sliding</figcaption>
+                                            </figure>
+
+                                            <figure style='float:right'>
+                                              <img src='{{URL::to('img/wall/masonry_wall.png')}}' alt='Masonry Wall' width='80'>
+                                              <figcaption>Masonry Wall</figcaption>
+                                            </figure>
+
+                                            <figure style='float:left'>
+                                              <img src='{{URL::to('img/wall/plywood.png')}}' alt='Plywood Wall' width='80'>
+                                              <figcaption>Plywood</figcaption>
+                                            </figure>
+
+                                            <figure style='float:right'>
+                                              <img src='{{URL::to('img/wall/stone_wall.png')}}' alt='Stone Wall' width='80'>
+                                              <figcaption>Stone Wall</figcaption>
+                                            </figure>
+                                            "
+                                            data-original-title="Wall types">
                                                 <option value="horizontal_sliding_wall">Horizontal Sliding Wall</option>
                                                 <option value="masonry_wall">Masonry Wall</option>
                                                 <option value="stone_wall">Stone Wall</option>
@@ -486,7 +523,7 @@
                                     <label for="roof-type">Floors</label>
                                     <div class="row">
                                         <div class="col-lg-4 col-md-4">
-                                            <select class="form-control" name="floor-type" data-content="Please edit this" data-original-title="Floors">
+                                            <select class="form-control" name="floor-type" data-content="Select floor type" data-original-title="Floors">
                                                 <option value="ceramic_tile">Ceramic Tile</option>
                                                 <option value="wood_flooring">Wood Flooring</option>
                                             </select>
@@ -604,7 +641,7 @@
                                     </div>
                                 </div>
                                 <label for="design_name" >Name</label>
-                                <input type="text" data-content="Please edit this" data-original-title="House design name"placeholder="My first dream house" class="form-control" name="design_name">
+                                <input type="text" data-content="The name of your dream house" data-original-title="House design name"placeholder="My first dream house" class="form-control" name="design_name">
                             </div>
                             <div class="modal-footer">
                                  <button class="btn btn-flat btn-success" id="saveHouse">Save</button>

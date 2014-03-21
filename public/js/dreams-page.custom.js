@@ -45,6 +45,7 @@ $(document).on('click', '#view-3d', function() {
     childWindow.location.href = strWindowUrl;
 
     childWindow.focus();
+    childWindow.location.reload();
 });
 
 $(document).on('click', '#view-floorplan', function() {

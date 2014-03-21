@@ -22,7 +22,7 @@
     <style type="text/css" media="screen">
     	#floorplan, #floorplan img{ 
     		text-align: center;
-    		margin:0 auto;
+    		margin:0 auto; 
     	}	
     </style>
 </head>
@@ -115,11 +115,19 @@
 			img = $('img').attr('src');
 			printAble = '<html><head>'
 						+'<title>'+{{'"'.str_replace("'","\\'",$house->name).'"'}}+' - Floor Plan View</title>'
+						+'<script type="text/javascript" src="{{URL::to("js/jquery-2.0.3.min.js")}}"></scr'+'ipt>'
 						+'</head>'
 						+'<body onload="printa();">'
-						+'<center><img src="'+img+'" /></center>'
+						+'<center><img src="'+img+'" style="max-width:1200px;"/></center>'
 						+'<script type="text/javascript">\n'
-						+'function printa(){window.print();}\n'
+						+'function printa(){'
+						+'$("img").css({'
+								+"'max-width': '1200px'"
+							+'});'
+							+'setTimeout(function() {'
+						       +'window.print();'
+						    +'}, 4000);'
+							+'}\n'
 						+'</scr'+'ipt>'
 						+'</body>'+
 						'<html>';
@@ -134,6 +142,10 @@
 		$('[download]').attr('download','floorplan-'+{{'"'.$house->id.'_'.date('y-m-d').'.png"'}});
 		url = img.attr('src').replace('image/png','image/octet-stream');
 		$('[download]').attr('href',url); 
+
+		$('img').css({
+			'max-width': $(window).width()+'px'
+		});
 	});
 </script>
 </body>
