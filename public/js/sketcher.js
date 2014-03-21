@@ -1,7 +1,7 @@
 (function() {
     hasInit = false;
     var current = 4;
-    var maxWidth = 1000;
+    var maxWidth = (screen.width - parseInt($('.sidebar').width())) * 0.8726003490401396;
     var pi = function(s) {
         return parseInt($(s).val());
     };
@@ -225,7 +225,12 @@
                             py: room.y,
                             width: parseFloat(room.width),
                             length: parseFloat(room.length),
-                            name: room.name
+                            name: room.name,
+                            door: {
+                                where: room.door.where,
+                                width: parseFloat(room.door.width),
+                                length: parseFloat(room.door.length)
+                            }
                         });
                     }
                 });
@@ -345,12 +350,24 @@
 
             return false;
         }
+        var where = $('select[name=room-door-where]').val();
+        var dim = $('input[name=room-door-dim]:checked').val();
+        dim = dim.split('x');
+        var l = dim[0].split('.');
+        var w = dim[1].split('.');
+        var width = (parseInt(w[0]) * 12 + parseInt(w[1])) * 2.54;
+        var length = (parseInt(l[0]) * 12 + parseInt(l[1])) * 2.54;
         d.createRoom({
             px: 0,
             py: 0,
             width: pf('input[name=room-length]') * 100,
             length: pf('input[name=room-width]') * 100,
-            name: $('input[name=room-name]').val()
+            name: $('input[name=room-name]').val(),
+            door: {
+                where: where,
+                width: width,
+                length: length
+            }
         });
         $('#new-room-dialog').modal('hide');
         return false;
@@ -366,7 +383,7 @@
             return false;
         }
         var where = $('select[name=door-where]').val();
-        var dim = $('input[name=door-dim]').val();
+        var dim = $('input[name=door-dim]:checked').val();
         dim = dim.split('x');
         var l = dim[0].split('.');
         var w = dim[1].split('.');
@@ -395,7 +412,7 @@
             return false;
         }
         var where = $('select[name=window-where]').val();
-        var dim = $('input[name=window-dim]').val();
+        var dim = $('input[name=window-dim]:checked').val();
         dim = dim.split('x');
         var l = dim[0].split('.');
         var w = dim[1].split('.');
