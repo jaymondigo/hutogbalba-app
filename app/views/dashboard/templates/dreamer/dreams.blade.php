@@ -122,24 +122,53 @@
                                     </div>
                                     <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">     
                                         <fieldset>
-                                            <legend>Room Size</legend>
-                                            <label for="room-area">Area: </label>
-                                            <section class="input-group">
-                                                <input value="4" name="room-area" type="text" class="form-control" disabled data-content="Please edit this" data-original-title="Room area here"/>
-                                                <span class="input-group-addon">m<sup>2</sup></span>
-                                            </section><br />
-                                            <label for="room-length">a. Room Length: </label>
-                                            <section class="input-group">
-                                                <input required min="2" value="2" name="room-length" type="text" class="form-control" data-content="Please edit this" data-original-title="Length of the room"/>
-                                                <span class="input-group-addon" >m</span>
-                                            </section><br />
-                                            <label for="room-width">b. Room Width: </label>
-                                            <section class="input-group">
-                                                <input data-content="Please edit this" data-original-title="Width of the room" required min="2" value="2" name="room-width" type="text" class="form-control" />
-                                                <span class="input-group-addon">m</span>
-                                            </section><br />
-                                            <label for="room-name">Room Label: </label>
-                                            <input data-content="Please edit this" data-original-title="Room label" type="text" name="room-name" class="form-control" />
+                                            <div class="form-group">
+                                                <legend>Room Size</legend>
+                                                <label for="room-area">Area: </label>
+                                                <section class="input-group">
+                                                    <input value="4" name="room-area" type="text" class="form-control" disabled data-content="Please edit this" data-original-title="Room area here"/>
+                                                    <span class="input-group-addon">m<sup>2</sup></span>
+                                                </section>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="room-length">a. Room Length: </label>
+                                                <section class="input-group">
+                                                    <input required min="2" value="2" name="room-length" type="text" class="form-control" data-content="Please edit this" data-original-title="Length of the room"/>
+                                                    <span class="input-group-addon" >m</span>
+                                                </section>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="room-width">b. Room Width: </label>
+                                                <section class="input-group">
+                                                    <input data-content="Please edit this" data-original-title="Width of the room" required min="2" value="2" name="room-width" type="text" class="form-control" />
+                                                    <span class="input-group-addon">m</span>
+                                                </section>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="room-name">Room Label: </label>
+                                                <input data-content="Please edit this" data-original-title="Room label" type="text" name="room-name" class="form-control" />
+                                            </div>
+                                            <fieldset>
+                                                <legend>Door</legend>
+                                                <div class="form-group">
+                                                    <label for="wall">Select Which Wall to Attach: </label>
+                                                    <select name="room-door-where" class="form-control" data-content="Please edit this" data-original-title="Select which wall to attached">
+                                                        <option value="left">a. Left</option>
+                                                        <option value="top">b. Top</option>
+                                                        <option value="right">c. Right</option>
+                                                        <option value="bottom">d. Bottom</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="wall">Available Doors: </label>
+                                                    <ul class="list-unstyled">
+                                                        <li><label><input type="radio" checked name="room-door-dim" value="6.6x2.10" data-type="A" data-content="Please edit this" data-original-title="Available Doors"> 6'6" &times; 2'10"</label></li>
+                                                        <li><label><input type="radio" name="room-door-dim" value="6.8x2.10" data-type="B"> 6'8" &times; 2'10"</label></li>
+                                                        <li><label><input type="radio" name="room-door-dim" value="7.0x2.10" data-type="C"> 7'0" &times; 2'10"</label></li>
+                                                        <li><label><input type="radio" name="room-door-dim" value="8.0x2.10" data-type="D"> 8'0" &times; 2'10"</label></li>
+                                                    </ul>
+                                                </div>
+                                            </fieldset>
                                         </fieldset>
                                     </div>
                                 </div>

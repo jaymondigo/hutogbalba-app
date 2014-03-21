@@ -213,50 +213,62 @@
             DreamBuilder.setLength(DreamBuilder.house.length).setWidth(DreamBuilder.house.width).setHeight(DreamBuilder.house.height);
             d = new DreamBuilder.TWOD();
             d.createFloor();
+            console.log('rooms', data.rooms);
+            console.log('windows', data.windows);
+            console.log('doors', data.doors);
+            console.log('walls', data.walls);
             if (typeof data.rooms != 'undefined') {
                 $.each(data.rooms, function(i, room) {
-                    d.createRoom({
-                        px: room.x,
-                        py: room.y,
-                        width: parseFloat(room.width),
-                        length: parseFloat(room.length),
-                        name: room.name
-                    });
+                    if(typeof room == 'object') {
+                        d.createRoom({
+                            px: room.x,
+                            py: room.y,
+                            width: parseFloat(room.width),
+                            length: parseFloat(room.length),
+                            name: room.name
+                        });
+                    }
                 });
             }
             if (typeof data.windows != 'undefined') {
                 $.each(data.windows, function(i, win) {
-                    d.createWindow({
-                        where: win.where,
-                        x: win.x,
-                        y: win.y,
-                        width: parseFloat(win.width),
-                        length: parseFloat(win.length)
-                    });
+                    if(typeof win == 'object') {
+                        d.createWindow({
+                            where: win.where,
+                            x: win.x,
+                            y: win.y,
+                            width: parseFloat(win.width),
+                            length: parseFloat(win.length)
+                        });
+                    }
                 });
             }
             if (typeof data.doors != 'undefined') {
                 $.each(data.doors, function(i, door) {
-                    d.createDoor({
-                        where: door.where,
-                        x: door.x,
-                        y: door.y,
-                        width: parseFloat(door.width),
-                        length: parseFloat(door.length),
-                        type: door.type,
-                        num: parseInt(door.num)
-                    });
+                    if(typeof door == 'object') {
+                        d.createDoor({
+                            where: door.where,
+                            x: door.x,
+                            y: door.y,
+                            width: parseFloat(door.width),
+                            length: parseFloat(door.length),
+                            type: door.type,
+                            num: parseInt(door.num)
+                        }); 
+                    }
                 });
             }
             if(typeof data.walls != 'undefined') {
                 $.each(data.walls, function (i, wall) {
-                    d.createWall({
-                        orientation: wall.orientation,
-                        x: wall.x,
-                        y: wall.y,
-                        width: wall.width,
-                        thickness: wall.thickness
-                    });
+                    if(typeof wall == 'object') {
+                        d.createWall({
+                            orientation: wall.orientation,
+                            x: wall.x,
+                            y: wall.y,
+                            width: wall.width,
+                            thickness: wall.thickness
+                        });
+                    }
                 });
             }
         });

@@ -1,7 +1,8 @@
 (function() {
     var offsetX = 100,
         offsetY = 100,
-        bgColor = 'white';
+        bgColor = 'white',
+        ra = 50;
     var $svg = $('#floorplan-svg'),
         $canvas = $('#floorplan-canvas');
     var Floorplan = (function() {
@@ -22,6 +23,24 @@
                 'font-style': 'italic',
                 'font-size': '10px'
             });
+            rightAngle.call(this);
+        }
+
+        function rightAngle() {
+            var angle = paper.path('M' + offsetX + ',' + (offsetY + ra) + ' C' + offsetX + ',' + (offsetY + ra) +
+                ' ' + (offsetX + ra) + ',' + (offsetY + ra) + ' ' + (offsetX + ra) + ',' + offsetY +
+                ' M' + (offsetX + ra) + ',' + offsetY + ' M' + offsetX + ',' + (this.width + offsetY - ra) +
+                ' C' + offsetX + ',' + (this.width + offsetY - ra) + ' ' + (offsetX + ra) + ',' + (this.width + offsetY - ra) +
+                ' ' + (offsetX + ra) + ',' + (this.width + offsetY) + ' M' + (offsetX + ra) + ',' + (this.width + offsetY) +
+                ' M' + (this.length + offsetX - ra) + ',' + offsetY + ' C' + (this.length + offsetX - ra) + ',' + offsetY +
+                ' ' + (this.length + offsetX - ra) + ',' + (offsetY + ra) + ' ' + (this.length + offsetX) + ',' + (offsetY + ra) +
+                ' M' + (this.length + offsetX) + ',' + (offsetY + ra) +
+                ' M' + (this.length + offsetX - ra) + ',' + (this.width + offsetY) + ' C' + (this.length + offsetX - ra) + ',' + (this.width + offsetY) +
+                ' ' + (this.length + offsetX - ra) + ',' + (this.width + offsetY - ra) + ' ' + (this.length + offsetX) + ',' + (this.width + offsetY - ra) +
+                ' M' + (this.length + offsetX) + ',' + (this.width + offsetY - ra));
+            var kudlit = paper.path('M' + (offsetX + 3 + ra / 2) + ',' + (offsetY + 8 + ra / 2) + 'L' + (offsetX + 14 + ra / 2) + ',' + (offsetY + 19 + ra / 2) +
+                'M' + (offsetX + 8 + ra / 2) + ',' + (offsetY + 3 + ra / 2) + 'L' + (offsetX + 19 + ra / 2) + ',' + (offsetY + 14 + ra / 2) +
+                '');
         }
 
         function rightPythagorean(h) {
@@ -225,6 +244,7 @@
             var m2 = paper.text(obj.x + offsetX + obj.width / 2 + 50, obj.y + offsetY + obj.length / 2, (obj.width / 100).toFixed(2) + ' m');
         };
         Floorplan.prototype.createDoor = function(obj) {
+            if(typeof obj.where == 'undefined') return;
             var doorFunc, x, y, l, dx, dy;
             switch (obj.where) {
                 case 'left':
@@ -263,6 +283,7 @@
             doorFunc(x, y, obj.width * obj.num, l, dx, dy);
         };
         Floorplan.prototype.createWindow = function(obj) {
+            if(typeof obj.where == 'undefined') return;
             var x, y;
             var windowFunc, l = 0;
             switch (obj.where) {
@@ -293,6 +314,7 @@
             windowFunc(x, y, obj.width, l);
         };
         Floorplan.prototype.createWall = function (obj) {
+            if(typeof obj.orientation == 'undefined') return;
             var w = 0, l = 0;
             switch(obj.orientation) {
                 case 'vertical':
