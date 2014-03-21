@@ -663,8 +663,8 @@
                 <div class="modal fade" id="options-dialog" tabindex="-1" role="dialog" aria-labelledby="form-label" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content" options-content>
-                            <b>Frequently Asked Questions</b>
-                            <h5>What is Dream Builder Solutions?</h5>
+                        <h3><b>Frequently Asked Questions</b></h3>
+                        <h5>What is Dream Builder Solutions?</h5>
                             <p>Is a web app, which helps dreamers visualize their dream house in a fun and
                             easy way. This displays 2D, 3D and floor plan view of house design plus cost 
                             of materials to be used depending on the supplier price.</p>
