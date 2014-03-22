@@ -51,8 +51,8 @@
                                         @if(isset($product->productType->name))
                                         {{$product->productType->name}}
                                         @endif
-                                    </td>
-                                    <td>{{$product->price}}</td>
+                                    </td> 
+                                    <td>P {{number_format($product->price)}}.00</td>
                                     <td><span class="label label-@if($product->availability=='available'){{'success'}} @elseif($product->availability=='Out of stacks'){{'danger'}}@else{{'warning'}} @endif">{{$product->availability}}</span></td>
                                     <td>
                                         @if(isset($product->vendor_profile->name))
