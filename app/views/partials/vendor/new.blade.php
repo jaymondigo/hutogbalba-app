@@ -1,4 +1,4 @@
-<form action="{{URL::to('vendor')}}" method="POST" vendor-form novalidate="novalidate">
+<form action="{{URL::to('vendor')}}" method="POST" vendor-form>
 <div class="modal-body">
         <div class="form-group">
             <label for="vendor-name">Name</label>
@@ -25,7 +25,7 @@
         </div>
 </div>
 <div class="modal-footer">
-    <button type="submit" class="btn btn-flat btn-info cancel">Add</button>
+    <input type="submit" class="btn btn-flat btn-info cancel" value="Add" />
     <button class="btn btn-flat btn-danger cancel" data-dismiss="modal">Cancel</button>
 </div>
 

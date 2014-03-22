@@ -19,6 +19,9 @@ Route::get('/', function(){
 });
  
 // Confide routes
+Route::get('/', function () {
+	return View::make('public.home');
+});
 Route::get( 'user/register',                 'UserController@create');
 Route::post('user',                        'UserController@store');
 Route::get( 'user/login',                  'UserController@login');
