@@ -54,7 +54,9 @@
 
         },
 
-        currentSet: null
+        currentSet: null,
+
+        doorEdge: 20
 
     };
 
