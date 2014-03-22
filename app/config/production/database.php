@@ -54,10 +54,10 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => 'localhost',
+			'host'      => 'mysql.hostinger.ph',
 			'database'  => 'dbs_app',
-			'username'  => 'root',
-			'password'  => '',
+			'username'  => 'u694416191_app',
+			'password'  => 'qmto4K+1',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
