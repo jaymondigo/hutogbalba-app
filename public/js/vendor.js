@@ -51,14 +51,3 @@ $(document).on('click', '[action-view-vendor]', function() {
         $('[view-vendor]').html(data);
     });
 });
-
-$(document).on('submit', '[vendor-form]', function(e) {
-    e.preventDefault();
-
-    $(this).validate({
-        submitHandler: function() {
-            $('[vendor-form]').submit();
-        }
-    });
-    return false;
-});
