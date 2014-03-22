@@ -74,7 +74,7 @@ class UserController extends BaseController {
         {
             // If user is logged, redirect to internal 
             // page, change it to '/admin', '/dashboard' or something
-            return Redirect::to('/');
+            return Redirect::to('/home');
         }
         else
         {
@@ -105,7 +105,7 @@ class UserController extends BaseController {
             // caught by the authentication filter IE Redirect::guest('user/login').
             // Otherwise fallback to '/'
             // Fix pull #145
-            return Redirect::intended('/'); // change it to '/admin', '/dashboard' or something
+            return Redirect::intended('/home'); // change it to '/admin', '/dashboard' or something
         }
         else
         {

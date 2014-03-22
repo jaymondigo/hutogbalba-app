@@ -1,6 +1,6 @@
 (function() {
 
-    var currentSet; //will be set upon right-clicking the element
+    var currentSet = DreamBuilder.currentSet; //will be set upon right-clicking the element
 
     var $cm = $('#contextMenu'); //house elements contextmenu
 
