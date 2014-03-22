@@ -190,3 +190,9 @@
 		})
 	</script>
 </html>
+
+<!-- Developer:
+			Jillberth Estillore
+			Arnel Lenteria	 \
+			Ivan Kirby Colina
+	 -->
