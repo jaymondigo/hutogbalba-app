@@ -1,0 +1,105 @@
+.container-narrow{
+	margin: 0 auto;
+	max-width: 860px;
+}
+
+.navbar{
+	margin-bottom: 0px;
+}
+
+.background{
+	background: url(../img/background.jpg);
+	background-size: 120% 101%;
+}
+
+.background{
+	color: #f9f9f9;
+	margin-top: 50px;
+}
+
+.background h2{
+	font-size: 50px;
+	margin-bottom: 30px;
+}
+
+.background p{
+	margin-bottom: 30px;
+}
+
+.con{
+	margin-top: 90px;
+	margin-bottom: 60px;
+}
+
+.section{
+	padding-top: 20px;
+	margin-top: 30px;
+}
+
+.background-about{
+	background: url(../img/background-about.jpg);
+	background-size: 100% 100%;
+}
+
+.boys{
+	margin-bottom: 30px;
+}
+
+.img-about{
+	border: 5px solid #fefefe;
+	cursor: pointer;
+	height: 150px;
+	width: 150px;
+	margin-left: 30px;
+	opacity: 0.5;
+}
+
+.angeline{
+	margin-left: 130px;
+}
+
+.popover-content{
+	font-size: 15px;
+}
+
+.background-contact{
+	background: url(../img/background-contact.jpg);
+	background-size: 30% 100%;
+}
+
+.instruction-contact{
+	margin-top: 100px;
+}
+
+.bg-blue{
+	font-size: 13px;
+}
+
+.list-contact-number, .list-contact-email{
+	padding-top: 20px;
+}
+
+.list-contact-number li, .list-contact-email li{
+	font-size: 20px;
+	padding-top: 12px;
+}
+
+.list-contact-number li span, .list-contact-email li span{
+	font-size: 17px;
+}
+
+.list-contact-email a{
+	color: #ffffff;
+}
+
+.box-contact{
+	margin-top: 15px;
+}
+
+.form-contact{
+	margin-top: 10px;
+}
+
+.item{
+	margin-top: 50px;
+}
