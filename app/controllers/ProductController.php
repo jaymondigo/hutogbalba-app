@@ -22,7 +22,7 @@ class ProductController extends BaseController {
 		 $obj = new Material();
 		 if(Input::has('id'))
 		 	$obj = Material::find(Input::get('id'));
-		 $obj->productID = Input::get('productID');
+		 $obj->productID = Input::has('productID') ? Input::get('productID') : $obj->productID;
 		 $obj->name = Input::get('name');
 		 $obj->type = Input::get('type');
 		 $obj->availability = Input::get('availability');
