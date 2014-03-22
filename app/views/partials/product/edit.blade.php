@@ -6,7 +6,7 @@
     <div class="modal-body" >
     <input type="hidden" name="id" value="{{$product->id}}">
     <label for="product_id">Product ID</label>
-    <input disabled type="text" value="{{$product->productID}}" name="productID" class="form-control" placeholder="CEM1234"><br>
+    <input disabled type="text" class="form-control" placeholder="CEM1234"><br>
     <label for="name">Name</label>
     <input required type="text" value="{{$product->name}}" name="name" class="form-control" placeholder="Fox Cement"><br>
      

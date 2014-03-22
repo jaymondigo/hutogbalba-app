@@ -10,11 +10,9 @@
     <select name="type" class="form-control">
          @foreach ($elements as $element)
              <optgroup label="{{$element->name}}">
-               @if(isset($element->types))
                 @foreach($element->types as $type)
                     <option value="{{$type->id}}">{{$type->name}}</option> 
-                @endforeach
-               @endif
+                @endforeach 
              </optgroup>
          @endforeach
     </select><br>
