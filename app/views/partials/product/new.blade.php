@@ -8,13 +8,7 @@
      
     <label for="type">Type</label>
     <select name="type" class="form-control">
-         @foreach ($elements as $element)
-             <optgroup label="{{$element->name}}">
-                @foreach($element->types as $type)
-                    <option value="{{$type->id}}">{{$type->name}}</option> 
-                @endforeach
-             </optgroup>>
-         @endforeach
+         
     </select><br>
     <label for="price">Price</label>
     <section class="input-group">
@@ -39,7 +33,7 @@
 </div>
  <div class="modal-footer">
     <input type="submit" class="btn btn-flat btn-info cancel" value="Add" />
-    <button class="btn btn-flat btn-danger cancel" data-dismiss="modal">Cancel</button>
+    <button class="btn btn-flat btn-danger cancel" data-dismiss="modal" onclick="$('input[type='text']').val('');">Cancel</button>
 </div>
 
 </form> 
