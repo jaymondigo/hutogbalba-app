@@ -66,7 +66,8 @@
                                         <ul class="dropdown-menu" file-menu>
                                             <li><a href="#" id="new">New</a></li>
                                             <li><a href="#" id="save">Save</a></li>
-                                            <li><a href="#" id="save-as" class="save-as">Save As New</a></li>
+                                            <li><a href="#" id="save-as" class="save-as" style="display:none">Save As New</a></li>
+                                            <li><a href="#" id="rename" style="display:none">Rename</a></li>
                                             <li><a href="#" id="open">Open</a></li>
                                         </ul>
                                     </li>
@@ -646,6 +647,32 @@
                             </div>
                             <div class="modal-footer">
                                  <button class="btn btn-flat btn-success" id="saveHouse">Save</button>
+                                <button class="btn btn-flat btn-primary" data-dismiss="modal">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="save-as-dialog" tabindex="-1" role="dialog" aria-labelledby="form-label" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title">Save Design</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="save-notification" style="display:none;">
+                                    <div class="alert alert-danger" style="padding-left:10px; margin-left:0px;"> 
+                                      <a href="#" class="alert-link" save-notification-content>
+                                      Alert!
+                                      </a>
+                                    </div>
+                                </div>
+                                <label for="design_name2" >Name</label>
+                                <input type="text" data-content="The name of your dream house" data-original-title="House design name"placeholder="My first dream house" class="form-control" name="design_name2">
+                            </div>
+                            <div class="modal-footer">
+                                 <button class="btn btn-flat btn-success save-as" id="saveAsHouse">Save</button>
                                 <button class="btn btn-flat btn-primary" data-dismiss="modal">Cancel</button>
                             </div>
                         </div>
