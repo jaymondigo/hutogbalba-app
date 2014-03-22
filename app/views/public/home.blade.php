@@ -7,6 +7,7 @@
 		<link rel="stylesheet" type="text/css" href="{{URL::to('css/ionicons.css')}}"/>
 		<link rel="stylesheet" type="text/css" href="{{URL::to('css/landing-page.css')}}"/>
 		<title>Dream Builder Solutions</title>
+		<link id="page_favicon" href="{{URL::to('img/logo.png')}}" rel="icon" type="image/x-icon">
 	</head>
 	<body class="skin-blue">
 		<div class="container-narrow">
