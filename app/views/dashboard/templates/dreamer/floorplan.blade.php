@@ -126,7 +126,7 @@
 								+"'max-width': '1200px'"
 							+'});'
 							+'window.print();}'
-						+'</scr'+'ipt>'+'</body><html>';
+						+'</scrip'+'t></body><html>';
 			link = 'floorplan-'+{{'"'.$house->id.'_'.date('y-m-d').'.png"'}};
 			print = window.open(link, '_new');
 			print.document.open();
