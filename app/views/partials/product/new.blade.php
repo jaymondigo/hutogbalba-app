@@ -2,18 +2,26 @@
 <form name="addProductForm" action="{{URL::to('product')}}" method="POST" enctype="multipart/form-data">
  <div class="modal-body">
     <label for="product_id">Product ID</label>
-    <input required type="text" name="productID" class="form-control" placeholder="CEM1234"><br>
+    <input type="text" name="productID" class="form-control" placeholder="CEM1234"><br>
     <label for="name">Name</label>
-    <input required type="text" name="name" class="form-control" placeholder="Fox Cement"><br>
+    <input type="text" name="name" class="form-control" placeholder="Fox Cement"><br>
      
     <label for="type">Type</label>
     <select name="type" class="form-control">
-         
+         @foreach ($elements as $element)
+             <optgroup label="{{$element->name}}">
+               @if(isset($element->types))
+                @foreach($element->types as $type)
+                    <option value="{{$type->id}}">{{$type->name}}</option> 
+                @endforeach
+               @endif
+             </optgroup>
+         @endforeach
     </select><br>
     <label for="price">Price</label>
     <section class="input-group">
         <span class="input-group-addon">PHP</span>
-        <input required type="text" required class="form-control" name="price" placeholder="143.00">
+        <input type="text" class="form-control" name="price" placeholder="143.00">
     </section><br>
     <label for="availability">Availability</label>
     <select name="availability" class="form-control">
