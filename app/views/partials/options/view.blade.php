@@ -3,8 +3,8 @@
     <h4 class="modal-title">Help</h4>
 </div>
 <div class="modal-body">
-    <div class="row" style="text-align: center;">
-    	<h3><b>Frequently Asked Questions</b></h3>
+    <div class="row" style="text-align: right;">
+    	               <h3><b>Frequently Asked Questions</b></h3>
                         <h5>What is Dream Builder Solutions?</h5>
                             <p>Is a web app, which helps dreamers visualize their dream house in a fun and
                             easy way. This displays 2D, 3D and floor plan view of house design plus cost 
