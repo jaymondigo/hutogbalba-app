@@ -55,7 +55,7 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'mysql.hostinger.ph',
-			'database'  => 'dbs_app',
+			'database'  => 'u694416191_app',
 			'username'  => 'u694416191_app',
 			'password'  => 'qmto4K+1',
 			'charset'   => 'utf8',
