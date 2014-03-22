@@ -47,7 +47,11 @@
                                  <tr class="bg-success">
                                     <td>{{$product->productID}}</td>
                                     <td>{{$product->name}}</td> 
-                                    <td>{{$product->productType->name}}</td>
+                                    <td>
+                                        @if(isset($product->productType->name))
+                                        {{$product->productType->name}}
+                                        @endif
+                                    </td>
                                     <td>{{$product->price}}</td>
                                     <td><span class="label label-@if($product->availability=='available'){{'success'}} @elseif($product->availability=='Out of stacks'){{'danger'}}@else{{'warning'}} @endif">{{$product->availability}}</span></td>
                                     <td>
