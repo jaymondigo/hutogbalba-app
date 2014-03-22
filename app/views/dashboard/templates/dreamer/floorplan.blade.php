@@ -126,7 +126,7 @@
 								+"'max-width': '1200px'"
 							+'});'
 							+'window.print();}\n'
-						+'</scr'+'ipt>'
+						+'</scr'+'ipt>\n'
 						+'</body>'+
 						'<html>';
 			link = 'floorplan-'+{{'"'.$house->id.'_'.date('y-m-d').'.png"'}};
