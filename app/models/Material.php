@@ -15,6 +15,10 @@ class Material extends Ardent {
       parent::__construct($attributes);
   	}
 
+  	public static $rules = array(
+		'productID' => 'required',
+    );
+
 	protected $fillable = array('productID', 'name', 'price','type', 'availability', 'vendor');
 	public function productType(){
 		return $this->belongsTo('Type', 'type');
