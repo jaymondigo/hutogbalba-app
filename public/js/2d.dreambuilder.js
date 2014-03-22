@@ -4,7 +4,7 @@
 
     var $cm = $('#contextMenu'); //house elements contextmenu
 
-    var doorEdge = 20;
+    var doorEdge = DreamBuilder.doorEdge;
 
     var contextCallback = function(e) {
         DreamBuilder.currentSet = currentSet = set;
@@ -57,7 +57,7 @@
     };
 
     Raphael.st.dragVertical = function(obj) {
-        var limit = DreamBuilder.get('width') * DreamBuilder.divider - obj.width;
+        var limit = DreamBuilder.get('width') * DreamBuilder.divider - obj.width - doorEdge;
         var me = this;
         var lx = 0;
         var ly = 0;
@@ -68,7 +68,7 @@
             var x = 0; // cannot change the x position
             var y = dy + oy;
             lx = x;
-            ly = y >= 0 ? (y <= limit ? y : limit) : 0; // set y to zero if y < 0 and max if y > max
+            ly = y >= doorEdge ? (y <= limit ? y : limit) : doorEdge; // set y to zero if y < 0 and max if y > max
             me.transform('t' + lx + ',' + ly); //move the object
         };
 
@@ -87,7 +87,7 @@
     };
 
     Raphael.st.dragHorizontal = function(obj) {
-        var limit = DreamBuilder.get('length') * DreamBuilder.divider - obj.width;
+        var limit = DreamBuilder.get('length') * DreamBuilder.divider - obj.width - doorEdge;
         var me = this;
         var lx = 0;
         var ly = 0;
@@ -96,7 +96,7 @@
         var moveFnc = function(dx, dy) {
             var x = dx + ox;
             var y = 0; //cannot change they y ordinate
-            lx = x >= 0 ? (x <= limit ? x : limit) : 0; //set x to 0 if x < 0 and max if x > max
+            lx = x >= doorEdge ? (x <= limit ? x : limit) : doorEdge; //set x to 0 if x < 0 and max if x > max
             ly = y;
             me.transform('t' + lx + ',' + ly);
         };

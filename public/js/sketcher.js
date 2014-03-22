@@ -368,13 +368,19 @@
 
             return false;
         }
+        var width = pf('input[name=room-length]') * 100;
+        var length = pf('input[name=room-width]') * 100;
+        if(width > DreamBuilder.house.length || length > DreamBuilder.house.width) {
+            alert('Room should not overlap with the house.');
+            return false;
+        }
         var where = $('select[name=room-door-where]').val();
         var dim = $('input[name=room-door-dim]:checked').val();
         dim = dim.split('x');
         var l = dim[0].split('.');
         var w = dim[1].split('.');
-        var width = (parseInt(w[0]) * 12 + parseInt(w[1])) * 2.54;
-        var length = (parseInt(l[0]) * 12 + parseInt(l[1])) * 2.54;
+        var doorWidth = (parseInt(w[0]) * 12 + parseInt(w[1])) * 2.54;
+        var doorLength = (parseInt(l[0]) * 12 + parseInt(l[1])) * 2.54;
         d.createRoom({
             px: 0,
             py: 0,
@@ -383,8 +389,8 @@
             name: $('input[name=room-name]').val(),
             door: {
                 where: where,
-                width: width,
-                length: length
+                width: doorWidth,
+                length: doorLength
             }
         });
         $('#new-room-dialog').modal('hide');
@@ -408,8 +414,8 @@
         var width = (parseInt(w[0]) * 12 + parseInt(w[1])) * 2.54;
         var length = (parseInt(l[0]) * 12 + parseInt(l[1])) * 2.54;
         d.createDoor({
-            x: 0,
-            y: 0,
+            x: DreamBuilder.doorEdge,
+            y: DreamBuilder.doorEdge,
             width: width,
             length: length,
             where: where,
@@ -437,8 +443,8 @@
         var width = (parseInt(w[0]) * 12 + parseInt(w[1])) * 2.54;
         var length = (parseInt(l[0]) * 12 + parseInt(l[1])) * 2.54;
         d.createWindow({
-            x: 0,
-            y: 0,
+            x: DreamBuilder.doorEdge,
+            y: DreamBuilder.doorEdge,
             width: width,
             length: length,
             where: where
