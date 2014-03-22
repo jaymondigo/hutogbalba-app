@@ -36,9 +36,13 @@
     var addDeleteBtn = function() {
         if ($('#delete').length <= 0)
             $('[file-menu]').append('<li><a href="#" id="delete">Delete</a></li>');
+        $('.save-as').show();
+        $('#rename').show();
     }
     var rmDeleteBtn = function() {
         $('#delete').remove();
+        $('.save-as').hide();
+        $('#rename').hide();
     }
 
     var enableBtns = function() {
@@ -116,9 +120,12 @@
             }
         });
     });
-
+    $('#rename').click(function(e) {
+        $('.save-notification').hide();
+        $('#save-dialog').modal('show');
+    });
     $('#save, #save-as').click(function(e) {
-
+        $('.save-notification').hide();
         if (!hasInit) {
             $DBSAlert({
                 message: 'Nothing to save. Please create a new house design.',
@@ -127,12 +134,11 @@
             return false;
         }
 
-        if (DreamBuilder.ID == 0)
+        if (DreamBuilder.ID == 0) {
             $('#save-dialog').modal('show');
-        else {
+        } else {
             if ($(this).hasClass('save-as')) {
-                DreamBuilder.ID = 0;
-                $('#save-dialog').modal('show');
+                $('#save-as-dialog').modal('show');
             } else
                 $('#saveHouse').click();
         }
@@ -140,9 +146,14 @@
         enableBtns();
     });
 
-    $('#saveHouse').click(function() {
+    $('#saveHouse, #saveAsHouse').click(function() {
 
         name = $('[name="design_name"]').val();
+        if ($(this).hasClass('save-as')) {
+            DreamBuilder.ID = 0;
+            name = $('[name="design_name2"]').val();
+        }
+
         name = name == '' ? DreamBuilder.NAME : name;
         $.ajax({
             url: baseUrl + '/dreamer/save-dream',
@@ -160,6 +171,7 @@
                     enableBtns();
 
                     $('#save-dialog').modal('hide');
+                    $('#save-as-dialog').modal('hide');
                     DreamBuilder.ID = data.ID;
                     DreamBuilder.NAME = data.name;
                     $('[name="design_name"]').val(data.name);
@@ -292,6 +304,7 @@
             id: DreamBuilder.ID
         }, function(resp) {
             clearSketchpad();
+            rmDeleteBtn();
             $DBSAlert({
                 message: 'Your dream house was deleted successfully!',
                 type: 'success'
@@ -355,13 +368,19 @@
 
             return false;
         }
+        var width = pf('input[name=room-length]') * 100;
+        var length = pf('input[name=room-width]') * 100;
+        if(width > DreamBuilder.house.length || length > DreamBuilder.house.width) {
+            alert('Room should not overlap with the house.');
+            return false;
+        }
         var where = $('select[name=room-door-where]').val();
         var dim = $('input[name=room-door-dim]:checked').val();
         dim = dim.split('x');
         var l = dim[0].split('.');
         var w = dim[1].split('.');
-        var width = (parseInt(w[0]) * 12 + parseInt(w[1])) * 2.54;
-        var length = (parseInt(l[0]) * 12 + parseInt(l[1])) * 2.54;
+        var doorWidth = (parseInt(w[0]) * 12 + parseInt(w[1])) * 2.54;
+        var doorLength = (parseInt(l[0]) * 12 + parseInt(l[1])) * 2.54;
         d.createRoom({
             px: 0,
             py: 0,
@@ -370,8 +389,8 @@
             name: $('input[name=room-name]').val(),
             door: {
                 where: where,
-                width: width,
-                length: length
+                width: doorWidth,
+                length: doorLength
             }
         });
         $('#new-room-dialog').modal('hide');
@@ -395,8 +414,8 @@
         var width = (parseInt(w[0]) * 12 + parseInt(w[1])) * 2.54;
         var length = (parseInt(l[0]) * 12 + parseInt(l[1])) * 2.54;
         d.createDoor({
-            x: 0,
-            y: 0,
+            x: DreamBuilder.doorEdge,
+            y: DreamBuilder.doorEdge,
             width: width,
             length: length,
             where: where,
@@ -424,8 +443,8 @@
         var width = (parseInt(w[0]) * 12 + parseInt(w[1])) * 2.54;
         var length = (parseInt(l[0]) * 12 + parseInt(l[1])) * 2.54;
         d.createWindow({
-            x: 0,
-            y: 0,
+            x: DreamBuilder.doorEdge,
+            y: DreamBuilder.doorEdge,
             width: width,
             length: length,
             where: where
@@ -474,14 +493,6 @@
     $('input[name=room-length]').bind('change paste keyup', roomArea);
 
     $('input[name=room-width]').bind('change paste keyup', roomArea);
-
-    $('#duplicate-set').click(function (e) {
-        var p = DreamBuilder.currentSet.property;
-        var method = 'create' + p.charAt(0).toUpperCase() + p.substr(1, p.length -2);
-        d[method](DreamBuilder.house[p][DreamBuilder.currentSet.index]);
-        $('#contextMenu').hide();
-        return false;
-    });
 
     window.d = d;
 
