@@ -174,6 +174,7 @@
                     $('#save-as-dialog').modal('hide');
                     DreamBuilder.ID = data.ID;
                     DreamBuilder.NAME = data.name;
+                    $('[house-title]').html(data.name);
                     $('[name="design_name"]').val(data.name);
                     $('#view-3d').attr('house-id', data.ID);
                     $DBSAlert({
@@ -198,6 +199,7 @@
 
             DreamBuilder.ID = resp.id;
             DreamBuilder.NAME = resp.name;
+            $('[house-title]').html(resp.name);
             $('[name="design_name"]').val(resp.name);
             $('#open-dialog').modal('hide');
             $('[house-id]').attr('house-id', resp.id);
@@ -305,6 +307,7 @@
         }, function(resp) {
             clearSketchpad();
             rmDeleteBtn();
+            $('[house-title]').html('Dreamer<smal>Sketcher</small>');
             $DBSAlert({
                 message: 'Your dream house was deleted successfully!',
                 type: 'success'
@@ -370,7 +373,7 @@
         }
         var width = pf('input[name=room-length]') * 100;
         var length = pf('input[name=room-width]') * 100;
-        if(width > DreamBuilder.house.length || length > DreamBuilder.house.width) {
+        if (width > DreamBuilder.house.length || length > DreamBuilder.house.width) {
             alert('Room should not overlap with the house.');
             return false;
         }
@@ -490,7 +493,7 @@
         $('input[name=room-area]').val(pf('input[name=room-length]') * pf('input[name=room-width]'));
     };
 
-    $('#duplicate-set').click(function (e) {
+    $('#duplicate-set').click(function(e) {
         var p = DreamBuilder.currentSet.property;
         var method = 'create' + p.charAt(0).toUpperCase() + p.substr(1, p.length - 2);
         d[method](DreamBuilder.house[p][DreamBuilder.currentSet.index]);

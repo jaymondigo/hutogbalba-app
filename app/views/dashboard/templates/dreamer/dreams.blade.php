@@ -20,7 +20,7 @@
              <aside class="right-side">
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
-                    <h1>
+                    <h1 house-title>
                         Dreamer
                         <small>Sketcher</small>
                     </h1>
@@ -100,8 +100,18 @@
                         </div>
                     </div>
 
-                    <div>
-                        <center id="sketchpad"></center>
+                    <div style="background: #DFDFF8;">
+                        <div class="zoom-in-out" style="font-size: 19px;
+                            font-weight: bold;
+                            border: 1px solid #C7ACAC;
+                            width: 19px;text-align:center;
+                            position: absolute;
+                            border-radius: 6px;z-index:10000">
+                            <a href="javascript:void(0)" zoom-in>+</a>
+                            <a href="javascript:void(0)" zoom-orig>o</a>
+                            <a href="javascript:void(0)" zoom-out>-</a>
+                        </div>
+                        <center id="sketchpad" style="zoom:100%;"></center>
                     </div>
                 </section><!-- /.content -->
             </aside><!-- /.right-side -->

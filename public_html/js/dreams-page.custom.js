@@ -122,6 +122,22 @@ $(document).on('change', '[price-options]', function() {
     calculatePrices();
 });
 
+$(document).on('mousedown', '[zoom-in]', function() {
+    zoom = $('#sketchpad').css('zoom');
+    zoom = zoom * 100;
+    $('#sketchpad').css('zoom', zoom + 5 * 1 + '%');
+});
+
+$(document).on('mousedown', '[zoom-out]', function() {
+    zoom = $('#sketchpad').css('zoom');
+    zoom = zoom * 100;
+    $('#sketchpad').css('zoom', zoom - 5 * 1 + '%');
+});
+
+$(document).on('mousedown', '[zoom-orig]', function() {
+    $('#sketchpad').css('zoom', '100%');
+});
+
 window.calculatePrices = function() {
     total = 0;
     $.each($('[p-qnty]'), function(i, data) {
