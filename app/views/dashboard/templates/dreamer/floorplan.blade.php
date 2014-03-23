@@ -35,7 +35,7 @@
 <br/><br/>
 <div id="floorplan-svg"></div>
 <canvas id="floorplan-canvas"></canvas>
-<div id="floorplan" style="overflow:hidden;"></div>
+<div id="floorplan" style="overflow:hidden;width:100%;height:100%;position:absolute;"></div>
 
  <script type="text/javascript" src="{{URL::to('js/jquery-2.0.3.min.js')}}"></script>
 <script type="text/javascript">
@@ -179,6 +179,7 @@ $.fn.attachDragger = function() {
     var attachment = false,
         lastPosition, position, difference;
     $($(this).selector).on("mousedown mouseup mousemove", function(e) {
+    	e.preventDefault();
         if (e.type == "mousedown") attachment = true, lastPosition = [e.clientX, e.clientY];
         if (e.type == "mouseup") attachment = false;
         if (e.type == "mousemove" && attachment == true) {
@@ -196,20 +197,20 @@ $.fn.attachDragger = function() {
 
 $('#floorplan').attachDragger();
  
-
+$('#floorplan img').css('zoom','normal');
 function zoom(obj) {
-    z = $('#floorplan').css('zoom');
+    z = $('#floorplan img').css('zoom');
     m = z * 100;
     switch (obj.type) {
         case 'normal':
-            $('#floorplan').css('zoom', 'normal');
+            $('#floorplan img').css('zoom', 'normal');
             break;
         case 'in':
-            $('#floorplan').css('zoom', m + 5 * 1 + '%');
+            $('#floorplan img').css('zoom', m + 5 * 1 + '%');
             break;
 
         case 'out':
-            $('#floorplan').css('zoom', m - 5 * 1 + '%');
+            $('#floorplan img').css('zoom', m - 5 * 1 + '%');
             break;
         default:
 
