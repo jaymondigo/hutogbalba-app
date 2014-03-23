@@ -17,11 +17,11 @@
         return false;
     };
 
-    var cm2px = function (cm) {
+    var cm2px = function(cm) {
         return cm * 37.795275591
     };
 
-    var px2cm = function (px) {
+    var px2cm = function(px) {
         return px / 37.795275591;
     };
 
@@ -40,6 +40,7 @@
             lx = (x >= 0 ? (x <= xx ? x : xx) : 0); // set x to zero if the drag x is less than zero, and set the max if drag x exceeds the limit
             ly = (y >= 0 ? (y <= yy ? y : yy) : 0); // set y to zero if the drag x is less than zero, and set the max if drag y exceeds the limit
             me.transform('t' + lx + ',' + ly); //move the room to x,y ordinates
+            return false;
         };
 
         var startFnc = function() {};
@@ -70,6 +71,7 @@
             lx = x;
             ly = y >= doorEdge ? (y <= limit ? y : limit) : doorEdge; // set y to zero if y < 0 and max if y > max
             me.transform('t' + lx + ',' + ly); //move the object
+            return false;
         };
 
         var startFnc = function() {};
@@ -99,6 +101,8 @@
             lx = x >= doorEdge ? (x <= limit ? x : limit) : doorEdge; //set x to 0 if x < 0 and max if x > max
             ly = y;
             me.transform('t' + lx + ',' + ly);
+
+            return false;
         };
 
         var startFnc = function() {};
@@ -261,10 +265,11 @@
             set: set
         });
 
-        if(typeof obj.door == 'object') {
-            var w = 0, l = 0;
-            
-            switch(obj.door.where) {
+        if (typeof obj.door == 'object') {
+            var w = 0,
+                l = 0;
+
+            switch (obj.door.where) {
                 case 'left':
                     x = offsetX;
                     y = offsetY + doorEdge * DreamBuilder.divider;
@@ -339,7 +344,7 @@
     };
 
     d.prototype.createDoor = function(obj) {
-        if(typeof obj.where == 'undefined') return;
+        if (typeof obj.where == 'undefined') return;
         var xxx;
         //cache the door to the house object
         DreamBuilder.house.doors.push({
@@ -398,7 +403,7 @@
             fill: 'brown'
         });
         set.push(door);
-        $(door.node).on('contextmenu', function (e) {
+        $(door.node).on('contextmenu', function(e) {
             DreamBuilder.currentSet = currentSet = set;
             $cm.css({
                 display: 'block',
@@ -525,7 +530,7 @@
 
     };
 
-    d.prototype.createWall = function (obj) {
+    d.prototype.createWall = function(obj) {
         DreamBuilder.house.walls.push({
             x: obj.x,
             y: obj.y,
@@ -533,9 +538,10 @@
             width: obj.width,
             orientation: obj.orientation
         });
-        var w = 0, l = 0;
+        var w = 0,
+            l = 0;
         var set = paper.set();
-        switch(obj.orientation) {
+        switch (obj.orientation) {
             case 'vertical':
                 w = obj.thickness * DreamBuilder.divider;
                 l = obj.width * DreamBuilder.divider;

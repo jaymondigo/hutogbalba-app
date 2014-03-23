@@ -18,11 +18,24 @@
 	<button class="btn btn-default" print>Print</button>
 	<a class="btn btn-success" download draggable="true">Download</a>
 </div>
+<div class="zoom-in-out" style="font-size: 31px;
+                            font-weight: bold;
+                            border: 1px solid #C7ACAC;
+                            width: 24px;
+                            text-align: center;
+                            position: absolute;
+                            border-radius: 6px;
+                            z-index: 100;
+                            margin: 10px;">
+                            <a href="javascript:void(0)" zoom-in>+</a>
+                            <a href="javascript:void(0)" zoom-orig>o</a>
+                            <a href="javascript:void(0)" zoom-out>-</a>
+                        </div>
 </div>
 <br/><br/>
 <div id="floorplan-svg"></div>
 <canvas id="floorplan-canvas"></canvas>
-<div id="floorplan"></div>
+<div id="floorplan" style="overflow:hidden;"></div>
 
  <script type="text/javascript" src="{{URL::to('js/jquery-2.0.3.min.js')}}"></script>
 <script type="text/javascript">
@@ -128,6 +141,82 @@
 			'max-width': $(window).width()+'px'
 		});
 	});
+
+
+$('#floorplan').bind('mousewheel', function(event) {
+    if (event.originalEvent.wheelDelta >= 0) {
+        zoom({
+            type: 'in'
+        });
+        return false;
+    } else {
+        zoom({
+            type: 'out'
+        });
+        return false;
+    }
+});
+
+$(document).on('mousedown', '[zoom-in]', function() {
+    zoom({
+        type: 'in'
+    });
+});
+
+$(document).on('mousedown', '[zoom-out]', function() {
+    zoom({
+        type: 'out'
+    });
+});
+
+$(document).on('mousedown', '[zoom-orig]', function() {
+    zoom({
+        type: 'normal'
+    });
+});
+
+$.fn.attachDragger = function() {
+    var attachment = false,
+        lastPosition, position, difference;
+    $($(this).selector).on("mousedown mouseup mousemove", function(e) {
+        if (e.type == "mousedown") attachment = true, lastPosition = [e.clientX, e.clientY];
+        if (e.type == "mouseup") attachment = false;
+        if (e.type == "mousemove" && attachment == true) {
+            position = [e.clientX, e.clientY];
+            difference = [(position[0] - lastPosition[0]), (position[1] - lastPosition[1])];
+            $(this).scrollLeft($(this).scrollLeft() - difference[0]);
+            $(this).scrollTop($(this).scrollTop() - difference[1]);
+            lastPosition = [e.clientX, e.clientY];
+        }
+    });
+    $(window).on("mouseup", function() {
+        attachment = false;
+    });
+}
+
+$('#floorplan').attachDragger();
+ 
+
+function zoom(obj) {
+    z = $('#floorplan').css('zoom');
+    m = z * 100;
+    switch (obj.type) {
+        case 'normal':
+            $('#floorplan').css('zoom', 'normal');
+            break;
+        case 'in':
+            $('#floorplan').css('zoom', m + 5 * 1 + '%');
+            break;
+
+        case 'out':
+            $('#floorplan').css('zoom', m - 5 * 1 + '%');
+            break;
+        default:
+
+            break;
+
+    }
+}
 </script>
 </body>
 </html>

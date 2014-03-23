@@ -122,22 +122,6 @@ $(document).on('change', '[price-options]', function() {
     calculatePrices();
 });
 
-$(document).on('mousedown', '[zoom-in]', function() {
-    zoom = $('#sketchpad').css('zoom');
-    zoom = zoom * 100;
-    $('#sketchpad').css('zoom', zoom + 5 * 1 + '%');
-});
-
-$(document).on('mousedown', '[zoom-out]', function() {
-    zoom = $('#sketchpad').css('zoom');
-    zoom = zoom * 100;
-    $('#sketchpad').css('zoom', zoom - 5 * 1 + '%');
-});
-
-$(document).on('mousedown', '[zoom-orig]', function() {
-    $('#sketchpad').css('zoom', '100%');
-});
-
 window.calculatePrices = function() {
     total = 0;
     $.each($('[p-qnty]'), function(i, data) {
@@ -154,3 +138,98 @@ window.calculatePrices = function() {
 
     $('[overall-total-price]').html(total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
 }
+
+
+$('#sketchpad').css('height', $(window).height());
+$('#sketchpad').css('min-height', $(window).height());
+$('#sketchpad').bind('mousewheel', function(event) {
+    if (event.originalEvent.wheelDelta >= 0) {
+        zoom({
+            type: 'in'
+        });
+        return false;
+    } else {
+        zoom({
+            type: 'out'
+        });
+        return false;
+    }
+});
+
+$.fn.attachDragger = function(e) {
+    var attachment = false,
+        lastPosition, position, difference;
+    $($(this).selector).on("mousedown mouseup mousemove", function(e) {
+
+        if (e.target.nodeName == 'rect')
+            return true;
+
+        if (e.type == "mousedown") attachment = true, lastPosition = [e.clientX, e.clientY];
+        if (e.type == "mouseup") attachment = false;
+        if (e.type == "mousemove" && attachment == true) {
+            position = [e.clientX, e.clientY];
+            difference = [(position[0] - lastPosition[0]), (position[1] - lastPosition[1])];
+            $(this).scrollLeft($(this).scrollLeft() - difference[0]);
+            $(this).scrollTop($(this).scrollTop() - difference[1]);
+            lastPosition = [e.clientX, e.clientY];
+        }
+    });
+    $(window).on("mouseup", function() {
+        attachment = false;
+
+    });
+
+
+}
+
+$('#sketchpad').attachDragger();
+
+$(document).on('mousedown', '[zoom-in]', function() {
+    zoom({
+        type: 'in'
+    });
+});
+
+$(document).on('mousedown', '[zoom-out]', function() {
+    zoom({
+        type: 'out'
+    });
+});
+
+$(document).on('mousedown', '[zoom-orig]', function() {
+    zoom({
+        type: 'normal'
+    });
+});
+
+$('#sketchpad svg').css('zoom', 'normal');
+
+function zoom(obj) {
+    z = $('#sketchpad svg').css('zoom');
+    m = z * 100;
+    switch (obj.type) {
+        case 'normal':
+            $('#sketchpad svg').css('zoom', 'normal');
+            break;
+        case 'in':
+            $('#sketchpad svg').css('zoom', m + 1 * 1 + '%');
+            break;
+
+        case 'out':
+            $('#sketchpad svg').css('zoom', m - 1 * 1 + '%');
+            break;
+        default:
+
+            break;
+
+    }
+}
+
+$(document).on('click', '[action-tools]', function() {
+    $('#sketchpad').css('zoom', 'normal');
+});
+$(document).on('mousedown', '#sketchpad', function() {
+    $('html, body').animate({
+        scrollTop: $(this).offset().top - 70
+    }, 1000);
+});
