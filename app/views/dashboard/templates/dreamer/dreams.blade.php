@@ -100,6 +100,7 @@
                         </div>
                     </div>
 
+<<<<<<< Updated upstream
                     <div style="background: #DFDFF8;">
                         <div class="zoom-in-out" style="font-size: 19px;
                             font-weight: bold;
@@ -112,6 +113,11 @@
                             <a href="javascript:void(0)" zoom-out>-</a>
                         </div>
                         <center id="sketchpad" style="zoom:100%;"></center>
+=======
+                    <div>
+                        <span id="debug">Debug details</span>
+                        <center id="sketchpad"></center>
+>>>>>>> Stashed changes
                     </div>
                 </section><!-- /.content -->
             </aside><!-- /.right-side -->
