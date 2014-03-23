@@ -64,6 +64,12 @@
         enableBtns();
 
         hasInit = true;
+
+        d.createLabel({
+            x: 150,
+            y: 200,
+            label: 'YEAH'
+        });
     };
 
     $(document).on('click', '.modal .back', function(e) {
@@ -232,10 +238,6 @@
             DreamBuilder.setLength(DreamBuilder.house.length).setWidth(DreamBuilder.house.width).setHeight(DreamBuilder.house.height);
             d = new DreamBuilder.TWOD();
             d.createFloor();
-            console.log('rooms', data.rooms);
-            console.log('windows', data.windows);
-            console.log('doors', data.doors);
-            console.log('walls', data.walls);
             if (typeof data.rooms != 'undefined') {
                 $.each(data.rooms, function(i, room) {
                     if (typeof room == 'object') {

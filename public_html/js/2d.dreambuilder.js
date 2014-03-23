@@ -29,24 +29,37 @@
         return px / 37.795275591;
     };
 
-    var verticalCollision = function (el) {
+    var checkCollisions = function (el) {
+        //check vertical
+        DreamBuilder.house.windows
         if(el) {
             overlap = 0;
             var p = DreamBuilder.house[el.p];
             el.e = p[el.i];
-            if(el.p == 'door') {
+            if(el.p == 'doors') {
                 el.e.width *= el.e.num;
             }
             for(var i = 0; i < p.length; i++) {
-                if(i != el.i) {
-                    var e = p[i];
-                    if(el.p == 'door') {
+                var e = p[i];
+                if(i != el.i && el.e.where == e.where) {
+                    if(el.p == 'doors') {
                         e.width *= e.num;
                     }
                     if((e.y >= el.e.y && e.y <= (el.e.y + el.e.width)) || (((e.y + e.width) >= el.e.y && (e.y + e.width) <= (el.e.y + el.e.width))) ||
                         (el.e.y >= e.y && el.e.y <= (e.y + e.width)) || ((el.e.y + el.e.width) >= e.y && (el.e.y + el.e.width) <= (e.y + e.width))) {
                         overlap = 1;
                     }
+                }
+            }
+            p = el.p == 'doors' ? 'windows' : 'doors';
+            for(var i = 0; i < p.length; i++) {
+                var e = p[i];
+                if(el.p == 'door') {
+                    e.width *= e.num;
+                }
+                if((e.y >= el.e.y && e.y <= (el.e.y + el.e.width)) || (((e.y + e.width) >= el.e.y && (e.y + e.width) <= (el.e.y + el.e.width))) ||
+                    (el.e.y >= e.y && el.e.y <= (e.y + e.width)) || ((el.e.y + el.e.width) >= e.y && (el.e.y + el.e.width) <= (e.y + e.width))) {
+                    overlap = 1;
                 }
             }
             $debug.html(overlap ? 'Overlapping' : 'Not overlapping');
@@ -113,10 +126,6 @@
             oy = ly;
             DreamBuilder.house[obj.property][obj.index].x = ox / DreamBuilder.divider; // set x to the house object
             DreamBuilder.house[obj.property][obj.index].y = oy / DreamBuilder.divider; //set y to the house object
-            verticalCollision({
-                p: obj.property,
-                i: obj.index
-            });
         };
 
         this.drag(moveFnc, startFnc, endFnc);
@@ -347,6 +356,7 @@
         DreamBuilder.rooms++;
 
         var name = obj.name ? obj.name : 'ROOM' + DreamBuilder.rooms;
+        DreamBuilder.house.rooms[DreamBuilder.rooms - 1].name = name;
         //display the room label
         var label = paper.text(obj.width * DreamBuilder.divider / 2 + offsetX, obj.length * DreamBuilder.divider / 2 + offsetY, name);
 
@@ -449,10 +459,6 @@
             });
             return false;
         });
-        console.log('d1', 'M' + x + ',' + y + 'L' + (x + xx) + ',' + (y + yy));
-        console.log('d2', 'M' + x + ',' + (y + yy) + 'L' + (x + xx) + ',' + y);
-        console.log('x', x, 'y', y, 'yy', yy, 'xx', xx);
-        console.log('obj', obj);
         var d1 = paper.path('M' + x + ',' + y + 'L' + (x + xx) + ',' + (y + yy));
         var d2 = paper.path('M' + x + ',' + (y + yy) + 'L' + (x + xx) + ',' + y);
         set.push(d1);
@@ -611,6 +617,14 @@
                 top: e.pageY
             });
             return false;
+        });
+    };
+
+    d.prototype.createLabel = function(obj) {
+        var label = paper.text(obj.x + offsetX, obj.y + offsetY, obj.label);
+        label.attr({
+            'font-size': '15px',
+            'font-weight': 'bold'
         });
     };
 
