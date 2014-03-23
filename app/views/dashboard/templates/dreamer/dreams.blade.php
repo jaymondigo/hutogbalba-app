@@ -148,14 +148,14 @@
                                                 </section>
                                             </div>
                                             <div class="form-group">
-                                                <label for="room-length">a. Room Length: </label>
+                                                <label for="room-length">a. Room Width: </label>
                                                 <section class="input-group">
                                                     <input required min="2" value="2" name="room-length" type="text" class="form-control" data-content="The length of the room on the side labeled <b>a</b><br/><i>Please refer to the image at the left</i>" data-original-title="Length of the room"/>
                                                     <span class="input-group-addon" >m</span>
                                                 </section>
                                             </div>
                                             <div class="form-group">
-                                                <label for="room-width">b. Room Width: </label>
+                                                <label for="room-width">b. Room Length: </label>
                                                 <section class="input-group">
                                                     <input data-content="The wideness of the room on the side labeled <b>a</b><br/><i>Please refer to the image at the left</i>" data-original-title="Width of the room" required min="2" value="2" name="room-width" type="text" class="form-control" />
                                                     <span class="input-group-addon">m</span>
