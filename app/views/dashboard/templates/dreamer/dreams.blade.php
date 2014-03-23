@@ -100,7 +100,8 @@
                         </div>
                     </div>
                     <div style="background: #DFDFF8;">
-                        <div class="zoom-in-out" style="font-size: 31px;
+                        <span id="debug"></span> 
+                        <div class="zoom-in-out" style="font-size: 31px; 
                             font-weight: bold;
                             border: 1px solid #C7ACAC;
                             width: 24px;

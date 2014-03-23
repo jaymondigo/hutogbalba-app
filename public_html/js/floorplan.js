@@ -243,6 +243,7 @@
             });
             if(typeof obj.door != 'object') return;
             var doorFunc;
+            var vx, vy1, vy2, vy3, vy4, hx1, hx2, hx3, hx4, hy, lx1, lx2, ly1, ly2;
             switch(obj.door.where) {
                 case 'left':
                     x = offsetX + obj.x;
@@ -251,6 +252,21 @@
                     dx = 1;
                     dy = 1;
                     doorFunc = verticalDoor;
+
+                    vx = offsetX + obj.x + obj.width - ra / 2;
+                    vy1 = offsetY + obj.y + ra / 2;
+                    vy2 = offsetY + obj.y + obj.length / 2 - ra / 4;
+                    vy3 = offsetY + obj.y + obj.length / 2 + ra / 4;
+                    vy4 = offsetY + obj.y + obj.length - ra / 2;
+                    hx1 = offsetX + obj.x + ra / 2;
+                    hx2 = offsetX + obj.x + obj.width / 2 - ra / 2;
+                    hx3 = offsetX + obj.x + obj.width / 2 + ra / 2;
+                    hx4 = offsetX + obj.x + obj.width - ra / 2;
+                    hy = offsetY + obj.y + obj.length - ra / 2;
+                    lx1 = offsetX + obj.x + obj.width - ra / 2;
+                    lx2 = offsetX + obj.x + obj.width / 2;
+                    ly1 = offsetY + obj.y + obj.length / 2;
+                    ly2 = offsetY + obj.y + obj.length - ra / 2;
                     break;
                 case 'right':
                     x = offsetX + obj.x + obj.width;
@@ -259,6 +275,21 @@
                     dx = -1;
                     dy = 1;
                     doorFunc = verticalDoor;
+
+                    vx = offsetX + obj.x + ra / 2;
+                    vy1 = offsetY + obj.y + ra / 2;
+                    vy2 = offsetY + obj.y + obj.length / 2 - ra / 4;
+                    vy3 = offsetY + obj.y + obj.length / 2 + ra / 4;
+                    vy4 = offsetY + obj.y + obj.length - ra / 2;
+                    hx1 = offsetX + obj.x + ra / 2;
+                    hx2 = offsetX + obj.x + obj.width / 2 - ra / 2;
+                    hx3 = offsetX + obj.x + obj.width / 2 + ra / 2;
+                    hx4 = offsetX + obj.x + obj.width - ra / 2;
+                    hy = offsetY + obj.y + obj.length - ra / 2;
+                    lx1 = offsetX + obj.x + ra / 2;
+                    lx2 = offsetX + obj.x + obj.width / 2;
+                    ly1 = offsetY + obj.y + obj.length / 2;
+                    ly2 = offsetY + obj.y + obj.length - ra / 2;
                     break;
                 case 'top':
                     y = offsetY + obj.y;
@@ -267,6 +298,21 @@
                     dx = -1;
                     dy = 1;
                     doorFunc = horizontalDoor;
+
+                    vx = offsetX + obj.x + obj.width - ra / 2;
+                    vy1 = offsetY + obj.y + ra / 2;
+                    vy2 = offsetY + obj.y + obj.length / 2 - ra / 4;
+                    vy3 = offsetY + obj.y + obj.length / 2 + ra / 4;
+                    vy4 = offsetY + obj.y + obj.length - ra / 2;
+                    hx1 = offsetX + obj.x + ra / 2;
+                    hx2 = offsetX + obj.x + obj.width / 2 - ra / 2;
+                    hx3 = offsetX + obj.x + obj.width / 2 + ra / 2;
+                    hx4 = offsetX + obj.x + obj.width - ra / 2;
+                    hy = offsetY + obj.y + obj.length - ra / 2;
+                    lx1 = offsetX + obj.x + obj.width - ra / 2;
+                    lx2 = offsetX + obj.x + obj.width / 2;
+                    ly1 = offsetY + obj.y + obj.length / 2;
+                    ly2 = offsetY + obj.y + obj.length - ra / 2;
                     break;
                 case 'bottom':
                     y = offsetY + obj.y + obj.length;
@@ -275,7 +321,31 @@
                     dx = -1;
                     dy = -1;
                     doorFunc = horizontalDoor;
+
+                    vx = offsetX + obj.x + obj.width - ra / 2;
+                    vy1 = offsetY + obj.y + ra / 2;
+                    vy2 = offsetY + obj.y + obj.length / 2 - ra / 4;
+                    vy3 = offsetY + obj.y + obj.length / 2 + ra / 4;
+                    vy4 = offsetY + obj.y + obj.length - ra / 2;
+                    hx1 = offsetX + obj.x + ra / 2;
+                    hx2 = offsetX + obj.x + obj.width / 2 - ra / 2;
+                    hx3 = offsetX + obj.x + obj.width / 2 + ra / 2;
+                    hx4 = offsetX + obj.x + obj.width - ra / 2;
+                    hy = offsetY + obj.y + ra / 2;
+                    lx1 = offsetX + obj.x + obj.width - ra / 2;
+                    lx2 = offsetX + obj.x + obj.width / 2;
+                    ly1 = offsetY + obj.y + obj.length / 2;
+                    ly2 = offsetY + obj.y + ra / 2;
                     break;
+            }
+
+            if(typeof vx != 'undefined') {
+                var line = paper.path('M' + vx + ',' + vy1 + 'L' + vx + ',' + vy2 + 
+                    'M' + vx + ',' + vy3 + 'L' + vx + ',' + vy4 + 
+                    'M' + hx1 + ',' + hy + 'L' + hx2 + ',' + hy + 
+                    'M' + hx3 + ',' + hy + 'L' + hx4 + ',' + hy);
+                var label1 = paper.text(lx1, ly1, (obj.length / 2).toFixed(2) + ' m');
+                var label2 = paper.text(lx2, ly2, (obj.width / 2).toFixed(2) + ' m');
             }
             doorFunc(x, y, obj.door.width, l, dx, dy);
             //var m1 = paper.text(obj.x + offsetX + obj.width / 2, obj.y + offsetY + obj.length / 2 + 25, (obj.length / 100).toFixed(2) + ' m');
@@ -367,6 +437,14 @@
             var wall = paper.rect(obj.x + offsetX, obj.y + offsetY, w, l);
             wall.attr({
                 fill: 'black'
+            });
+        };
+        Floorplan.prototype.createLabel = function (obj) {
+            if(typeof obj.x == 'undefined') return;
+            var label = paper.text(obj.x, obj.y, obj.label);
+            label.attr({
+                'font-size': '15px',
+                'font-weight': 'bold'
             });
         };
         return Floorplan;
