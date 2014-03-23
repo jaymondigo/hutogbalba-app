@@ -99,7 +99,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div style="background: #DFDFF8;">
                         <div class="zoom-in-out" style="font-size: 31px;
                             font-weight: bold;

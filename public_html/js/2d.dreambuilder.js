@@ -6,6 +6,10 @@
 
     var doorEdge = DreamBuilder.doorEdge;
 
+    var $debug = $('#debug');
+
+    var overlap = false;
+
     var contextCallback = function(e) {
         DreamBuilder.currentSet = currentSet = set;
         //show the contextmenu
@@ -23,6 +27,36 @@
 
     var px2cm = function(px) {
         return px / 37.795275591;
+    };
+
+    var verticalCollision = function (el) {
+        if(el) {
+            overlap = 0;
+            var p = DreamBuilder.house[el.p];
+            el.e = p[el.i];
+            if(el.p == 'door') {
+                el.e.width *= el.e.num;
+            }
+            for(var i = 0; i < p.length; i++) {
+                if(i != el.i) {
+                    var e = p[i];
+                    if(el.p == 'door') {
+                        e.width *= e.num;
+                    }
+                    if((e.y >= el.e.y && e.y <= (el.e.y + el.e.width)) || (((e.y + e.width) >= el.e.y && (e.y + e.width) <= (el.e.y + el.e.width))) ||
+                        (el.e.y >= e.y && el.e.y <= (e.y + e.width)) || ((el.e.y + el.e.width) >= e.y && (el.e.y + el.e.width) <= (e.y + e.width))) {
+                        overlap = 1;
+                    }
+                }
+            }
+            $debug.html(overlap ? 'Overlapping' : 'Not overlapping');
+        }
+    };
+
+    var horizontalCollision = function (el) {
+        if(el) {
+
+        }
     };
 
     Raphael.st.draggable = function(obj) {
@@ -81,6 +115,10 @@
             oy = ly;
             DreamBuilder.house[obj.property][obj.index].x = ox / DreamBuilder.divider; // set x to the house object
             DreamBuilder.house[obj.property][obj.index].y = oy / DreamBuilder.divider; //set y to the house object
+            verticalCollision({
+                p: obj.property,
+                i: obj.index
+            });
         };
 
         this.drag(moveFnc, startFnc, endFnc);
@@ -112,6 +150,10 @@
             oy = ly;
             DreamBuilder.house[obj.property][obj.index].x = ox / DreamBuilder.divider;
             DreamBuilder.house[obj.property][obj.index].y = oy / DreamBuilder.divider;
+            horizontalCollision({
+                p: obj.property,
+                i: obj.index
+            });
         };
 
         this.drag(moveFnc, startFnc, endFnc);
@@ -277,7 +319,7 @@
                     l = obj.door.width * DreamBuilder.divider;
                     break;
                 case 'right':
-                    x = offsetX + (obj.length - doorEdge) * DreamBuilder.divider;
+                    x = offsetX + (obj.width - doorEdge) * DreamBuilder.divider;
                     y = offsetY + doorEdge * DreamBuilder.divider;
                     w = doorEdge * DreamBuilder.divider;
                     l = obj.door.width * DreamBuilder.divider;
@@ -290,7 +332,7 @@
                     break;
                 case 'bottom':
                     x = offsetX + doorEdge * DreamBuilder.divider;
-                    y = offsetY + (obj.width - doorEdge) * DreamBuilder.divider;
+                    y = offsetY + (obj.length - doorEdge) * DreamBuilder.divider;
                     w = obj.door.width * DreamBuilder.divider;
                     l = doorEdge * DreamBuilder.divider;
                     break;
