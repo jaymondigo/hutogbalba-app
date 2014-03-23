@@ -100,8 +100,9 @@
                         </div>
                     </div>
 
-                    <div id="sketchpad"></div>
-
+                    <div>
+                        <center id="sketchpad"></center>
+                    </div>
                 </section><!-- /.content -->
             </aside><!-- /.right-side -->
 
@@ -485,8 +486,8 @@
                                     <div class="row">
                                         <div class="col-lg-4 col-md-4">
                                             <select class="form-control" name="wall-dim" data-content="The thickness of the wall" data-original-title="Walls">
-                                                <option value="10">10 m</option>
-                                                <option value="15">15 m</option>
+                                                <option value="10">10 cm</option>
+                                                <option value="15">15 cm</option>
                                             </select>
                                         </div>
                                         <div class="col-lg-8 col-md-8">
