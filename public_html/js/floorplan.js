@@ -423,21 +423,31 @@
         };
         Floorplan.prototype.createWall = function (obj) {
             if(typeof obj.orientation == 'undefined') return;
-            var w = 0, l = 0;
+            var w = 0, l = 0, x = 0, y = 0, r = 0;
             switch(obj.orientation) {
                 case 'vertical':
                     w = obj.thickness;
                     l = obj.width;
+                    x = obj.x + offsetX + obj.thickness / 2;
+                    y = offsetY + obj.y + obj.width / 2;
+                    r = 90;
                     break;
                 case 'horizontal':
                     w = obj.width;
                     l = obj.thickness;
+                    x = offsetX + obj.x + obj.width / 2;
+                    y = obj.y + offsetY + obj.thickness / 2;
                     break;
             }
             var wall = paper.rect(obj.x + offsetX, obj.y + offsetY, w, l);
             wall.attr({
                 fill: 'black'
             });
+            var label = paper.text(x, y, (obj.width / 100).toFixed(2) + ' m');
+            label.attr({
+                'stroke': bgColor
+            });
+            label.transform('R' + r);
         };
         Floorplan.prototype.createLabel = function (obj) {
             if(typeof obj.x == 'undefined') return;

@@ -10,6 +10,8 @@
 
     var overlap = false;
 
+    var LEFT = 37, TOP = 38, RIGHT = 39, BOTTOM = 40;
+
     var contextCallback = function(e) {
         DreamBuilder.currentSet = currentSet = set;
         //show the contextmenu
@@ -30,40 +32,63 @@
     };
 
     var checkCollisions = function (el) {
-        //check vertical
-        DreamBuilder.house.windows
-        if(el) {
-            overlap = 0;
-            var p = DreamBuilder.house[el.p];
-            el.e = p[el.i];
-            if(el.p == 'doors') {
-                el.e.width *= el.e.num;
-            }
-            for(var i = 0; i < p.length; i++) {
-                var e = p[i];
-                if(i != el.i && el.e.where == e.where) {
-                    if(el.p == 'doors') {
-                        e.width *= e.num;
+        /*
+        overlap = false;
+        //check rooms
+        $.each(DreamBuilder.house.doors, function (i, door) {
+            door.width *= door.num;
+            $.each(DreamBuilder.house.doors, function (i, dr) {
+                dr.width *= dr.num;
+                if(door != dr && door.where == dr.where) {
+                    switch(door.where) {
+                        case 'left': case 'right':
+                            if((door.y >= dr.y && door.y <= (dr.y + dr.width)) ||
+                                ((door.y + door.width) >= dr.y && (door.y + door.width) <= (dr.y + dr.width)) ||
+                                (dr.y >= door.y && dr.y <= (door.y + door.width)) ||
+                                ((dr.y + dr.width) >= door.y && (dr.y + dr.width) <= (door.y + door.width))) {
+                                console.log(door, dr);
+                                overlap = true;
+                            }
+                            break;
+                        case 'top': case 'bottom':
+                            if((door.x >= dr.x && door.x <= (dr.x + dr.length)) ||
+                                ((door.x + door.length) >= dr.x && (door.x + door.length) <= (dr.x + dr.length)) ||
+                                (dr.x >= door.x && dr.x <= (door.x + door.length)) ||
+                                ((dr.x + dr.length) >= door.x && (dr.x + dr.length) <= (door.x + door.length))) {
+                                overlap = true;
+                                console.log(door, dr);
+                            }
+                            break;
                     }
-                    if((e.y >= el.e.y && e.y <= (el.e.y + el.e.width)) || (((e.y + e.width) >= el.e.y && (e.y + e.width) <= (el.e.y + el.e.width))) ||
-                        (el.e.y >= e.y && el.e.y <= (e.y + e.width)) || ((el.e.y + el.e.width) >= e.y && (el.e.y + el.e.width) <= (e.y + e.width))) {
-                        overlap = 1;
+                }
+            });
+            $.each(DreamBuilder.house.windows, function (i, win) {
+                if(door.where == win.where) {
+                    switch(door.where) {
+                        case 'left': case 'right':
+                            if((door.y >= win.y && door.y <= (win.y + win.width)) ||
+                                ((door.y + door.width) >= win.y && (door.y + door.width) <= (win.y + win.width)) ||
+                                (win.y >= door.y && win.y <= (door.y + door.width)) ||
+                                ((win.y + win.width) >= door.y && (win.y + win.width) <= (door.y + door.width))) {
+                                overlap = true;
+                                console.log(door, win);
+                            }
+                            break;
+                        case 'top': case 'bottom':
+                            if((door.x >= win.x && door.x <= (win.x + win.length)) ||
+                                ((door.x + door.length) >= win.x && (door.x + door.length) <= (win.x + win.length)) ||
+                                (win.x >= door.x && win.x <= (door.x + door.length)) ||
+                                ((win.x + win.length) >= door.x && (win.x + win.length) <= (door.x + door.length))) {
+                                overlap = true;
+                                console.log(door, win);
+                            }
+                            break;
                     }
                 }
-            }
-            p = el.p == 'doors' ? 'windows' : 'doors';
-            for(var i = 0; i < p.length; i++) {
-                var e = p[i];
-                if(el.p == 'door') {
-                    e.width *= e.num;
-                }
-                if((e.y >= el.e.y && e.y <= (el.e.y + el.e.width)) || (((e.y + e.width) >= el.e.y && (e.y + e.width) <= (el.e.y + el.e.width))) ||
-                    (el.e.y >= e.y && el.e.y <= (e.y + e.width)) || ((el.e.y + el.e.width) >= e.y && (el.e.y + el.e.width) <= (e.y + e.width))) {
-                    overlap = 1;
-                }
-            }
-            $debug.html(overlap ? 'Overlapping' : 'Not overlapping');
-        }
+            });
+        });
+        console.log('overlap', overlap);
+        */
     };
 
     var horizontalCollision = function (el) {
@@ -76,8 +101,8 @@
         var me = this;
         var lx = 0;
         var ly = 0;
-        var ox = 0;
-        var oy = 0;
+        var ox = obj.x;
+        var oy = obj.y;
 
         var moveFnc = function(dx, dy) {
             var x = dx + ox;
@@ -128,6 +153,7 @@
             oy = ly;
             DreamBuilder.house[obj.property][obj.index].x = ox / DreamBuilder.divider; // set x to the house object
             DreamBuilder.house[obj.property][obj.index].y = oy / DreamBuilder.divider; //set y to the house object
+            checkCollisions();
         };
 
         this.drag(moveFnc, startFnc, endFnc);
@@ -148,7 +174,6 @@
             lx = x >= doorEdge ? (x <= limit ? x : limit) : doorEdge; //set x to 0 if x < 0 and max if x > max
             ly = y;
             me.transform('t' + lx + ',' + ly);
-
             return false;
         };
 
@@ -159,10 +184,8 @@
             oy = ly;
             DreamBuilder.house[obj.property][obj.index].x = ox / DreamBuilder.divider;
             DreamBuilder.house[obj.property][obj.index].y = oy / DreamBuilder.divider;
-            horizontalCollision({
-                p: obj.property,
-                i: obj.index
-            });
+            
+            checkCollisions();
         };
 
         this.drag(moveFnc, startFnc, endFnc);
@@ -455,7 +478,11 @@
             fill: 'brown'
         });
         set.push(door);
-        $(door.node).on('contextmenu', function(e) {
+        var d1 = paper.path('M' + x + ',' + y + 'L' + (x + xx) + ',' + (y + yy));
+        var d2 = paper.path('M' + x + ',' + (y + yy) + 'L' + (x + xx) + ',' + y);
+        set.push(d1);
+        set.push(d2);
+        $([door.node, d1.node, d2.node]).on('contextmenu', function(e) {
             DreamBuilder.currentSet = currentSet = set;
             $cm.css({
                 display: 'block',
@@ -464,17 +491,9 @@
             });
             return false;
         });
-        var d1 = paper.path('M' + x + ',' + y + 'L' + (x + xx) + ',' + (y + yy));
-        var d2 = paper.path('M' + x + ',' + (y + yy) + 'L' + (x + xx) + ',' + y);
-        set.push(d1);
-        set.push(d2);
-        $([d1.node, d2.node]).on('contextmenu', function(e) {
+        $([door.node, d1.node, d2.node]).on('dblclick', function(e) {
             DreamBuilder.currentSet = currentSet = set;
-            $cm.css({
-                display: 'block',
-                left: e.pageX,
-                top: e.pageY
-            });
+            set.attr('opacity', '0.5');
             return false;
         });
         set[drag]({
@@ -623,6 +642,9 @@
                 top: e.pageY
             });
             return false;
+        });
+        $(wall.node).on('dblclick', function (e) {
+            DreamBuilder.currentSet = currentSet = set;
         });
     };
 
