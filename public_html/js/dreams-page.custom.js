@@ -232,5 +232,5 @@ $(document).on('click', '[action-tools]', function() {
 $(document).on('mousedown', '#sketchpad', function() {
     $('html, body').animate({
         scrollTop: $(this).offset().top - 70
-    }, 1000);
+    }, 100);
 });
