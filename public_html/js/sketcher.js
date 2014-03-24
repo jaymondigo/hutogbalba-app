@@ -242,8 +242,8 @@
                 $.each(data.rooms, function(i, room) {
                     if (typeof room == 'object') {
                         d.createRoom({
-                            px: room.x,
-                            py: room.y,
+                            px: parseFloat(room.x),
+                            py: parseFloat(room.y),
                             width: parseFloat(room.width),
                             length: parseFloat(room.length),
                             name: room.name,
@@ -261,8 +261,8 @@
                     if (typeof win == 'object') {
                         d.createWindow({
                             where: win.where,
-                            x: win.x,
-                            y: win.y,
+                            x: parseFloat(win.x),
+                            y: parseFloat(win.y),
                             width: parseFloat(win.width),
                             length: parseFloat(win.length)
                         });
@@ -274,8 +274,8 @@
                     if (typeof door == 'object') {
                         d.createDoor({
                             where: door.where,
-                            x: door.x,
-                            y: door.y,
+                            x: parseFloat(door.x),
+                            y: parseFloat(door.y),
                             width: parseFloat(door.width),
                             length: parseFloat(door.length),
                             type: door.type,
@@ -289,10 +289,10 @@
                     if (typeof wall == 'object') {
                         d.createWall({
                             orientation: wall.orientation,
-                            x: wall.x,
-                            y: wall.y,
-                            width: wall.width,
-                            thickness: wall.thickness
+                            x: parseFloat(wall.x),
+                            y: parseFloat(wall.y),
+                            width: parseFloat(wall.width),
+                            thickness: parseFloat(wall.thickness)
                         });
                     }
                 });
