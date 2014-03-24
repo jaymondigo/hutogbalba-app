@@ -6,7 +6,7 @@
 		<link rel="stylesheet" type="text/css" href="{{URL::to('css/AdminLTE.css')}}"/>
 		<link rel="stylesheet" type="text/css" href="{{URL::to('css/ionicons.css')}}"/>
 		<link rel="stylesheet" type="text/css" href="{{URL::to('css/landing-page.css')}}"/>
-		<title>Dream Builder Solutions</title>
+		<title>Dream Builder Solutions Beta</title>
 		<link id="page_favicon" href="{{URL::to('img/logo.png')}}" rel="icon" type="image/x-icon">
 	</head>
 	<body class="skin-blue">
@@ -20,7 +20,7 @@
 			            	<span class="icon-bar"></span>
 			            	<span class="icon-bar"></span>
 			          	</button>
-						<a href="#" class="logo navbar-brand">Dream Builder Solutions</a>
+						<a href="#" class="logo navbar-brand">Dream Builder Solutions<sup>&nbsp;Beta</sup></a>
 			        </div>
 			        <div class="collapse navbar-collapse pull-right">
 			          	<ul class="nav navbar-nav">

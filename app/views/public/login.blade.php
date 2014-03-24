@@ -3,7 +3,7 @@
 
 @section('head')
 	<meta charset="UTF-8">
-    <title>Dream Builder Solutions | Log in</title>
+    <title>Dream Builder Solutions Beta| Log in</title>
     <link id="page_favicon" href="{{URL::to('img/logo.png')}}" rel="icon" type="image/x-icon">
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- bootstrap 3.0.2 -->

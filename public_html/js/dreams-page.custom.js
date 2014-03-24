@@ -130,6 +130,7 @@ window.calculatePrices = function() {
         qnty = $(data).text();
         price = $('[name="price[' + i + ']"]').val();
 
+        $('[p-price="' + type + '"]').text(price);
         price_cost = qnty * price;
 
         $('[p-tprice="' + type + '"]').text(price_cost.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
