@@ -54,7 +54,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => 'no-reply@dreambuildersolutions.com', 'name' => 'Dream Builder Solutions'),
+	'from' => array('address' => 'dreambuilder@gmail.com', 'name' => 'Dream Builder Solutions'),
 
 	/*
 	|--------------------------------------------------------------------------
